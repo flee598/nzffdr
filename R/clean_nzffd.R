@@ -1,0 +1,117 @@
+#' Clean NZ freshwater Fish fishdasets
+#'
+#' Clean up data imported from the NZ Freshwater Fish Database
+#'
+#' If I want a details section this is where I should write it.
+#'
+#' @param fishd A dataframe imported from the NZFFD using \code{import_nzffd}
+#'
+#' @return A dataframe of the same dimensions as \code{fishd}, but cleaned.
+#'
+#' @import stringr
+#' @importFrom chron chron
+#'
+#' @examples
+#' \dontrun{
+#'
+#' dat <- clean_nzffd(nzffdr::nzffd_data)
+#' head(dat)
+#' }
+#' @export
+clean_nzffd <- function(fishd) {
+
+  if (is.data.frame(fishd) == FALSE) {
+    stop("arg fishd must be a data.frame")
+  }
+
+  if (identical(cl_nms, colnames(fishd)) == FALSE) {
+    stop(paste0("column names must be exactly: ", paste(cl_nms, collapse = ", "))
+      )
+  }
+
+  # covert column types
+  cols_int(fishd)
+  cols_chr(fishd)
+
+  fishd$m[fishd$m < 1 | fishd$m > 12] <- NA
+  fishd$y[fishd$y > as.integer(format(Sys.Date(), "%Y"))] <- NA
+
+  fishd$catchname <- uppr_case(fishd$catchname)
+
+  # replace site type with relevant abbr. from repl list.
+  for (i in names(repl)) {
+    fishd$catchname <- sub(paste(paste0("\\b", repl[[i]], "\\b"),
+      collapse = "|"
+    ), i, fishd$catchname)
+  }
+
+  fishd$locality <- uppr_case(fishd$locality)
+  fishd$locality <- to_txt(fishd$locality)
+
+  # add new variable "form"
+  fishd <- add_frm(fishd)
+
+  # fix time
+  fishd$time <- to_txt(fishd$time)
+  fishd$time <- as.POSIXct(sprintf("%s.0f", fishd$time), format = "%H%M")
+  fishd$time <- chron::chron(times = substr(fishd$time, 12, 19))
+  attr(fishd$time, "format") <- NULL
+
+  fishd$org <- to_txt(fishd$org)
+  fishd$org <- tolower(fishd$org)
+
+  fishd$map <- tolower(fishd$map)
+  fishd$map[nchar(fishd$map) != 3] <- NA
+
+  return(fishd)
+}
+
+# helper functions ------------------------------------------------------------
+
+# first letter to upper case
+uppr_case <- function(x) {
+  gsub("\\b([[:lower:]])([[:lower:]]+)",
+    "\\U\\1\\L\\2", x,
+    perl = TRUE
+  )
+}
+
+# remove non-letter elements
+to_txt <- function(x) {
+  gsub("[[:punct:]]", "", x)
+}
+
+# get last word
+lst_wrd <- function(x) {
+  sub("^.* ([[:alnum:]]+)$", "\\1", x)
+}
+
+# cols to intiger
+cols_int <- function(x) {
+  cols <- c(
+    "card", "m", "y", "east", "north", "altitude", "penet",
+    "effort", "pass", "number", "minl", "maxl", "nzreach"
+  )
+  x[cols] <- lapply(x[cols], function(x) {
+    suppressWarnings(as.integer(as.character(x)))
+  })
+}
+
+# cols to character
+cols_chr <- function(x) {
+  cols2 <- c("time", "map", "abund")
+
+  x[cols2] <- lapply(x[cols2], function(x) {
+    suppressWarnings(as.character(x))
+  })
+}
+
+# add new variable "form"
+add_frm <- function(fishd){
+  fishd$form <- lst_wrd(fishd$locality)
+  is.na(fishd$form) <- !(fishd$form %in% frm)
+  fishd$frm <- stringr::str_extract(fishd$locality, paste(frm, collapse = "|"))
+  fishd$form <- ifelse(is.na(fishd$form) == TRUE, fishd$frm, fishd$form)
+  fishd <- subset(fishd, select = -frm)
+  return(fishd)
+}
