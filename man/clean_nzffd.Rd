@@ -22,8 +22,8 @@ is converted to a standardised 24 hour format and nonsesical values
 converted to \code{NA}. \code{org} is converted to all lowercase and has
 non-alphanumeric characters removed. \code{map} is converted to lower case
 and has any non-three digit codes converted to \code{NA}. \code{catchname} 
-codes are tidied following the suggested abbreviations (*add URL*), e.g.
-\code{“Cluth River”}, \code{“Clutha r”} and \code{“Clutha river”} all 
+codes are tidied following the suggested abbreviations (add URL), e.g.
+\code{Cluth River}, \code{Clutha r} and \code{Clutha river} all 
 become \code{Clutha R}. Finally a new variable \code{form} is added which
 defines the sampled habitat type for each observation.
 }
