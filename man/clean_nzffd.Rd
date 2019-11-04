@@ -16,7 +16,16 @@ A dataframe of the same dimensions as \code{fishd}, but cleaned.
 Clean up data imported from the NZ Freshwater Fish Database
 }
 \details{
-If I want a details section this is where I should write it.
+The first letter of all words in \code{catchname} and \code{locality} are 
+capitalised and any non-alphanumeric characters are removed. \code{time} 
+is converted to a standardised 24 hour format and nonsesical values 
+converted to \code{NA}. \code{org} is converted to all lowercase and has
+non-alphanumeric characters removed. \code{map} is converted to lower case
+and has any non-three digit codes converted to \code{NA}. \code{catchname} 
+codes are tidied following the suggested abbreviations (*add URL*), e.g.
+\code{“Cluth River”}, \code{“Clutha r”} and \code{“Clutha river”} all 
+become \code{Clutha R}. Finally a new variable \code{form} is added which
+defines the sampled habitat type for each observation.
 }
 \examples{
 \dontrun{
