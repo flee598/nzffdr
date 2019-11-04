@@ -27,13 +27,13 @@
 #'
 #' @param fish_method fishing method used. There are 59 different possible
 #' options for \code{fish_method}, if you want to search for a specific fishing
-#' method use the function \code{method_nzffd()} to see a list of all possible
+#' method use the function \code{method_nzffd} to see a list of all possible
 #' options, you can then copy/paste from there (e.g. if we only wanted fish
 #' caught be lures use \code{fish_meth = "Angling - Lure"}) don't set the arg
 #' if you want all fishing methods.
 #'
 #' @param species species of interest.There are 75 different possible options
-#' for species, use \code{species_nzffd()} function to see a list of all
+#' for species, use \code{species_nzffd} function to see a list of all
 #' possible options. You can search using either common or scientific names
 #' and can search for multiple species at once. e.g. to search for Black
 #' mudfish use \code{species = "Black mudfish"} or \code{species = "Neochanna
