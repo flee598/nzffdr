@@ -29,10 +29,13 @@ add_nzffd <- function(fishd) {
   if (is.data.frame(fishd) == FALSE) {
     stop("arg fishd must be a data.frame")
   }
-  if("nzreach" %in% colnames(fishd) == FALSE) {
+  
+  
+  if ("nzreach" %in% colnames(fishd) == FALSE) {
     stop("dataframe must include \"nzreach\" column")
 
   }
+  
   # rec data, filter out 0, 9 and NA
   reach <- unique(fishd$nzreach)
   reach <- reach[!reach %in% c(NA, 0, 9)]
@@ -47,4 +50,7 @@ add_nzffd <- function(fishd) {
   fishd <- merge(fishd, results, by.x = "nzreach", by.y = "NZREACH", all = TRUE)
   return(fishd)
   }
+
+
+
 
