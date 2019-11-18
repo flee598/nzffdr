@@ -7,6 +7,8 @@
 
 <!-- badges: end -->
 
+Add coord conversion function
+
 The purpose of this package is allow for direct access to the NZ
 Freshwater Fish Database from R and additional functions for cleaning
 imported data and adding missing data. The
@@ -252,15 +254,22 @@ library(devtools)
 library(southernMaps) # NZ map that plays nice
 library(tidyverse)    # data handling functions
 library(sp)           # coordinate conversion
+library(rgdal)        # coordinate conversion
 library(nzffdr)
 
 # Add WGS84 lat longs ---------------------------------------------------------
 
-# transform the NZFFD coords (from NZMG to WGS84 lat/long,
-# these are off by a few meters, but ok for mapping)
+# transform the NZFFD coords (from NZMG to WGS84 lat/long)
+
 dat_coord <- data.frame(x = dat4$east, y = dat4$north)
 sp::coordinates(dat_coord) <- ~ x + y
-sp::proj4string(dat_coord) <- sp::CRS("+init=epsg:27200") # NZMG49
+
+proj4string <- "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 
++ellps=intl +datum=nzgd49 +units=m +towgs84=59.47,-5.04,187.44,0.47,-0.1,1.024,-4.5993 
++nadgrids=nzgd2kgrid0005.gsb +no_defs" # NZMG49
+
+sp::proj4string(dat_coord) <- sp::CRS(proj4string) 
+
 dat_coord <- sp::spTransform(dat_coord, sp::CRS("+init=epsg:4326")) #WGS84
 dat_coord <- as.data.frame(dat_coord)
 
