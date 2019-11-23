@@ -1,13 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nzffdr
+# nzffdr <img src='man/figures/nzffdr_hex.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
 <!-- badges: end -->
-
-Add coord conversion function
 
 The purpose of this package is allow for direct access to the NZ
 Freshwater Fish Database from R and additional functions for cleaning
@@ -94,27 +92,27 @@ dat <- import_nzffd(catchment = "", river = "", location = "",
   fish_method = "", species = "", starts = 2000, ends = 2010)
 
 head(dat)
-#>   card m    y catchname   catch                locality time org map
-#> 1  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10
-#> 2  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10
-#> 3  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10
-#> 4  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10
-#> 5  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10
-#> 6  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10
-#>      east   north altitude penet fishmeth effort pass spcode abund number
-#> 1 2664600 6499800       30     3      gmt      6   NA parane            1
-#> 2 2664600 6499800       30     3      gmt      6   NA gobhut            2
-#> 3 2664600 6499800       30     3      gmt      6   NA galfas            2
-#> 4 2664600 6499800       30     3      fyn      3   NA parane            2
-#> 5 2664600 6499800       30     3      fyn      3   NA gobgob            1
-#> 6 2664600 6499800       30     3      fyn      3   NA galfas            3
-#>   minl maxl nzreach
-#> 1   40   NA 2004154
-#> 2   80   85 2004154
-#> 3   95  110 2004154
-#> 4   70   75 2004154
-#> 5  150   NA 2004154
-#> 6  130  135 2004154
+#>   card m    y catchname   catch                locality time org map    east
+#> 1  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600
+#> 2  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600
+#> 3  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600
+#> 4  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600
+#> 5  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600
+#> 6  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600
+#>     north altitude penet fishmeth effort pass spcode abund number minl maxl
+#> 1 6499800       30     3      gmt      6   NA parane            1   40   NA
+#> 2 6499800       30     3      gmt      6   NA gobhut            2   80   85
+#> 3 6499800       30     3      gmt      6   NA galfas            2   95  110
+#> 4 6499800       30     3      fyn      3   NA parane            2   70   75
+#> 5 6499800       30     3      fyn      3   NA gobgob            1  150   NA
+#> 6 6499800       30     3      fyn      3   NA galfas            3  130  135
+#>   nzreach
+#> 1 2004154
+#> 2 2004154
+#> 3 2004154
+#> 4 2004154
+#> 5 2004154
+#> 6 2004154
 ```
 
 ### Cleaning data
@@ -138,27 +136,27 @@ Wetland, Reservoir, Brook, Spring, Gully` or `NA`.
 ``` r
 dat2 <- clean_nzffd(dat)
 head(dat2)
-#>   card m    y catchname   catch                locality time org map
-#> 1  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10
-#> 2  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10
-#> 3  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10
-#> 4  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10
-#> 5  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10
-#> 6  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10
-#>      east   north altitude penet fishmeth effort pass spcode abund number
-#> 1 2664600 6499800       30     3      gmt      6   NA parane            1
-#> 2 2664600 6499800       30     3      gmt      6   NA gobhut            2
-#> 3 2664600 6499800       30     3      gmt      6   NA galfas            2
-#> 4 2664600 6499800       30     3      fyn      3   NA parane            2
-#> 5 2664600 6499800       30     3      fyn      3   NA gobgob            1
-#> 6 2664600 6499800       30     3      fyn      3   NA galfas            3
-#>   minl maxl nzreach   form
-#> 1   40   NA 2004154 Stream
-#> 2   80   85 2004154 Stream
-#> 3   95  110 2004154 Stream
-#> 4   70   75 2004154 Stream
-#> 5  150   NA 2004154 Stream
-#> 6  130  135 2004154 Stream
+#>   card m    y catchname   catch                locality time org map    east
+#> 1  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
+#> 2  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
+#> 3  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
+#> 4  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
+#> 5  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
+#> 6  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
+#>     north altitude penet fishmeth effort pass spcode abund number minl maxl
+#> 1 6499800       30     3      gmt      6   NA parane            1   40   NA
+#> 2 6499800       30     3      gmt      6   NA gobhut            2   80   85
+#> 3 6499800       30     3      gmt      6   NA galfas            2   95  110
+#> 4 6499800       30     3      fyn      3   NA parane            2   70   75
+#> 5 6499800       30     3      fyn      3   NA gobgob            1  150   NA
+#> 6 6499800       30     3      fyn      3   NA galfas            3  130  135
+#>   nzreach   form
+#> 1 2004154 Stream
+#> 2 2004154 Stream
+#> 3 2004154 Stream
+#> 4 2004154 Stream
+#> 5 2004154 Stream
+#> 6 2004154 Stream
 
 # quick check for changes in the number of different catchment names (a 
 # reduction means, names have successfully been recoded)
