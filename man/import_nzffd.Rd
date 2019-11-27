@@ -4,8 +4,15 @@
 \alias{import_nzffd}
 \title{Import NZ Freshwater Fish datasets}
 \usage{
-import_nzffd(catchment = "", river = "", location = "",
-  fish_method = "", species = "", starts = 1850, ends = 2100)
+import_nzffd(
+  catchment = "",
+  river = "",
+  location = "",
+  fish_method = "",
+  species = "",
+  starts = 1850,
+  ends = 2100
+)
 }
 \arguments{
 \item{catchment}{catchment number. a 6 digit number unique to the reach of
