@@ -25,17 +25,14 @@
 #' }
 #' @export
 add_nzffd <- function(fishd) {
-
-  if (is.data.frame(fishd) == FALSE) {
+  if (!is.data.frame(fishd)) {
     stop("arg fishd must be a data.frame")
   }
-  
-  
-  if ("nzreach" %in% colnames(fishd) == FALSE) {
-    stop("dataframe must include \"nzreach\" column")
 
+  if (!("nzreach" %in% colnames(fishd))) {
+    stop("dataframe must include \"nzreach\" column")
   }
-  
+
   # rec data, filter out 0, 9 and NA
   reach <- unique(fishd$nzreach)
   reach <- reach[!reach %in% c(NA, 0, 9)]
@@ -44,13 +41,11 @@ add_nzffd <- function(fishd) {
     body = list(reach = jsonlite::toJSON(reach)),
     encode = "form"
   )
+  
   results <- jsonlite::fromJSON(httr::content(resp,
-    "text", encoding = "UTF-8"))[[1]]
+    "text",encoding = "UTF-8"
+  ))[[1]]
 
   fishd <- merge(fishd, results, by.x = "nzreach", by.y = "NZREACH", all = TRUE)
   return(fishd)
-  }
-
-
-
-
+}
