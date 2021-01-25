@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
+WIP code breaking changes will happen.
+
 The purpose of this package is allow for direct access to the NZ Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search)) from R and additional functions for cleaning imported data and adding missing data. 
 
 ### Installation
