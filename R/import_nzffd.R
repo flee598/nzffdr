@@ -87,7 +87,7 @@ import_nzffd <- function(catchment = "", river = "", location = "",
   if (ends < 1850) {
     stop("arg ends must be greater than 1850", call. = FALSE)
   }
-
+  
   if (((catchment == "") || grepl("^\\d+\\%$", catchment) ||
       grepl("^\\d{3}\\.\\d{3}$", catchment)) == FALSE) {
     stop("arg: catchment must be 6-digit character string (e.g. \"752.638\")
