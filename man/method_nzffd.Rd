@@ -4,10 +4,12 @@
 \name{method_nzffd}
 \alias{method_nzffd}
 \title{method_nzffd}
-\format{A dataframe of 59 rows and one variable:
+\format{
+A dataframe of 59 rows and one variable:
 \describe{
   \item{method}{fishing method used}
-}}
+}
+}
 \usage{
 data(method_nzffd)
 }

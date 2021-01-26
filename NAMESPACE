@@ -2,13 +2,10 @@
 
 export(add_nzffd)
 export(clean_nzffd)
-export(coord_nzffd)
 export(fill_nzffd)
 export(import_nzffd)
 import(httr)
 import(jsonlite)
-import(rgdal)
-import(sp)
 import(stringr)
 import(xml2)
 importFrom(chron,chron)

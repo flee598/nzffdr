@@ -4,7 +4,8 @@
 \name{nzffd_data}
 \alias{nzffd_data}
 \title{nzffd_data}
-\format{A dataframe of 141708 rows and 22 variables:
+\format{
+A dataframe of 141708 rows and 22 variables:
 \describe{
   \item{card}{NZFFD card id}
   \item{m}{month sampling occured}
@@ -20,7 +21,8 @@
   \item{north}{northing, in NZMG}
   \item{altitude}{sample site altitude, in meters above sea level}
   \item{penet}{ distance to sea along the network, in meters}
-}}
+}
+}
 \source{
 \url{www.niwa.co.nz}
 }
