@@ -158,7 +158,7 @@ length(unique(dat2$catchname))
 #> [1] 791
 ```
 
-The above changes, while superfical make analysis that, for example
+The above changes, while superficial make analysis that, for example
 relies on grouping, work as intended.
 
 ### Filling gaps.

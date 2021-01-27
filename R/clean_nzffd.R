@@ -46,16 +46,32 @@ clean_nzffd <- function(fishd) {
 
   fishd$catchname <- uppr_case(fishd$catchname)
 
+  
   # replace site type with relevant abbr. from repl list.
   for (i in names(repl)) {
     fishd$catchname <- sub(paste(paste0("\\b", repl[[i]], "\\b"),
       collapse = "|"
     ), i, fishd$catchname)
   }
-
+  
+  # run function again, if there is the word River twice, this 
+  # corrects the second occurrence, penalty of ~3sec on the whole NZFFD
+  for (i in names(repl)) {
+    fishd$catchname <- sub(paste(paste0("\\b", repl[[i]], "\\b"),
+                                 collapse = "|"
+    ), i, fishd$catchname)
+  }
+  
+  fishd$catchname[fishd$catchname == ""] <- NA
+  fishd$catch[fishd$catch == ""] <- NA
   fishd$locality <- uppr_case(fishd$locality)
   fishd$locality <- to_txt(fishd$locality)
-
+  fishd$locality[fishd$locality == ""] <- NA
+  fishd$fishmeth[fishd$fishmeth == ""] <- NA
+  fishd$abund[fishd$abund == ""] <- NA
+  
+  
+  
   # add new variable "form"
   fishd <- add_frm(fishd)
 

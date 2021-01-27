@@ -82,7 +82,7 @@ length(unique(dat$catchname))
 length(unique(dat2$catchname))
 ```
 
-The above changes, while superfical make analysis that, for example relies on grouping, work as intended.
+The above changes, while superficial make analysis that, for example relies on grouping, work as intended.
 
 
 ### Filling gaps.
