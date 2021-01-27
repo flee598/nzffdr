@@ -13,11 +13,11 @@ A dataframe of 75 rows and two variables:
 }
 }
 \usage{
-data(species_nzffd)
+species_nzffd
 }
 \description{
 A dataframe listing the possible inputs for the species argument
 of the import_nzffd function. Either the scientific or common name can
-be used
+be used.
 }
 \keyword{datasets}
