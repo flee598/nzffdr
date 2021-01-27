@@ -26,6 +26,7 @@ The purpose of this package is allow for direct access to the NZ Freshwater Fish
 ### Installation
 ```{r, warning = FALSE}
 # devtools::install_github("flee598/nzffdr")
+library(nzffdr)
 ```
 
 ### Built-in datasets 

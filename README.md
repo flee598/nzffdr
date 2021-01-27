@@ -1,9 +1,4 @@
 
-<<<<<<< HEAD
-=======
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
->>>>>>> f258ad3f13a34ee90d48cf01e784ccf34e9a2763
 # nzffdr <img src='man/figures/nzffdr_hex.png' align="right" height="150" /></a>
 
 <!-- badges: start -->
@@ -95,21 +90,12 @@ head(dat)
 #> 5  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600
 #> 6  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600
 #>     north altitude penet fishmeth effort pass spcode abund number minl maxl
-<<<<<<< HEAD
 #> 1 6499800       30     3      gmt      6   NA galfas            2   95  110
 #> 2 6499800       30     3      gmt      6   NA gobhut            2   80   85
 #> 3 6499800       30     3      gmt      6   NA parane            1   40   NA
 #> 4 6499800       30     3      fyn      3   NA gobgob            1  150   NA
 #> 5 6499800       30     3      fyn      3   NA galfas            3  130  135
 #> 6 6499800       30     3      fyn      3   NA parane            2   70   75
-=======
-#> 1 6499800       30     3      gmt      6   NA parane            1   40   NA
-#> 2 6499800       30     3      gmt      6   NA gobhut            2   80   85
-#> 3 6499800       30     3      gmt      6   NA galfas            2   95  110
-#> 4 6499800       30     3      fyn      3   NA parane            2   70   75
-#> 5 6499800       30     3      fyn      3   NA gobgob            1  150   NA
-#> 6 6499800       30     3      fyn      3   NA galfas            3  130  135
->>>>>>> f258ad3f13a34ee90d48cf01e784ccf34e9a2763
 #>   nzreach
 #> 1 2004154
 #> 2 2004154
@@ -148,21 +134,12 @@ head(dat2)
 #> 5  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
 #> 6  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
 #>     north altitude penet fishmeth effort pass spcode abund number minl maxl
-<<<<<<< HEAD
 #> 1 6499800       30     3      gmt      6   NA galfas            2   95  110
 #> 2 6499800       30     3      gmt      6   NA gobhut            2   80   85
 #> 3 6499800       30     3      gmt      6   NA parane            1   40   NA
 #> 4 6499800       30     3      fyn      3   NA gobgob            1  150   NA
 #> 5 6499800       30     3      fyn      3   NA galfas            3  130  135
 #> 6 6499800       30     3      fyn      3   NA parane            2   70   75
-=======
-#> 1 6499800       30     3      gmt      6   NA parane            1   40   NA
-#> 2 6499800       30     3      gmt      6   NA gobhut            2   80   85
-#> 3 6499800       30     3      gmt      6   NA galfas            2   95  110
-#> 4 6499800       30     3      fyn      3   NA parane            2   70   75
-#> 5 6499800       30     3      fyn      3   NA gobgob            1  150   NA
-#> 6 6499800       30     3      fyn      3   NA galfas            3  130  135
->>>>>>> f258ad3f13a34ee90d48cf01e784ccf34e9a2763
 #>   nzreach   form
 #> 1 2004154 Stream
 #> 2 2004154 Stream
@@ -170,10 +147,6 @@ head(dat2)
 #> 4 2004154 Stream
 #> 5 2004154 Stream
 #> 6 2004154 Stream
-<<<<<<< HEAD
-=======
-
->>>>>>> f258ad3f13a34ee90d48cf01e784ccf34e9a2763
 # quick check for changes in the number of different catchment names (a 
 # reduction means, names have successfully been recoded)
 length(unique(dat$catchname))
@@ -238,137 +211,4 @@ dim(dat4)
 ```
 
 You should now have a cleaned up dataframe of NZFFD records available to
-<<<<<<< HEAD
 you, optionally along with some missing data and associated REC data.
-=======
-you, optionally along with some missing data along with associated REC
-data. That is it for the main nzffdr functions, there is one more which
-allows you to submit a two-column dataframe of coordinates (in NZMG) and
-get back the associated elevation data from the 8m NZ DEM -
-`dem_nzffd()`. *add this*
-
-``` r
-# sites <- xxx
-# sites_dem <- dem_nzffd(sites)
-# head(sites_dem)
-```
-
-### Do something with the data
-
-The follow is a quick example of what you can do with the cleaned nzffd
-data, this section requires the additional packages: `devtools,
-tidyverse, sp, southernMaps`.
-
-Make a map of Mudfish distributions:
-
-``` r
-
-# load required packages
-library(devtools)
-# devtools::install_github("orb16/southernMaps")
-library(southernMaps) # NZ map that plays nice
-library(tidyverse)    # data handling functions
-library(sp)           # coordinate conversion
-library(rgdal)        # coordinate conversion
-library(nzffdr)
-
-# Add WGS84 lat longs ---------------------------------------------------------
-
-# transform the NZFFD coords (from NZMG to WGS84 lat/long)
-
-dat_coord <- data.frame(x = dat4$east, y = dat4$north)
-sp::coordinates(dat_coord) <- ~ x + y
-
-proj4string <- "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 
-+ellps=intl +datum=nzgd49 +units=m +towgs84=59.47,-5.04,187.44,0.47,-0.1,1.024,-4.5993 
-+nadgrids=nzgd2kgrid0005.gsb +no_defs" # NZMG49
-
-sp::proj4string(dat_coord) <- sp::CRS(proj4string) 
-
-dat_coord <- sp::spTransform(dat_coord, sp::CRS("+init=epsg:4326")) #WGS84
-dat_coord <- as.data.frame(dat_coord)
-
-# reattch coords
-dat4$wgs84_x <- dat_coord$x
-dat4$wgs84_y <- dat_coord$y
-
-# Subset Mudfish data ---------------------------------------------------------
-
-mud <- c("Canterbury mudfish", "Burgundy mudfish", 
-         "Brown mudfish", "Black mudfish")
-
-fish_map <- dat4 %>%
-  filter(common_name %in% mud) %>%
-  filter(catch != "Chatham")
-
-# Mapping ---------------------------------------------------------------------
-
-# get a friendly NZ map
-nzmap <- southernMaps::nzHigh
-nzmap <- southernMaps::fortify_polygons(nzmap, proj = "wgs84")
-
-# Plot all 4 species on one map
-ggplot(nzmap, aes(x = long, y = lat)) +
-  geom_path(aes(group = group)) +
-  coord_map() +
-  geom_point(data = fish_map, aes(x = wgs84_x, y = wgs84_y, colour = common_name)) +
-  theme_minimal() +
-  labs(color = "Species")
-```
-
-![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
-
-``` r
-
-# Each species on their own map
-ggplot(nzmap, aes(x = long, y = lat)) +
-  geom_path(aes(group = group)) +
-  coord_map() +
-  geom_point(data = fish_map, aes(x = wgs84_x, y = wgs84_y, colour = common_name)) +
-  facet_wrap(~common_name, nrow = 1) +
-  guides(color = FALSE) +
-  theme_minimal() +
-  ggtitle("NZFFD mainland mudfish observations (2000 - 2010)")
-```
-
-![](man/figures/README-unnamed-chunk-8-2.png)<!-- -->
-
-Make a plot of whitebait records
-
-``` r
-# filter most common habitat types
-frms <- c("Creek", "River", "Tributary", "Stream",
-  "Lake", "Lagoon", "Wetland", "Pond")
-
-# whitebait species 
-WhiteB <- c( "Shortjaw kokopu", "Koaro", "Inanga", "Banded kokopu", "Giant kokopu")
-
-# filter data
-fish_tbl2 <- dat4 %>%
-  filter(catch != "Chatham") %>%
-  filter(form %in% frms) %>%
-  filter(common_name %in% WhiteB) %>%
-  group_by(form, common_name, threat_class) %>%
-  summarise(records = n()) %>%
-  arrange(desc(records))
-
-# plot
-ggplot(transform(fish_tbl2,
-  form = factor(form, levels = c("Lagoon","Wetland","Lake","Pond",
-    "River", "Stream","Creek","Tributary"))),
-  aes(x = reorder(common_name, -records), y = records)) +
-  geom_bar(stat = "identity", aes(fill = threat_class)) +
-  scale_fill_manual(values = c("darkgoldenrod2", "darkolivegreen3", "firebrick3")) +
-  facet_wrap(~form, nrow = 2) +
-  theme_bw() +
-  xlab("Species") +
-  ylab("Number of records") +
-  labs(fill = "Threat status",
-       caption = "NZFFD whitebait records by habitat form and threat classificaiton (2000 - 2010)") +
-    theme(axis.text.x = element_text(angle = 90, size = 11, vjust = 0.2),
-          axis.ticks = element_blank(),
-          plot.caption = element_text(hjust = 0))
-```
-
-![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
->>>>>>> f258ad3f13a34ee90d48cf01e784ccf34e9a2763
