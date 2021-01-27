@@ -55,7 +55,7 @@ arguments:
     possible options for `fish_method`, if you want to search for a
     specific fishing method use `method_nzffd()` to see a list of all
     possible options, you can then copy/paste from there (e.g. if we
-    only wanted fish caught be lures use `fish_meth = "Angling - Lure"`)
+    only wanted fish caught by lures use `fish_meth = "Angling - Lure"`)
     don’t set the arg if you want all fishing methods.
 
 -   `species` search for a particular species. There are 75 different
@@ -103,6 +103,9 @@ head(dat)
 #> 4 2004154
 #> 5 2004154
 #> 6 2004154
+
+# To import the entire NZFF database:
+# dat <- import_nzffd()
 ```
 
 ### Cleaning data
@@ -161,7 +164,7 @@ relies on grouping, work as intended.
 ### Filling gaps.
 
 Some additional useful information can quickly be added to the dataset.
-the `fill_nzffd()` function adds columns giving the speices’ common
+the `fill_nzffd()` function adds columns giving the species’ common
 name, scientific name (genus + species), family, genus, species, threat
 classification status and weather the species is native or introduced.
 
@@ -171,7 +174,7 @@ and `altitude` we run the observation coordinates (NZMG) against a
 raster projection of the ([NZMS260
 MapTiles](https://koordinates.com/layer/413-nzms-260-map-series-index/))
 and an 8m digital elevation model
-([(DEM)](https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/))
+([DEM](https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/))
 of NZ. Note the ‘altitude’ values are not exact so we suggest they are
 used in an exploratory manner only.
 
@@ -193,7 +196,7 @@ sum(is.na(dat3$altitude))
 
 We can also add associated network topology and environmental
 information from the River Environment Classification database
-([(REC)](https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/))
+([REC](https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/))
 using `add_nzffd()`. This function takes the `nzreach` variable and
 matches it again the corresponding `NZREACH` variable in the REC
 database and imports all the REC data. Note this will add 24 new columns

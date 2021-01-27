@@ -48,7 +48,7 @@ Start by importing some data. We have tried to make the search terms match those
     
 * `location` search for river by location e.g. (`location = "Nelson"`).
     
-* `fish_method` search by fishing method used. There are 59 different possible options for `fish_method`, if you want to search for a specific fishing method use `method_nzffd()` to see a list of all possible options, you can then copy/paste from there (e.g. if we only wanted fish caught be lures use `fish_meth = "Angling - Lure"`) don't set the arg if you want all fishing methods. 
+* `fish_method` search by fishing method used. There are 59 different possible options for `fish_method`, if you want to search for a specific fishing method use `method_nzffd()` to see a list of all possible options, you can then copy/paste from there (e.g. if we only wanted fish caught by lures use `fish_meth = "Angling - Lure"`) don't set the arg if you want all fishing methods. 
 
 * `species` search for a particular species. There are 75 different possible options for `species`, use `species_nzffd()` to see a list of all possible options. You can search using either common or scientific names and can search for multiple species at once. e.g. to search for Black mudfish use `species = "Black mudfish"` or `species = "Neochanna diversus"` and to search for Black mudfish and Bluegill bully use `species = c("Black mudfish", "Bluegill bully")` etc. 
 
@@ -65,6 +65,9 @@ Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version 1.2.
 dat <- import_nzffd(catchment = "", river = "", location = "", 
   fish_method = "", species = "", starts = 2000, ends = 2010)
 head(dat)
+
+# To import the entire NZFF database:
+# dat <- import_nzffd()
 ```
 
 ### Cleaning data
@@ -85,9 +88,9 @@ The above changes, while superfical make analysis that, for example relies on gr
 ### Filling gaps.
 
 
-Some additional useful information can quickly be added to the dataset. the `fill_nzffd()` function adds columns giving the speices' common name, scientific name (genus + species), family, genus, species, threat classification status and weather the species is native or introduced.
+Some additional useful information can quickly be added to the dataset. the `fill_nzffd()` function adds columns giving the species' common name, scientific name (genus + species), family, genus, species, threat classification status and weather the species is native or introduced.
 
-Additionally, both the `map` and `altitude` variables have some `NA` values, here we can fill most of them with `fill_nzffd()`. To fill `map` and `altitude` we run the observation coordinates (NZMG) against a raster projection of the ([NZMS260 MapTiles](https://koordinates.com/layer/413-nzms-260-map-series-index/)) and an 8m digital elevation model ([(DEM)](https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/)) of NZ. Note the 'altitude' values are not exact so we suggest they are used in an exploratory manner only.  
+Additionally, both the `map` and `altitude` variables have some `NA` values, here we can fill most of them with `fill_nzffd()`. To fill `map` and `altitude` we run the observation coordinates (NZMG) against a raster projection of the ([NZMS260 MapTiles](https://koordinates.com/layer/413-nzms-260-map-series-index/)) and an 8m digital elevation model ([DEM](https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/)) of NZ. Note the 'altitude' values are not exact so we suggest they are used in an exploratory manner only.  
 
 
 ```{r}
@@ -102,7 +105,7 @@ sum(is.na(dat3$altitude))
 
   
 ### Adding River Environment classification data
-We can also add associated network topology and environmental information from the River Environment Classification database ([(REC)](https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/)) using `add_nzffd()`. This function takes the `nzreach` variable and matches it again the corresponding `NZREACH` variable in the REC database and imports all the REC data. Note this will add 24 new columns to your dataframe, with the original REC column names, we suggest renaming the REC columns as they are a bit fiendish as is. 
+We can also add associated network topology and environmental information from the River Environment Classification database ([REC](https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/)) using `add_nzffd()`. This function takes the `nzreach` variable and matches it again the corresponding `NZREACH` variable in the REC database and imports all the REC data. Note this will add 24 new columns to your dataframe, with the original REC column names, we suggest renaming the REC columns as they are a bit fiendish as is. 
 
 This function requires an internet connection to query the REC database. 
 
