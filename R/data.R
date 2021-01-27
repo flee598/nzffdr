@@ -1,6 +1,6 @@
 #' nzffd_data
 #'
-#' A random sample of 200 rows of the NZFFD
+#' A random sample of 200 rows of the NZFFD.
 #'
 #' @docType data
 #'
@@ -34,7 +34,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(method_nzffd)
+#' @usage method_nzffd
 #'
 #' @format A dataframe of 59 rows and one variable:
 #' \describe{
@@ -47,11 +47,11 @@
 #'
 #' A dataframe listing the possible inputs for the species argument
 #' of the import_nzffd function. Either the scientific or common name can
-#' be used
+#' be used.
 #'
 #' @docType data
 #'
-#' @usage data(species_nzffd)
+#' @usage species_nzffd
 #'
 #' @format A dataframe of 75 rows and two variables:
 #' \describe{

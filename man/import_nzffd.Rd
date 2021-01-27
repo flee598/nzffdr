@@ -2,10 +2,17 @@
 % Please edit documentation in R/import_nzffd.R
 \name{import_nzffd}
 \alias{import_nzffd}
-\title{Import NZ Freshwater Fish datasets}
+\title{Import NZ Freshwater Fish datasets.}
 \usage{
-import_nzffd(catchment = "", river = "", location = "",
-  fish_method = "", species = "", starts = 1850, ends = 2100)
+import_nzffd(
+  catchment = "",
+  river = "",
+  location = "",
+  fish_method = "",
+  species = "",
+  starts = 1850,
+  ends = 2100
+)
 }
 \arguments{
 \item{catchment}{catchment number. a 6 digit number unique to the reach of
@@ -14,7 +21,7 @@ interest. You can search using the indidviual number (e.g. \code{catchment =
 search term (e.g. \code{catchment = "702\%"}), or don't set the arg if you
 want all catchments in NZ.}
 
-\item{river}{river name. e.g to get all records for the Clutha, \code{river
+\item{river}{river name. e.g. to get all records for the Clutha, \code{river
 = "Clutha"}.}
 
 \item{location}{sampling location. e.g. \code{location = "Nelson"}. This
@@ -22,13 +29,13 @@ only works when the location is included in the name of the waterway.}
 
 \item{fish_method}{fishing method used. There are 59 different possible
 options for \code{fish_method}, if you want to search for a specific fishing
-method use the function \code{method_nzffd} to see a list of all possible
+method look at the dataset \code{?method_nzffd} to see a list of all possible
 options, you can then copy/paste from there (e.g. if we only wanted fish
 caught be lures use \code{fish_meth = "Angling - Lure"}) don't set the arg
 if you want all fishing methods.}
 
 \item{species}{species of interest.There are 75 different possible options
-for species, use \code{species_nzffd} function to see a list of all
+for species, use \code{?species_nzffd} function to see a list of all
 possible options. You can search using either common or scientific names
 and can search for multiple species at once. e.g. to search for Black
 mudfish use \code{species = "Black mudfish"} or \code{species = "Neochanna
@@ -44,14 +51,14 @@ A dataframe consisting of 22 columns where each row is a record for
 an individual species. The number of rows will depend on search terms.
 }
 \description{
-Import data from the NZ Freshwater Fish Database.
+Import data from the NZ Freshwater Fish Database. Enter search terms as 
+arguments as you would in the NZFFD and import directly into R. You can 
+search using all the same query options which are
+used for the \href{https://nzffdms.niwa.co.nz/search}{NZFFFD}, see their
+\href{https://niwa.co.nz/freshwater-and-estuaries/nzffd/user-guide/tips}{help page} 
+for details. To import the entire database leave all arguments blank.
 }
 \details{
-Enter search terms as arguments as you would in the NZFFD and import
-directly into R. You can search using all the same query options which are
-used for the \href{https://nzffdms.niwa.co.nz/search}{NZFFFD}, see their
-\href{https://niwa.co.nz/freshwater-and-estuaries/nzffd/user-guide/tips}{help page} for details.
-
 This function requires an internet connection to query Niwa's database.
 
 Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version

@@ -1,6 +1,6 @@
 #' Clean NZ freshwater Fish fishdasets
 #'
-#' Clean up data imported from the NZ Freshwater Fish Database
+#' Clean up data imported from the NZ Freshwater Fish Database.
 #'
 #' The first letter of all words in \code{catchname} and \code{locality} are 
 #' capitalised and any non-alphanumeric characters are removed. \code{time} 

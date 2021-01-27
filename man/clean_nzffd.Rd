@@ -13,7 +13,7 @@ clean_nzffd(fishd)
 A dataframe of the same dimensions as \code{fishd}, but cleaned.
 }
 \description{
-Clean up data imported from the NZ Freshwater Fish Database
+Clean up data imported from the NZ Freshwater Fish Database.
 }
 \details{
 The first letter of all words in \code{catchname} and \code{locality} are 
