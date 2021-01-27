@@ -11,19 +11,17 @@ add_nzffd(fishd)
 }
 \value{
 A dataframe with the same number of rows as \code{fishd} but
-with *XX* additional columns from the REC database added.
+with 24 additional columns from the REC database added.
 }
 \description{
-Use the reachID variable to match NZFFD sample locations against the REC database and add
-coresponding REC data to the NZFFD.
+Use the \code{nzreach} variable in the NZFFD to match NZFFD sample locations against the \code{NZREACH} code in the 
+\href{https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/}{River Environment Classification} (REC) database and attach corresponding REC data to the NZFFD dataframe.
 }
 \details{
 Note that any row that has an \code{nzreach} value of \code{0}, \code{9}
 or \code{NA} will not return any REC data.
 
 This function requires an internet connection to query the REC database.
-
-REC citation:
 }
 \examples{
 \dontrun{

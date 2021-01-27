@@ -2,7 +2,7 @@
 % Please edit documentation in R/fill_nzffd.R
 \name{fill_nzffd}
 \alias{fill_nzffd}
-\title{Add missing data to the NZFFD}
+\title{Add additional data to the NZFFD}
 \usage{
 fill_nzffd(fishd, alt = TRUE, maps = TRUE)
 }
@@ -15,17 +15,16 @@ fill_nzffd(fishd, alt = TRUE, maps = TRUE)
 }
 \value{
 A dataframe with the same number of rows as \code{fishd} but with
-four additional columns added (\code{family, sci_name, common_name, threat_status}).
+seven additional columns added (\code{common_name, sci_name, family, genus, species, threat_class, native}).
 }
 \description{
-Adds family, genus, species and common names, the species threat
-classification status and missing values for the \code{map} and \code{alt}
-variables.
+Adds columns for family, genus, species and common names, the species threat
+classification status, whether the species is native or exotic. 
+Also add missing values for the \code{map} and \code{alt} variables.
 }
 \details{
 Altitude data is added by taking the site coordinates and pulling the relevant
-data from an 8m DEM (url). Note values taken from the 8m DEM are not 100
-percent accurate and should be treated with caution (*add MoE??*).
+data from an 8m \href{https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/}{DEM}. Note data taken from the DEM is suitable for cartographic visualisation only.
 
 If \code{alt = TRUE} this function requires an internet connection to query
 the 8m DEM.

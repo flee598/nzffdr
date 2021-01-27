@@ -21,37 +21,35 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-Fixes to come soon.
 
 The purpose of this package is allow for direct access to the NZ Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search)) from R and additional functions for cleaning imported data and adding missing data. 
 
 ### Installation
 ```{r, warning = FALSE}
 # devtools::install_github("flee598/nzffdr")
-library(nzffdr)
 ```
 
 ### Built-in datasets 
 There are three built-in datasets to assist, these are:
+  
+  * `nzffd_data` a subset of 200 rows from the NZFFD, used for examples, tutorials etc. 
 
-* `nzffd_data` a subset of 200 rows from the NZFFD, used for examples, tutorials etc. 
-    
 * `method_nzffd` a dataframe containing all the different fishing methods included in the NZFFD, it is possible to search the database using these terms so they are provided for reference. 
-    
-* `species_nzffd` a dataframe of the scientific and common names of all species. It is possible to search the database by species name (using scientific or common names) so these are provided for reference.
+
+* `species_nzffd` a dataframe of the scientific and common names of all species included in the NZFFD. It is possible to search the database by species name (using scientific or common names) so these are provided for reference.
 
 
 ### Getting data
-We start by importing some data. We have tried to make the search terms match those you would use directly on the Niwa site. For example leaving a search field blank will return all records. There are seven search arguments:
-
-* `catchment` this  refers to the Catchment No. a 6 digit number unique to the reach of interest. You can search using the inidviual number (e.g. `catchment = "702.500"`), or for all rivers in a catchment you can use the wildcard search term (e.g. `catchment = "702%"`), or don't set the arg if you want all catchments in NZ.
+Start by importing some data. We have tried to make the search terms match those you would use directly on the Niwa site. For example leaving a search field blank will return all records. There are seven search arguments:
+  
+  * `catchment` this  refers to the Catchment No. a 6 digit number unique to the reach of interest. You can search using the inidviual number (e.g. `catchment = "702.500"`), or for all rivers in a catchment you can use the wildcard search term (e.g. `catchment = "702%"`), or don't set the arg if you want all catchments in NZ.
     
 * `river` search for a river by name, to get all records for the Clutha (e.g. `river = "Clutha"`).
     
 * `location` search for river by location e.g. (`location = "Nelson"`).
     
 * `fish_method` search by fishing method used. There are 59 different possible options for `fish_method`, if you want to search for a specific fishing method use `method_nzffd()` to see a list of all possible options, you can then copy/paste from there (e.g. if we only wanted fish caught be lures use `fish_meth = "Angling - Lure"`) don't set the arg if you want all fishing methods. 
-    
+
 * `species` search for a particular species. There are 75 different possible options for `species`, use `species_nzffd()` to see a list of all possible options. You can search using either common or scientific names and can search for multiple species at once. e.g. to search for Black mudfish use `species = "Black mudfish"` or `species = "Neochanna diversus"` and to search for Black mudfish and Bluegill bully use `species = c("Black mudfish", "Bluegill bully")` etc. 
 
 * `starts` starting search date, 1850 at the earliest.
@@ -72,7 +70,7 @@ head(dat)
 ```
 
 ### Cleaning data
-While the data imported from NZFFD is in pretty good shape there are some small inconsistencies. The `clean_nzffd()` function aims to deal with some of these inconsistencies. In particular text strings have been standardised. The first letter of all words in `catchname` and `locality` are capitalised and any non-alphanumeric characters are removed. `time` is converted to a standardised 24 hour format and nonsesical values converted to `NA`. `org` is converted to all lowercase and has non-alphanumeric characters removed. `map` is converted to lower case and has any non-three digit codes converted to `NA`. `catchname` codes are tidied following the suggested abbreviations (*URL*), e.g. "Cluth River", "Clutha r" and "Clutha river" all become Clutha R. Finally a new variable `form` is added which defines each observation as from one of the following systems: `Creek, River, Tributary, Stream, Lake, Lagoon, Pond, Burn, Race, Dam, Estuary, Swamp, Drain, Canal, Tarn, Wetland, Reservoir, Brook, Spring, Gully` or `NA`. 
+While the data imported from NZFFD is in pretty good shape there are some small inconsistencies. The `clean_nzffd()` function aims to deal with some of these inconsistencies. In particular text strings have been standardised. The first letter of all words in `catchname` and `locality` are capitalised and any non-alphanumeric characters are removed. `time` is converted to a standardised 24 hour format and nonsesical values converted to `NA`. `org` is converted to all lowercase and has non-alphanumeric characters removed. `map` is converted to lower case and has any non-three digit codes converted to `NA`. `catchname` codes are tidied following the suggested abbreviations, e.g. "Cluth River", "Clutha r" and "Clutha river" all become Clutha R. Finally a new variable `form` is added which defines each observation as from one of the following systems: `Creek, River, Tributary, Stream, Lake, Lagoon, Pond, Burn, Race, Dam, Estuary, Swamp, Drain, Canal, Tarn, Wetland, Reservoir, Brook, Spring, Gully` or `NA`. 
 
 ```{r}
 dat2 <- clean_nzffd(dat)
@@ -84,14 +82,16 @@ length(unique(dat$catchname))
 length(unique(dat2$catchname))
 ```
 
-The above changes, while superfical make analysis that, for example relies on grouping by river name much cleaner.
+The above changes, while superfical make analysis that, for example relies on grouping, work as intended.
 
 
 ### Filling gaps.
-Both the `map` and `altitude` variables have some `NA` values, here we can fill most of them with `fill_nzffd()`. To fill `map` and `altitude` we run the observation coordinates (NZMG) against a raster projection of the NZMS260 MapTiles (URL) and an 8m digital elevation model of NZ (URL). Note the 'altitude' values are not exact (margin of error??) so we suggest they are used in an exploratory manner only.  
 
-NZ Map Tiles sauce:
-NZ 8m DEM sauce:
+
+Some additional useful information can quickly be added to the dataset. the `fill_nzffd()` function adds columns giving the speices' common name, scientific name (genus + species), family, genus, species, threat classification status and weather the species is native or introduced.
+
+Additionally, both the `map` and `altitude` variables have some `NA` values, here we can fill most of them with `fill_nzffd()`. To fill `map` and `altitude` we run the observation coordinates (NZMG) against a raster projection of the ([NZMS260 MapTiles](https://koordinates.com/layer/413-nzms-260-map-series-index/)) and an 8m digital elevation model ([(DEM)](https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/)) of NZ. Note the 'altitude' values are not exact so we suggest they are used in an exploratory manner only.  
+
 
 ```{r}
 # number of NA's in input variables map and altitude
@@ -105,15 +105,11 @@ sum(is.na(dat3$maps))
 sum(is.na(dat3$altitude))
 ```
 
-
-
-We also have a function for queurying the 8m DEM if you just want to supply a dataframe of Easting and Northing coordinates (see below). *ADD THIS*
-
-### Adding REC data
-We can also add data from the River Environment/Ecosystem(??) Classification 2(??) database using `add_nzffd()`. This function takes the `nzreach` variable and matches it again the cooresponding `NZREACH` variable in the REC database and imports all the REC data. Note this will add 24 new columns to your dataframe, with the original REC column names, we suggest renaming the REC columns as they are a bit fiendish as is. 
+  
+### Adding River Environment classification data
+We can also add associated network topology and environmental information from the River Environment Classification database ([(REC)](https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/)) using `add_nzffd()`. This function takes the `nzreach` variable and matches it again the corresponding `NZREACH` variable in the REC database and imports all the REC data. Note this will add 24 new columns to your dataframe, with the original REC column names, we suggest renaming the REC columns as they are a bit fiendish as is. 
 
 This function requires an internet connection to query the REC database. 
-REC sauce: *add citation*
 
 ```{r}
 dim(dat3)
@@ -123,12 +119,4 @@ dat4 <- add_nzffd(dat3)
 dim(dat4)
 ```
 
-You should now have a cleaned up dataframe of NZFFD records available to you, optionally along with some missing data along with associated REC data. That is it for the main nzffdr functions, there is one more which allows you to submit a two-column dataframe of coordinates (in NZMG) and get back the associated elevation data from the 8m NZ DEM - `dem_nzffd()`. *add this*
-
-```{r}
-# sites <- xxx
-# sites_dem <- dem_nzffd(sites)
-# head(sites_dem)
-```
-
-
+You should now have a cleaned up dataframe of NZFFD records available to you, optionally along with some missing data and associated REC data.

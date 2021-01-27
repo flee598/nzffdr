@@ -11,7 +11,7 @@ A dataframe of 59 rows and one variable:
 }
 }
 \usage{
-data(method_nzffd)
+method_nzffd
 }
 \description{
 A dataframe listing the possible inputs for the fish_method argument

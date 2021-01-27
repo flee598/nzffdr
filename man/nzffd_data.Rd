@@ -30,6 +30,6 @@ A dataframe of 141708 rows and 22 variables:
 data(nzffd_data)
 }
 \description{
-A random sample of 200 rows of the NZFFD
+A random sample of 200 rows of the NZFFD.
 }
 \keyword{datasets}
