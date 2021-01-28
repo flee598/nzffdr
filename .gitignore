@@ -1,3 +1,8 @@
 inst/doc
 .Rproj.user
 docs
+index.*
+.RData
+.Rhistory
+._pkgdown.yml
+cran-comments.md
