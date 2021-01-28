@@ -19,7 +19,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' df <- add_nzffd(nzffdr::nzffd_data)
+#' df <- import_nzffd()
 #' head(df)
 #' }
 #' @export

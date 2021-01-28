@@ -1,6 +1,4 @@
-#' nzffd_data
-#'
-#' A random sample of 200 rows of the NZFFD.
+#' Sample dataframe of 200 rows of the NZFFD.
 #'
 #' @docType data
 #'
@@ -26,10 +24,9 @@
 #' @source \url{www.niwa.co.nz}
 "nzffd_data"
 
-
-#' method_nzffd
-#'
-#' A dataframe listing the possible inputs for the fish_method argument
+#' Dataframe listing all fishing methods used in the NZFFD
+#' 
+#' Dataframe listing the possible inputs for the fish_method argument
 #' of the import_nzffd function.
 #'
 #' @docType data
@@ -43,7 +40,7 @@
 "method_nzffd"
 
 
-#' species_nzffd
+#' Dataframe listing all species in the NZFFD
 #'
 #' A dataframe listing the possible inputs for the species argument
 #' of the import_nzffd function. Either the scientific or common name can
@@ -57,7 +54,26 @@
 #' \describe{
 #'   \item{sci}{Genus and species}
 #'   \item{common}{common name}
-#'   ...
 #' }
 "species_nzffd"
 
+#' Simple features map of New Zealand
+#'
+#' A simple features map of New Zealand. A simplified version of the 1:150k
+#' NZ map outline available from Land Information New Zealand.
+#' CRS: New Zealand Map Grid, EPSG:27200 (matching NZFFD observations). 
+#' The map contains polygons for the three main island plus the Chatham Islands.  
+#' 
+#' @source \url{https://data.linz.govt.nz}
+#'
+#' @docType data
+#'
+#' @usage nzmap_nzffd
+#'
+#' @format A simple features dataframe with 4 rows and 3 columns:
+#' \describe{
+#'   \item{name}{Island name}
+#'   \item{name_ascii}{Island name ascii characters}
+#'   \item{geometry}{Line geometry}
+#' }
+"nzmap_nzffd"

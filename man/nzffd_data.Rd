@@ -3,7 +3,7 @@
 \docType{data}
 \name{nzffd_data}
 \alias{nzffd_data}
-\title{nzffd_data}
+\title{Sample dataframe of 200 rows of the NZFFD.}
 \format{
 A dataframe of 141708 rows and 22 variables:
 \describe{
@@ -30,6 +30,6 @@ A dataframe of 141708 rows and 22 variables:
 data(nzffd_data)
 }
 \description{
-A random sample of 200 rows of the NZFFD.
+Sample dataframe of 200 rows of the NZFFD.
 }
 \keyword{datasets}

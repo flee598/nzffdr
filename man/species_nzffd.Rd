@@ -3,13 +3,12 @@
 \docType{data}
 \name{species_nzffd}
 \alias{species_nzffd}
-\title{species_nzffd}
+\title{Dataframe listing all species in the NZFFD}
 \format{
 A dataframe of 75 rows and two variables:
 \describe{
   \item{sci}{Genus and species}
   \item{common}{common name}
-  ...
 }
 }
 \usage{

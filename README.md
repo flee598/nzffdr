@@ -137,12 +137,12 @@ head(dat2)
 #> 5  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
 #> 6  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
 #>     north altitude penet fishmeth effort pass spcode abund number minl maxl
-#> 1 6499800       30     3      gmt      6   NA galfas            2   95  110
-#> 2 6499800       30     3      gmt      6   NA gobhut            2   80   85
-#> 3 6499800       30     3      gmt      6   NA parane            1   40   NA
-#> 4 6499800       30     3      fyn      3   NA gobgob            1  150   NA
-#> 5 6499800       30     3      fyn      3   NA galfas            3  130  135
-#> 6 6499800       30     3      fyn      3   NA parane            2   70   75
+#> 1 6499800       30     3      gmt      6   NA galfas  <NA>      2   95  110
+#> 2 6499800       30     3      gmt      6   NA gobhut  <NA>      2   80   85
+#> 3 6499800       30     3      gmt      6   NA parane  <NA>      1   40   NA
+#> 4 6499800       30     3      fyn      3   NA gobgob  <NA>      1  150   NA
+#> 5 6499800       30     3      fyn      3   NA galfas  <NA>      3  130  135
+#> 6 6499800       30     3      fyn      3   NA parane  <NA>      2   70   75
 #>   nzreach   form
 #> 1 2004154 Stream
 #> 2 2004154 Stream

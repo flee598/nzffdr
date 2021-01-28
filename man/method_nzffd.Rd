@@ -3,7 +3,7 @@
 \docType{data}
 \name{method_nzffd}
 \alias{method_nzffd}
-\title{method_nzffd}
+\title{Dataframe listing all fishing methods used in the NZFFD}
 \format{
 A dataframe of 59 rows and one variable:
 \describe{
@@ -14,7 +14,7 @@ A dataframe of 59 rows and one variable:
 method_nzffd
 }
 \description{
-A dataframe listing the possible inputs for the fish_method argument
+Dataframe listing the possible inputs for the fish_method argument
 of the import_nzffd function.
 }
 \keyword{datasets}

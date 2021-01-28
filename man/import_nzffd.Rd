@@ -68,8 +68,7 @@ Occurrence Dataset https://doi.org/10.15468/ms5iqu
 \examples{
 \dontrun{
 
-import all records for the species "Black mudfish"
-df <- import_nzffd(species = "Black mudfish")
+df <- add_nzffd(nzffdr::nzffd_data)
 head(df)
 }
 }
