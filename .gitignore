@@ -1,7 +1,8 @@
 inst/doc
 .Rproj.user
 docs
-index.*
+index.Rmd
+index.md
 .RData
 .Rhistory
 ._pkgdown.yml
