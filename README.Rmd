@@ -4,7 +4,7 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  dpi = 300,
+  dpi = 600,
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
@@ -72,11 +72,12 @@ head(dat)
 ```
 
 ### Cleaning data
-While the data imported from NZFFD is in pretty good shape there are some small inconsistencies. The `nzffd_clean()` function aims to deal with some of these inconsistencies. In particular text strings have been standardised. The first letter of all words in `catchname` and `locality` are capitalised and any non-alphanumeric characters are removed. `time` is converted to a standardised 24 hour format and nonsesical values converted to `NA`. `org` is converted to all lowercase and has non-alphanumeric characters removed. `map` is converted to lower case and has any non-three digit codes converted to `NA`. `catchname` codes are tidied following the suggested abbreviations, e.g. "Cluth River", "Clutha r" and "Clutha river" all become Clutha R. Finally a new variable `form` is added which defines each observation as from one of the following systems: `Creek, River, Tributary, Stream, Lake, Lagoon, Pond, Burn, Race, Dam, Estuary, Swamp, Drain, Canal, Tarn, Wetland, Reservoir, Brook, Spring, Gully` or `NA`. 
+While the data imported from NZFFD is in pretty good shape there are some small inconsistencies. The `nzffd_clean()` function aims to deal with some of these inconsistencies. In particular text strings have been standardised. The first letter of all words in `catchname` and `locality` are capitalised and any non-alphanumeric characters are removed. `time` is converted to a standardised 24 hour format and nonsesical values converted to `NA`. `org` is converted to all lowercase and has non-alphanumeric characters removed. `map` is converted to lower case and has any non-three digit codes converted to `NA`. `catchname` codes are tidied following the suggested abbreviations, e.g. "Clutha River", "Clutha r" and "Clutha river" all become Clutha R. Finally a new variable `form` is added which defines each observation as from one of the following systems: `Creek, River, Tributary, Stream, Lake, Lagoon, Pond, Burn, Race, Dam, Estuary, Swamp, Drain, Canal, Tarn, Wetland, Reservoir, Brook, Spring, Gully` or `NA`. 
 
 ```{r}
 dat2 <- nzffd_clean(dat)
 head(dat2)
+
 # quick check for changes in the number of different catchment names (a 
 # reduction means, names have successfully been recoded)
 length(unique(dat$catchname))
@@ -99,9 +100,13 @@ Additionally, both the `map` and `altitude` variables have some `NA` values, her
 sum(is.na(dat2$map))
 sum(is.na(dat2$altitude))
 dat3 <- nzffd_fill(dat2, alt = TRUE, maps = TRUE)
+
 # number of NA's in output data
 sum(is.na(dat3$maps))
 sum(is.na(dat3$altitude))
+
+# check new species columns have been added
+head(dat3)
 ```
 
   
@@ -111,9 +116,53 @@ We can also add associated network topology and environmental information from t
 This function requires an internet connection to query the REC database. 
 
 ```{r}
+# check number of columns after REC data has been added
 dim(dat3)
+
+# add REC data
 dat4 <- nzffd_add(dat3)
+
+# check number of columns after REC data has been added
 dim(dat4)
 ```
 
 You should now have a cleaned up dataframe of NZFFD records available to you, optionally along with some missing data and associated REC data.
+
+### Mapping observations
+
+There is a simple features map of New Zealand included in the package, this can be used to quickly check species distributions and the like. 
+
+
+```{r}
+# ggplot2 for nice figures
+# sf library for setting map crs
+library(ggplot2)
+library(sf) 
+
+# get map of NZ and remove Chatham Islands
+nz <- nzffdr::nzffd_nzmap
+nz <- subset(nz, name != "Chatham Island")
+
+# use built-in subset of NZFFD data 
+eels <- nzffdr::nzffd_data
+
+# add scientific and common names for species
+eels <- nzffdr::nzffd_fill(eels)
+
+# filter just eels species 
+eels <- subset(eels, genus == "Anguilla")
+
+# create a basic map, with points coloured by species common names
+ggplot() +
+  geom_sf(data = nz) +
+  geom_point(data = eels, aes(x = east, y = north, colour = common_name), size = 1.5) +
+  scale_x_continuous(breaks = c(2e6, 25e5, 3e6)) +
+  scale_y_continuous(breaks = c(54e5, 61e5, 68e5)) +
+  coord_sf(datum = sf::st_crs(27200)) +
+  theme_light()
+```
+
+
+
+
+

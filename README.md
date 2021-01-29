@@ -32,6 +32,10 @@ There are four built-in datasets to assist, these are:
     database by species name (using scientific or common names) so these
     are provided for reference.
 
+-   `nzffd_nzmap` a simple features map of New Zealand. A simplified
+    version of the 1:150k NZ map outline available from [Land
+    Information New Zealand](https://www.linz.govt.nz).
+
 ### Getting data
 
 Start by importing some data. We have tried to make the search terms
@@ -119,7 +123,7 @@ removed. `time` is converted to a standardised 24 hour format and
 nonsesical values converted to `NA`. `org` is converted to all lowercase
 and has non-alphanumeric characters removed. `map` is converted to lower
 case and has any non-three digit codes converted to `NA`. `catchname`
-codes are tidied following the suggested abbreviations, e.g. “Cluth
+codes are tidied following the suggested abbreviations, e.g. “Clutha
 River”, “Clutha r” and “Clutha river” all become Clutha R. Finally a new
 variable `form` is added which defines each observation as from one of
 the following systems:
@@ -150,6 +154,7 @@ head(dat2)
 #> 4 2004154 Stream
 #> 5 2004154 Stream
 #> 6 2004154 Stream
+
 # quick check for changes in the number of different catchment names (a 
 # reduction means, names have successfully been recoded)
 length(unique(dat$catchname))
@@ -185,11 +190,43 @@ sum(is.na(dat2$map))
 sum(is.na(dat2$altitude))
 #> [1] 592
 dat3 <- nzffd_fill(dat2, alt = TRUE, maps = TRUE)
+
 # number of NA's in output data
 sum(is.na(dat3$maps))
 #> [1] 0
 sum(is.na(dat3$altitude))
 #> [1] 0
+
+# check new species columns have been added
+head(dat3)
+#>   spcode   card  m    y    catchname   catch                locality time  org
+#> 1 aldfor  30488  3 2009       Avon R 666.000          Bexley Wetland   NA docc
+#> 2 aldfor 111010 11 2003  Whanganui R 333.000         Whanganui River   NA  uow
+#> 3 aldfor  30382  5 2009 Ruamahanga R 292.000              Lake Onoke   NA wnrc
+#> 4 aldfor   7689  9 2001     Wairoa R 085.000            Wairoa River   NA niwa
+#> 5 aldfor  21454  2 2002       Long B 075.000 Unnamed Stream Long Bay   NA nscc
+#> 6 aldfor 105767  4 2005    Waimapu S 144.000          Waimapu Stream   NA  uow
+#>   map    east   north altitude penet fishmeth effort pass abund number minl
+#> 1 m35 2487482 5742964        5     1      ntc     32   NA  <NA>     36   95
+#> 2 R10 2687692 6143373        9    11      efb    324    1  <NA>      1   NA
+#> 3 r28 2686241 5978218        5     7      sen     NA   NA     a     NA   NA
+#> 4 s11 2692300 6465800        5     7      ntc      7   NA     a     15  275
+#> 5 r10 2665859 6500387       10     1      han     NA   NA  <NA>      6   NA
+#> 6 u14 2787148 6379884       10     2      efb   1522   NA  <NA>      1   NA
+#>   maxl  nzreach    form      common_name             sci_name    family
+#> 1  271 13045924 Wetland Yelloweye mullet Aldrichetta forsteri Mugilidae
+#> 2   NA  7029252   River Yelloweye mullet Aldrichetta forsteri Mugilidae
+#> 3   NA  9016280    Lake Yelloweye mullet Aldrichetta forsteri Mugilidae
+#> 4  345  2007061   River Yelloweye mullet Aldrichetta forsteri Mugilidae
+#> 5  150  2004122  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae
+#> 6   NA  4001685  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae
+#>         genus  species   threat_class native
+#> 1 Aldrichetta forsteri not threatened native
+#> 2 Aldrichetta forsteri not threatened native
+#> 3 Aldrichetta forsteri not threatened native
+#> 4 Aldrichetta forsteri not threatened native
+#> 5 Aldrichetta forsteri not threatened native
+#> 6 Aldrichetta forsteri not threatened native
 ```
 
 ### Adding River Environment classification data
@@ -206,12 +243,53 @@ renaming the REC columns as they are a bit fiendish as is.
 This function requires an internet connection to query the REC database.
 
 ``` r
+# check number of columns after REC data has been added
 dim(dat3)
 #> [1] 58768    30
+
+# add REC data
 dat4 <- nzffd_add(dat3)
+
+# check number of columns after REC data has been added
 dim(dat4)
 #> [1] 58768    54
 ```
 
 You should now have a cleaned up dataframe of NZFFD records available to
 you, optionally along with some missing data and associated REC data.
+
+### Mapping observations
+
+There is a simple features map of New Zealand included in the package,
+this can be used to quickly check species distributions and the like.
+
+``` r
+# ggplot2 for nice figures
+# sf library for setting map crs
+library(ggplot2)
+library(sf) 
+
+# get map of NZ and remove Chatham Islands
+nz <- nzffdr::nzffd_nzmap
+nz <- subset(nz, name != "Chatham Island")
+
+# use built-in subset of NZFFD data 
+eels <- nzffdr::nzffd_data
+
+# add scientific and common names for species
+eels <- nzffdr::nzffd_fill(eels)
+
+# filter just eels species 
+eels <- subset(eels, genus == "Anguilla")
+
+# create a basic map, with points coloured by species common names
+ggplot() +
+  geom_sf(data = nz) +
+  geom_point(data = eels, aes(x = east, y = north, colour = common_name), size = 1.5) +
+  scale_x_continuous(breaks = c(2e6, 25e5, 3e6)) +
+  scale_y_continuous(breaks = c(54e5, 61e5, 68e5)) +
+  coord_sf(datum = sf::st_crs(27200)) +
+  theme_light()
+```
+
+![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
