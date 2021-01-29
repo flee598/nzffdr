@@ -27,35 +27,35 @@
 #' Dataframe listing all fishing methods used in the NZFFD
 #' 
 #' Dataframe listing the possible inputs for the fish_method argument
-#' of the import_nzffd function.
+#' of the nzffd_import function.
 #'
 #' @docType data
 #'
-#' @usage method_nzffd
+#' @usage nzffd_method
 #'
 #' @format A dataframe of 59 rows and one variable:
 #' \describe{
 #'   \item{method}{fishing method used}
 #' }
-"method_nzffd"
+"nzffd_method"
 
 
 #' Dataframe listing all species in the NZFFD
 #'
 #' A dataframe listing the possible inputs for the species argument
-#' of the import_nzffd function. Either the scientific or common name can
+#' of the nzffd_import function. Either the scientific or common name can
 #' be used.
 #'
 #' @docType data
 #'
-#' @usage species_nzffd
+#' @usage nzffd_species
 #'
 #' @format A dataframe of 75 rows and two variables:
 #' \describe{
 #'   \item{sci}{Genus and species}
 #'   \item{common}{common name}
 #' }
-"species_nzffd"
+"nzffd_species"
 
 #' Simple features map of New Zealand
 #'
@@ -68,7 +68,7 @@
 #'
 #' @docType data
 #'
-#' @usage nzmap_nzffd
+#' @usage nzffd_nzmap
 #'
 #' @format A simple features dataframe with 4 rows and 3 columns:
 #' \describe{
@@ -76,4 +76,4 @@
 #'   \item{name_ascii}{Island name ascii characters}
 #'   \item{geometry}{Line geometry}
 #' }
-"nzmap_nzffd"
+"nzffd_nzmap"

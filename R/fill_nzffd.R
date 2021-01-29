@@ -10,7 +10,7 @@
 #' If \code{alt = TRUE} this function requires an internet connection to query
 #' the 8m DEM.
 #'
-#' @param fishd A dataframe imported from the NZFFD using \code{import_nzffd}.
+#' @param fishd A dataframe imported from the NZFFD using \code{nzffd_import}.
 #'
 #' @param maps Should missing map tiles be added to the dataframe.
 #'
@@ -23,11 +23,11 @@
 #' @examples
 #' \dontrun{
 #'
-#' df <- fill_nzffd(nzffdr::nzffd_data)
+#' df <- nzffd_fill(nzffdr::nzffd_data)
 #' head(df)
 #' }
 #' @export
-fill_nzffd <- function(fishd, alt = TRUE, maps = TRUE) {
+nzffd_fill <- function(fishd, alt = TRUE, maps = TRUE) {
 
   if (is.data.frame(fishd) == FALSE) {
     stop("arg fishd must be a data.frame")

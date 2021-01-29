@@ -18,16 +18,16 @@ library(nzffdr)
 
 ### Built-in datasets
 
-There are three built-in datasets to assist, these are:
+There are four built-in datasets to assist, these are:
 
 -   `nzffd_data` a subset of 200 rows from the NZFFD, used for examples,
     tutorials etc.
 
--   `method_nzffd` a dataframe containing all the different fishing
+-   `nzffd_method` a dataframe containing all the different fishing
     methods included in the NZFFD, it is possible to search the database
     using these terms so they are provided for reference.
 
--   `species_nzffd` a dataframe of the scientific and common names of
+-   `nzffd_species` a dataframe of the scientific and common names of
     all species included in the NZFFD. It is possible to search the
     database by species name (using scientific or common names) so these
     are provided for reference.
@@ -53,13 +53,13 @@ arguments:
 
 -   `fish_method` search by fishing method used. There are 59 different
     possible options for `fish_method`, if you want to search for a
-    specific fishing method use `method_nzffd()` to see a list of all
+    specific fishing method use `nzffd_method()` to see a list of all
     possible options, you can then copy/paste from there (e.g. if we
     only wanted fish caught by lures use `fish_meth = "Angling - Lure"`)
     don’t set the arg if you want all fishing methods.
 
 -   `species` search for a particular species. There are 75 different
-    possible options for `species`, use `species_nzffd()` to see a list
+    possible options for `species`, use `nzffd_species()` to see a list
     of all possible options. You can search using either common or
     scientific names and can search for multiple species at once.
     e.g. to search for Black mudfish use `species = "Black mudfish"` or
@@ -79,7 +79,7 @@ Version 1.2. The National Institute of Water and Atmospheric Research
 
 ``` r
 # import all records between 2000 and 2010
-dat <- import_nzffd(catchment = "", river = "", location = "", 
+dat <- nzffd_import(catchment = "", river = "", location = "", 
   fish_method = "", species = "", starts = 2000, ends = 2010)
 head(dat)
 #>   card m    y catchname   catch                locality time org map    east
@@ -105,13 +105,13 @@ head(dat)
 #> 6 2004154
 
 # To import the entire NZFF database:
-# dat <- import_nzffd()
+# dat <- nzffd_import()
 ```
 
 ### Cleaning data
 
 While the data imported from NZFFD is in pretty good shape there are
-some small inconsistencies. The `clean_nzffd()` function aims to deal
+some small inconsistencies. The `nzffd_clean()` function aims to deal
 with some of these inconsistencies. In particular text strings have been
 standardised. The first letter of all words in `catchname` and
 `locality` are capitalised and any non-alphanumeric characters are
@@ -127,7 +127,7 @@ the following systems:
 or `NA`.
 
 ``` r
-dat2 <- clean_nzffd(dat)
+dat2 <- nzffd_clean(dat)
 head(dat2)
 #>   card m    y catchname   catch                locality time org map    east
 #> 1  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600
@@ -164,12 +164,12 @@ relies on grouping, work as intended.
 ### Filling gaps.
 
 Some additional useful information can quickly be added to the dataset.
-the `fill_nzffd()` function adds columns giving the species’ common
+the `nzffd_fill()` function adds columns giving the species’ common
 name, scientific name (genus + species), family, genus, species, threat
 classification status and weather the species is native or introduced.
 
 Additionally, both the `map` and `altitude` variables have some `NA`
-values, here we can fill most of them with `fill_nzffd()`. To fill `map`
+values, here we can fill most of them with `nzffd_fill()`. To fill `map`
 and `altitude` we run the observation coordinates (NZMG) against a
 raster projection of the ([NZMS260
 MapTiles](https://koordinates.com/layer/413-nzms-260-map-series-index/))
@@ -184,7 +184,7 @@ sum(is.na(dat2$map))
 #> [1] 908
 sum(is.na(dat2$altitude))
 #> [1] 592
-dat3 <- fill_nzffd(dat2, alt = TRUE, maps = TRUE)
+dat3 <- nzffd_fill(dat2, alt = TRUE, maps = TRUE)
 # number of NA's in output data
 sum(is.na(dat3$maps))
 #> [1] 0
@@ -197,7 +197,7 @@ sum(is.na(dat3$altitude))
 We can also add associated network topology and environmental
 information from the River Environment Classification database
 ([REC](https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/))
-using `add_nzffd()`. This function takes the `nzreach` variable and
+using `nzffd_add()`. This function takes the `nzreach` variable and
 matches it again the corresponding `NZREACH` variable in the REC
 database and imports all the REC data. Note this will add 24 new columns
 to your dataframe, with the original REC column names, we suggest
@@ -208,7 +208,7 @@ This function requires an internet connection to query the REC database.
 ``` r
 dim(dat3)
 #> [1] 58768    30
-dat4 <- add_nzffd(dat3)
+dat4 <- nzffd_add(dat3)
 dim(dat4)
 #> [1] 58768    54
 ```

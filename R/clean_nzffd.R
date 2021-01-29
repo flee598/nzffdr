@@ -12,7 +12,7 @@
 #' \code{Cluth River}, \code{Clutha r} and \code{Clutha river} all 
 #' become \code{Clutha R}. Finally a new variable \code{form} is added which
 #' defines the sampled habitat type for each observation.
-#' @param fishd A dataframe imported from the NZFFD using \code{import_nzffd}
+#' @param fishd A dataframe imported from the NZFFD using \code{nzffd_import}
 #'
 #' @return A dataframe of the same dimensions as \code{fishd}, but cleaned.
 #'
@@ -22,11 +22,11 @@
 #' @examples
 #' \dontrun{
 #'
-#' dat <- clean_nzffd(nzffdr::nzffd_data)
-#' head(dat)
+#' dat <- nzffd_clean(nzffdr::nzffd_data)
+#' 
 #' }
 #' @export
-clean_nzffd <- function(fishd) {
+nzffd_clean <- function(fishd) {
 
   if (is.data.frame(fishd) == FALSE) {
     stop("arg fishd must be a data.frame")

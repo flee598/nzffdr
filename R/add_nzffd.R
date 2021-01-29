@@ -9,7 +9,7 @@
 #' This function requires an internet connection to query the REC database.
 #'
 #'
-#' @param fishd A dataframe imported from the NZFFD using \code{import_nzffd}.
+#' @param fishd A dataframe imported from the NZFFD using \code{nzffd_import}.
 #'
 #' @return A dataframe with the same number of rows as \code{fishd} but
 #' with 24 additional columns from the REC database added.
@@ -19,11 +19,11 @@
 #' @examples
 #' \dontrun{
 #'
-#' df <- import_nzffd()
-#' head(df)
+#' df <- nzffd_add(nzffdr::nzffd_data)
+
 #' }
 #' @export
-add_nzffd <- function(fishd) {
+nzffd_add <- function(fishd) {
   
   if (!is.data.frame(fishd)) {
     stop("arg fishd must be a data.frame")

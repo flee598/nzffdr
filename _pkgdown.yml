@@ -1,0 +1,17 @@
+reference:
+ - title: "Core functions"
+   desc: >
+    Functions for importing and tidying NZFFD data
+   contents: 
+    - nzffd_import
+    - nzffd_clean
+    - nzffd_fill
+    - nzffd_add
+ - title: "Datasets"
+   desc: >
+    Useful datasets
+   contents:
+    - nzffd_data
+    - nzffd_species
+    - nzffd_method
+    - nzffd_nzmap
