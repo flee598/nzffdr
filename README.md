@@ -9,7 +9,8 @@ Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search))
 from R and additional functions for cleaning imported data and adding
 missing data.
 
-For a detailed guide to using the package see: ADD URL HERE
+For a detailed guide to using the package see the [help
+page](https://flee598.github.io/nzffdr/).
 
 ### Installation
 
