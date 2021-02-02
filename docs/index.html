@@ -221,7 +221,7 @@
 </div>
 <div id="adding-river-environment-classification-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#adding-river-environment-classification-data" class="anchor"></a>Adding River Environment classification data</h3>
+<a href="#adding-river-environment-classification-data" class="anchor"></a>Adding River Environment Classification data</h3>
 <p>We can also add associated network topology and environmental information from the River Environment Classification database (<a href="https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/">REC</a>) using <code><a href="reference/nzffd_add.html">nzffd_add()</a></code>. This function takes the <code>nzreach</code> variable and matches it again the corresponding <code>NZREACH</code> variable in the REC database and imports all the REC data. Note this will add 24 new columns to your dataframe, with the original REC column names, we suggest renaming the REC columns as they are a bit fiendish as is.</p>
 <p>This function requires an internet connection to query the REC database.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
