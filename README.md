@@ -9,6 +9,8 @@ Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search))
 from R and additional functions for cleaning imported data and adding
 missing data.
 
+For a detailed guide to using the package see: ADD URL HERE
+
 ### Installation
 
 ``` r
@@ -16,70 +18,10 @@ missing data.
 library(nzffdr)
 ```
 
-### Built-in datasets
+### Import data from the NZFFD
 
-There are four built-in datasets to assist, these are:
-
--   `nzffd_data` a subset of 200 rows from the NZFFD, used for examples,
-    tutorials etc.
-
--   `nzffd_method` a dataframe containing all the different fishing
-    methods included in the NZFFD, it is possible to search the database
-    using these terms so they are provided for reference.
-
--   `nzffd_species` a dataframe of the scientific and common names of
-    all species included in the NZFFD. It is possible to search the
-    database by species name (using scientific or common names) so these
-    are provided for reference.
-
--   `nzffd_nzmap` a simple features map of New Zealand. A simplified
-    version of the 1:150k NZ map outline available from [Land
-    Information New Zealand](https://www.linz.govt.nz).
-
-### Getting data
-
-Start by importing some data. We have tried to make the search terms
-match those you would use directly on the Niwa site. For example leaving
-a search field blank will return all records. There are seven search
-arguments:
-
--   `catchment` this refers to the Catchment No. a 6 digit number unique
-    to the reach of interest. You can search using the inidviual number
-    (e.g. `catchment = "702.500"`), or for all rivers in a catchment you
-    can use the wildcard search term (e.g. `catchment = "702%"`), or
-    don’t set the arg if you want all catchments in NZ.
-
--   `river` search for a river by name, to get all records for the
-    Clutha (e.g. `river = "Clutha"`).
-
--   `location` search for river by location
-    e.g. (`location = "Nelson"`).
-
--   `fish_method` search by fishing method used. There are 59 different
-    possible options for `fish_method`, if you want to search for a
-    specific fishing method use `nzffd_method()` to see a list of all
-    possible options, you can then copy/paste from there (e.g. if we
-    only wanted fish caught by lures use `fish_meth = "Angling - Lure"`)
-    don’t set the arg if you want all fishing methods.
-
--   `species` search for a particular species. There are 75 different
-    possible options for `species`, use `nzffd_species()` to see a list
-    of all possible options. You can search using either common or
-    scientific names and can search for multiple species at once.
-    e.g. to search for Black mudfish use `species = "Black mudfish"` or
-    `species = "Neochanna diversus"` and to search for Black mudfish and
-    Bluegill bully use `species = c("Black mudfish", "Bluegill bully")`
-    etc.
-
--   `starts` starting search date, 1850 at the earliest.
-
--   `ends` ending search date.
-
-This function requires an internet connection to query Niwa’s database.
-
-Data citation: Crow S (2017). New Zealand Freshwater Fish Database.
-Version 1.2. The National Institute of Water and Atmospheric Research
-(NIWA). Occurrence Dataset <https://doi.org/10.15468/ms5iqu>
+This function requires an internet connection to query the NZFFD
+database.
 
 ``` r
 # import all records between 2000 and 2010
@@ -114,22 +56,6 @@ head(dat)
 
 ### Cleaning data
 
-While the data imported from NZFFD is in pretty good shape there are
-some small inconsistencies. The `nzffd_clean()` function aims to deal
-with some of these inconsistencies. In particular text strings have been
-standardised. The first letter of all words in `catchname` and
-`locality` are capitalised and any non-alphanumeric characters are
-removed. `time` is converted to a standardised 24 hour format and
-nonsesical values converted to `NA`. `org` is converted to all lowercase
-and has non-alphanumeric characters removed. `map` is converted to lower
-case and has any non-three digit codes converted to `NA`. `catchname`
-codes are tidied following the suggested abbreviations, e.g. “Clutha
-River”, “Clutha r” and “Clutha river” all become Clutha R. Finally a new
-variable `form` is added which defines each observation as from one of
-the following systems:
-`Creek, River, Tributary, Stream, Lake, Lagoon, Pond, Burn, Race, Dam, Estuary, Swamp, Drain, Canal, Tarn, Wetland, Reservoir, Brook, Spring, Gully`
-or `NA`.
-
 ``` r
 dat2 <- nzffd_clean(dat)
 head(dat2)
@@ -154,50 +80,12 @@ head(dat2)
 #> 4 2004154 Stream
 #> 5 2004154 Stream
 #> 6 2004154 Stream
-
-# quick check for changes in the number of different catchment names (a 
-# reduction means, names have successfully been recoded)
-length(unique(dat$catchname))
-#> [1] 888
-length(unique(dat2$catchname))
-#> [1] 791
 ```
 
-The above changes, while superficial make analysis that, for example
-relies on grouping, work as intended.
-
-### Filling gaps.
-
-Some additional useful information can quickly be added to the dataset.
-the `nzffd_fill()` function adds columns giving the species’ common
-name, scientific name (genus + species), family, genus, species, threat
-classification status and weather the species is native or introduced.
-
-Additionally, both the `map` and `altitude` variables have some `NA`
-values, here we can fill most of them with `nzffd_fill()`. To fill `map`
-and `altitude` we run the observation coordinates (NZMG) against a
-raster projection of the ([NZMS260
-MapTiles](https://koordinates.com/layer/413-nzms-260-map-series-index/))
-and an 8m digital elevation model
-([DEM](https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/))
-of NZ. Note the ‘altitude’ values are not exact so we suggest they are
-used in an exploratory manner only.
+### Filling gaps
 
 ``` r
-# number of NA's in input variables map and altitude
-sum(is.na(dat2$map))
-#> [1] 908
-sum(is.na(dat2$altitude))
-#> [1] 592
 dat3 <- nzffd_fill(dat2, alt = TRUE, maps = TRUE)
-
-# number of NA's in output data
-sum(is.na(dat3$maps))
-#> [1] 0
-sum(is.na(dat3$altitude))
-#> [1] 0
-
-# check new species columns have been added
 head(dat3)
 #>   spcode   card  m    y    catchname   catch                locality time  org
 #> 1 aldfor  30488  3 2009       Avon R 666.000          Bexley Wetland   NA docc
@@ -229,67 +117,63 @@ head(dat3)
 #> 6 Aldrichetta forsteri not threatened native
 ```
 
-### Adding River Environment classification data
-
-We can also add associated network topology and environmental
-information from the River Environment Classification database
-([REC](https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/))
-using `nzffd_add()`. This function takes the `nzreach` variable and
-matches it again the corresponding `NZREACH` variable in the REC
-database and imports all the REC data. Note this will add 24 new columns
-to your dataframe, with the original REC column names, we suggest
-renaming the REC columns as they are a bit fiendish as is.
+### Adding River Environment Classification data
 
 This function requires an internet connection to query the REC database.
 
 ``` r
-# check number of columns after REC data has been added
-dim(dat3)
-#> [1] 58768    30
-
-# add REC data
 dat4 <- nzffd_add(dat3)
-
-# check number of columns after REC data has been added
-dim(dat4)
-#> [1] 58768    54
+head(dat4)
+#>   nzreach spcode  card  m    y     catchname   catch                locality
+#> 1       0 anguil 21007  2 2001     Waimea In 573.000            Unnamed Pond
+#> 2       0 gobcot 18737  3 2001  Rangitikei R 327.000            Unnamed Lake
+#> 3       0 perflu 10733  1 2002 Waimakariri R 664.010            Unnamed Pond
+#> 4       0 parane 23626 10 2006     Pareora R 701.000 Pareora River Tributary
+#> 5       0 galfas 23766  8 2004    Punaruku S 044.000         Unnamed Wetland
+#> 6       0 angaus 26464  3 2004     Kakanui R 717.000            Unnamed Pond
+#>       time  org map    east   north altitude penet fishmeth effort pass abund
+#> 1     <NA> docn n27 2524900 5983300       40     5      gin      1   NA     c
+#> 2 10:30:00 docz s23 2704400 6103400        5    12      ntc     14   NA  <NA>
+#> 3     <NA> docc m35 2475400 5745900       25    28      ntc      9   NA  <NA>
+#> 4     <NA> doco j39 2361596 5636960       55     9      efp     15    1     n
+#> 5     <NA> docx q05 2629800 6647500        5     2      gmt     20   NA  <NA>
+#> 6 11:15:00  orc j41 2338000 5565000       40    18      efp      2    3  <NA>
+#>   number minl maxl      form      common_name                sci_name
+#> 1     NA   NA   NA      Pond Unidentified eel           Anguilla spp.
+#> 2     35   30   60      Lake     Common bully Gobiomorphus cotidianus
+#> 3      1   NA   NA      Pond            Perch       Perca fluviatilis
+#> 4     NA   NA   NA Tributary            Koura       Paranephrops spp.
+#> 5      2   55  133   Wetland    Banded kokopu      Galaxias fasciatus
+#> 6      1  560   NA      Pond     Shortfin eel      Anguilla australis
+#>         family        genus     species   threat_class     native OBJECTID
+#> 1  Anguillidae     Anguilla        spp.           <NA>       <NA>       NA
+#> 2   Eleotridae Gobiomorphus  cotidianus not threatened     native       NA
+#> 3     Percidae        Perca fluviatilis     introduced introduced       NA
+#> 4 Parastacidae Paranephrops        spp. not threatened     native       NA
+#> 5   Galaxiidae     Galaxias   fasciatus not threatened     native       NA
+#> 6  Anguillidae     Anguilla   australis not threatened     native       NA
+#>   FNODE TNODE LENGTH REACH_ID FNODE_1 TNODE_1 ORDER CLIMATE SRC_OF_FLW GEOLOGY
+#> 1    NA    NA     NA       NA      NA      NA    NA    <NA>       <NA>    <NA>
+#> 2    NA    NA     NA       NA      NA      NA    NA    <NA>       <NA>    <NA>
+#> 3    NA    NA     NA       NA      NA      NA    NA    <NA>       <NA>    <NA>
+#> 4    NA    NA     NA       NA      NA      NA    NA    <NA>       <NA>    <NA>
+#> 5    NA    NA     NA       NA      NA      NA    NA    <NA>       <NA>    <NA>
+#> 6    NA    NA     NA       NA      NA      NA    NA    <NA>       <NA>    <NA>
+#>   LANDCOVER NET_POSN VLY_LNDFRM CSOF CSOFG CSOFGL CSOFGLNP CSOFGLNPVL SPRING
+#> 1      <NA>     <NA>       <NA> <NA>  <NA>   <NA>     <NA>       <NA>   <NA>
+#> 2      <NA>     <NA>       <NA> <NA>  <NA>   <NA>     <NA>       <NA>   <NA>
+#> 3      <NA>     <NA>       <NA> <NA>  <NA>   <NA>     <NA>       <NA>   <NA>
+#> 4      <NA>     <NA>       <NA> <NA>  <NA>   <NA>     <NA>       <NA>   <NA>
+#> 5      <NA>     <NA>       <NA> <NA>  <NA>   <NA>     <NA>       <NA>   <NA>
+#> 6      <NA>     <NA>       <NA> <NA>  <NA>   <NA>     <NA>       <NA>   <NA>
+#>   NZFNODE NZTNODE DISTSEA CATCHAREA
+#> 1      NA      NA      NA        NA
+#> 2      NA      NA      NA        NA
+#> 3      NA      NA      NA        NA
+#> 4      NA      NA      NA        NA
+#> 5      NA      NA      NA        NA
+#> 6      NA      NA      NA        NA
 ```
 
 You should now have a cleaned up dataframe of NZFFD records available to
 you, optionally along with some missing data and associated REC data.
-
-### Mapping observations
-
-There is a simple features map of New Zealand included in the package,
-this can be used to quickly check species distributions and the like.
-
-``` r
-# ggplot2 for nice figures
-# sf library for setting map crs
-library(ggplot2)
-library(sf) 
-
-# get map of NZ and remove Chatham Islands
-nz <- nzffdr::nzffd_nzmap
-nz <- subset(nz, name != "Chatham Island")
-
-# use built-in subset of NZFFD data 
-eels <- nzffdr::nzffd_data
-
-# add scientific and common names for species
-eels <- nzffdr::nzffd_fill(eels)
-
-# filter just eels species 
-eels <- subset(eels, genus == "Anguilla")
-
-# create a basic map, with points coloured by species common names
-ggplot() +
-  geom_sf(data = nz) +
-  geom_point(data = eels, aes(x = east, y = north, colour = common_name), size = 1.5) +
-  scale_x_continuous(breaks = c(2e6, 25e5, 3e6)) +
-  scale_y_continuous(breaks = c(54e5, 61e5, 68e5)) +
-  coord_sf(datum = sf::st_crs(27200)) +
-  theme_light()
-```
-
-![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
