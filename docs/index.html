@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
 <ul>
 <li><p><code>catchment</code> this refers to the Catchment No. a 6 digit number unique to the reach of interest. You can search using the inidviual number (e.g. <code>catchment = "702.500"</code>), or for all rivers in a catchment you can use the wildcard search term (e.g. <code>catchment = "702%"</code>), or don’t set the arg if you want all catchments in NZ.</p></li>
 <li><p><code>river</code> search for a river by name, to get all records for the Clutha (e.g. <code>river = "Clutha"</code>).</p></li>
-<li><p><code>location</code> search for river by location e.g. (<code>location = "Nelson"</code>).</p></li>
+<li><p><code>location</code> search for river by sampling locality e.g. (<code>location = "Awakino"</code>). This only works when the location is included in the name of the waterway.</p></li>
 <li><p><code>fish_method</code> search by fishing method used. There are 59 different possible options for <code>fish_method</code>, if you want to search for a specific fishing method use <code><a href="reference/nzffd_method.html">nzffd_method()</a></code> to see a list of all possible options, you can then copy/paste from there (e.g. if we only wanted fish caught by lures use <code>fish_meth = "Angling - Lure"</code>) don’t set the arg if you want all fishing methods.</p></li>
 <li><p><code>species</code> search for a particular species. There are 75 different possible options for <code>species</code>, use <code><a href="reference/nzffd_species.html">nzffd_species()</a></code> to see a list of all possible options. You can search using either common or scientific names and can search for multiple species at once. e.g. to search for Black mudfish use <code>species = "Black mudfish"</code> or <code>species = "Neochanna diversus"</code> and to search for Black mudfish and Bluegill bully use <code>species = c("Black mudfish", "Bluegill bully")</code> etc.</p></li>
 <li><p><code>starts</code> starting search date, 1850 at the earliest.</p></li>
@@ -103,31 +103,31 @@
 <p>This function requires an internet connection to query Niwa’s database.</p>
 <p>Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version 1.2. The National Institute of Water and Atmospheric Research (NIWA). Occurrence Dataset <a href="https://doi.org/10.15468/ms5iqu" class="uri">https://doi.org/10.15468/ms5iqu</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># import all records between 2000 and 2010</span>
+<code class="sourceCode R"><span class="co"># import all records between 2010 and 2015</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffd_import.html">nzffd_import</a></span><span class="op">(</span>catchment <span class="op">=</span> <span class="st">""</span>, river <span class="op">=</span> <span class="st">""</span>, location <span class="op">=</span> <span class="st">""</span>, 
-  fish_method <span class="op">=</span> <span class="st">""</span>, species <span class="op">=</span> <span class="st">""</span>, starts <span class="op">=</span> <span class="fl">2000</span>, ends <span class="op">=</span> <span class="fl">2010</span><span class="op">)</span>
+  fish_method <span class="op">=</span> <span class="st">""</span>, species <span class="op">=</span> <span class="st">""</span>, starts <span class="op">=</span> <span class="fl">2010</span>, ends <span class="op">=</span> <span class="fl">2015</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
-<span class="co">#&gt;   card m    y catchname   catch                locality time org map    east</span>
-<span class="co">#&gt; 1  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600</span>
-<span class="co">#&gt; 2  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600</span>
-<span class="co">#&gt; 3  294 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600</span>
-<span class="co">#&gt; 4  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600</span>
-<span class="co">#&gt; 5  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600</span>
-<span class="co">#&gt; 6  295 5 2000    Long B 075.000 Unnamed stream Long Bay      arc r10 2664600</span>
-<span class="co">#&gt;     north altitude penet fishmeth effort pass spcode abund number minl maxl</span>
-<span class="co">#&gt; 1 6499800       30     3      gmt      6   NA galfas            2   95  110</span>
-<span class="co">#&gt; 2 6499800       30     3      gmt      6   NA gobhut            2   80   85</span>
-<span class="co">#&gt; 3 6499800       30     3      gmt      6   NA parane            1   40   NA</span>
-<span class="co">#&gt; 4 6499800       30     3      fyn      3   NA gobgob            1  150   NA</span>
-<span class="co">#&gt; 5 6499800       30     3      fyn      3   NA galfas            3  130  135</span>
-<span class="co">#&gt; 6 6499800       30     3      fyn      3   NA parane            2   70   75</span>
-<span class="co">#&gt;   nzreach</span>
-<span class="co">#&gt; 1 2004154</span>
-<span class="co">#&gt; 2 2004154</span>
-<span class="co">#&gt; 3 2004154</span>
-<span class="co">#&gt; 4 2004154</span>
-<span class="co">#&gt; 5 2004154</span>
-<span class="co">#&gt; 6 2004154</span>
+<span class="co">#&gt;    card  m    y     catchname catch                    locality time  org map</span>
+<span class="co">#&gt; 1 10142 12 2010     Waikato R   434               Waikato River      niwa R13</span>
+<span class="co">#&gt; 2 10142 12 2010     Waikato R   434               Waikato River      niwa R13</span>
+<span class="co">#&gt; 3 12132  1 2011 Waimakariri R   664 Otukaikino Stream tributary  day docc M35</span>
+<span class="co">#&gt; 4 12132  1 2011 Waimakariri R   664 Otukaikino Stream tributary  day docc M35</span>
+<span class="co">#&gt; 5 12132  1 2011 Waimakariri R   664 Otukaikino Stream tributary  day docc M35</span>
+<span class="co">#&gt; 6 12132  1 2011 Waimakariri R   664 Otukaikino Stream tributary  day docc M35</span>
+<span class="co">#&gt;      east   north altitude penet fishmeth effort pass spcode abund number minl</span>
+<span class="co">#&gt; 1 2691748 6427557       15    49              NA   NA anguil            3   NA</span>
+<span class="co">#&gt; 2 2691748 6427557       15    49              NA   NA chefos            1   NA</span>
+<span class="co">#&gt; 3 2479366 5751283       10    11      ntc     17   NA angdie           18  400</span>
+<span class="co">#&gt; 4 2479366 5751283       10    11      ntc     17   NA angaus           50  250</span>
+<span class="co">#&gt; 5 2479366 5751283       10    11      ntc     17   NA gobgob            1  125</span>
+<span class="co">#&gt; 6 2479366 5751283       10    11      ntc     17   NA gobcot           20   40</span>
+<span class="co">#&gt;   maxl  nzreach</span>
+<span class="co">#&gt; 1   NA  3008300</span>
+<span class="co">#&gt; 2   NA  3008300</span>
+<span class="co">#&gt; 3 1100 13043121</span>
+<span class="co">#&gt; 4  900 13043121</span>
+<span class="co">#&gt; 5   NA 13043121</span>
+<span class="co">#&gt; 6  110 13043121</span>
 
 <span class="co"># To import the entire NZFF database:</span>
 <span class="co"># dat &lt;- nzffd_import()</span></code></pre></div>
@@ -139,34 +139,34 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffd_clean.html">nzffd_clean</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span>
-<span class="co">#&gt;   card m    y catchname   catch                locality time org map    east</span>
-<span class="co">#&gt; 1  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600</span>
-<span class="co">#&gt; 2  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600</span>
-<span class="co">#&gt; 3  294 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600</span>
-<span class="co">#&gt; 4  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600</span>
-<span class="co">#&gt; 5  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600</span>
-<span class="co">#&gt; 6  295 5 2000    Long B 075.000 Unnamed Stream Long Bay   NA arc r10 2664600</span>
-<span class="co">#&gt;     north altitude penet fishmeth effort pass spcode abund number minl maxl</span>
-<span class="co">#&gt; 1 6499800       30     3      gmt      6   NA galfas  &lt;NA&gt;      2   95  110</span>
-<span class="co">#&gt; 2 6499800       30     3      gmt      6   NA gobhut  &lt;NA&gt;      2   80   85</span>
-<span class="co">#&gt; 3 6499800       30     3      gmt      6   NA parane  &lt;NA&gt;      1   40   NA</span>
-<span class="co">#&gt; 4 6499800       30     3      fyn      3   NA gobgob  &lt;NA&gt;      1  150   NA</span>
-<span class="co">#&gt; 5 6499800       30     3      fyn      3   NA galfas  &lt;NA&gt;      3  130  135</span>
-<span class="co">#&gt; 6 6499800       30     3      fyn      3   NA parane  &lt;NA&gt;      2   70   75</span>
-<span class="co">#&gt;   nzreach   form</span>
-<span class="co">#&gt; 1 2004154 Stream</span>
-<span class="co">#&gt; 2 2004154 Stream</span>
-<span class="co">#&gt; 3 2004154 Stream</span>
-<span class="co">#&gt; 4 2004154 Stream</span>
-<span class="co">#&gt; 5 2004154 Stream</span>
-<span class="co">#&gt; 6 2004154 Stream</span>
+<span class="co">#&gt;    card  m    y     catchname catch                    locality time  org map</span>
+<span class="co">#&gt; 1 10142 12 2010     Waikato R   434               Waikato River   NA niwa r13</span>
+<span class="co">#&gt; 2 10142 12 2010     Waikato R   434               Waikato River   NA niwa r13</span>
+<span class="co">#&gt; 3 12132  1 2011 Waimakariri R   664 Otukaikino Stream Tributary   NA docc m35</span>
+<span class="co">#&gt; 4 12132  1 2011 Waimakariri R   664 Otukaikino Stream Tributary   NA docc m35</span>
+<span class="co">#&gt; 5 12132  1 2011 Waimakariri R   664 Otukaikino Stream Tributary   NA docc m35</span>
+<span class="co">#&gt; 6 12132  1 2011 Waimakariri R   664 Otukaikino Stream Tributary   NA docc m35</span>
+<span class="co">#&gt;      east   north altitude penet fishmeth effort pass spcode abund number minl</span>
+<span class="co">#&gt; 1 2691748 6427557       15    49     &lt;NA&gt;     NA   NA anguil  &lt;NA&gt;      3   NA</span>
+<span class="co">#&gt; 2 2691748 6427557       15    49     &lt;NA&gt;     NA   NA chefos  &lt;NA&gt;      1   NA</span>
+<span class="co">#&gt; 3 2479366 5751283       10    11      ntc     17   NA angdie  &lt;NA&gt;     18  400</span>
+<span class="co">#&gt; 4 2479366 5751283       10    11      ntc     17   NA angaus  &lt;NA&gt;     50  250</span>
+<span class="co">#&gt; 5 2479366 5751283       10    11      ntc     17   NA gobgob  &lt;NA&gt;      1  125</span>
+<span class="co">#&gt; 6 2479366 5751283       10    11      ntc     17   NA gobcot  &lt;NA&gt;     20   40</span>
+<span class="co">#&gt;   maxl  nzreach      form</span>
+<span class="co">#&gt; 1   NA  3008300     River</span>
+<span class="co">#&gt; 2   NA  3008300     River</span>
+<span class="co">#&gt; 3 1100 13043121 Tributary</span>
+<span class="co">#&gt; 4  900 13043121 Tributary</span>
+<span class="co">#&gt; 5   NA 13043121 Tributary</span>
+<span class="co">#&gt; 6  110 13043121 Tributary</span>
 
 <span class="co"># quick check for changes in the number of different catchment names (a </span>
 <span class="co"># reduction means, names have successfully been recoded)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">catchname</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 888</span>
+<span class="co">#&gt; [1] 539</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">$</span><span class="va">catchname</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 791</span></code></pre></div>
+<span class="co">#&gt; [1] 416</span></code></pre></div>
 <p>The above changes, while superficial make analysis that, for example relies on grouping, work as intended.</p>
 </div>
 <div id="filling-gaps" class="section level3">
@@ -177,9 +177,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check number of NA's in input variables map and altitude</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">$</span><span class="va">map</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 908</span>
+<span class="co">#&gt; [1] 1560</span>
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">$</span><span class="va">altitude</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] 592</span>
+<span class="co">#&gt; [1] 835</span>
 <span class="va">dat3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffd_fill.html">nzffd_fill</a></span><span class="op">(</span><span class="va">dat2</span>, alt <span class="op">=</span> <span class="cn">TRUE</span>, maps <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># check number of NA's in output variables map and altitude, NA's have been dealt with</span>
@@ -190,34 +190,34 @@
 
 <span class="co"># check new columns have been added</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat3</span><span class="op">)</span>
-<span class="co">#&gt;   spcode   card  m    y    catchname   catch                locality time  org</span>
-<span class="co">#&gt; 1 aldfor  30488  3 2009       Avon R 666.000          Bexley Wetland   NA docc</span>
-<span class="co">#&gt; 2 aldfor 111010 11 2003  Whanganui R 333.000         Whanganui River   NA  uow</span>
-<span class="co">#&gt; 3 aldfor  30382  5 2009 Ruamahanga R 292.000              Lake Onoke   NA wnrc</span>
-<span class="co">#&gt; 4 aldfor   7689  9 2001     Wairoa R 085.000            Wairoa River   NA niwa</span>
-<span class="co">#&gt; 5 aldfor  21454  2 2002       Long B 075.000 Unnamed Stream Long Bay   NA nscc</span>
-<span class="co">#&gt; 6 aldfor 105767  4 2005    Waimapu S 144.000          Waimapu Stream   NA  uow</span>
-<span class="co">#&gt;   map    east   north altitude penet fishmeth effort pass abund number minl</span>
-<span class="co">#&gt; 1 m35 2487482 5742964        5     1      ntc     32   NA  &lt;NA&gt;     36   95</span>
-<span class="co">#&gt; 2 R10 2687692 6143373        9    11      efb    324    1  &lt;NA&gt;      1   NA</span>
-<span class="co">#&gt; 3 r28 2686241 5978218        5     7      sen     NA   NA     a     NA   NA</span>
-<span class="co">#&gt; 4 s11 2692300 6465800        5     7      ntc      7   NA     a     15  275</span>
-<span class="co">#&gt; 5 r10 2665859 6500387       10     1      han     NA   NA  &lt;NA&gt;      6   NA</span>
-<span class="co">#&gt; 6 u14 2787148 6379884       10     2      efb   1522   NA  &lt;NA&gt;      1   NA</span>
-<span class="co">#&gt;   maxl  nzreach    form      common_name             sci_name    family</span>
-<span class="co">#&gt; 1  271 13045924 Wetland Yelloweye mullet Aldrichetta forsteri Mugilidae</span>
-<span class="co">#&gt; 2   NA  7029252   River Yelloweye mullet Aldrichetta forsteri Mugilidae</span>
-<span class="co">#&gt; 3   NA  9016280    Lake Yelloweye mullet Aldrichetta forsteri Mugilidae</span>
-<span class="co">#&gt; 4  345  2007061   River Yelloweye mullet Aldrichetta forsteri Mugilidae</span>
-<span class="co">#&gt; 5  150  2004122  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae</span>
-<span class="co">#&gt; 6   NA  4001685  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae</span>
-<span class="co">#&gt;         genus  species   threat_class native</span>
-<span class="co">#&gt; 1 Aldrichetta forsteri not threatened native</span>
-<span class="co">#&gt; 2 Aldrichetta forsteri not threatened native</span>
-<span class="co">#&gt; 3 Aldrichetta forsteri not threatened native</span>
-<span class="co">#&gt; 4 Aldrichetta forsteri not threatened native</span>
-<span class="co">#&gt; 5 Aldrichetta forsteri not threatened native</span>
-<span class="co">#&gt; 6 Aldrichetta forsteri not threatened native</span></code></pre></div>
+<span class="co">#&gt;   spcode   card  m    y   catchname   catch         locality     time  org map</span>
+<span class="co">#&gt; 1 aldfor 104726  5 2015     Taipo S 229.000     Taipo Stream 09:50:00 hbrc v21</span>
+<span class="co">#&gt; 2 aldfor 104396  4 2013 Ngaruroro R 231.000 Waitangi Estuary 13:30:00 hbrc v21</span>
+<span class="co">#&gt; 3 aldfor  33330  1 2011 Ngaruroro R 231.000  Ngaruroro River     &lt;NA&gt; hbrc v21</span>
+<span class="co">#&gt; 4 aldfor  33321 10 2012     Clive R 231.501      Muddy Creek 23:00:00 hbrc v21</span>
+<span class="co">#&gt; 5 aldfor  30982  4 2010      Whau R  80.060  Avondale Stream 10:15:00  bml r11</span>
+<span class="co">#&gt; 6 aldfor 104726  5 2015     Taipo S 229.000     Taipo Stream 09:50:00 hbrc v21</span>
+<span class="co">#&gt;      east   north altitude penet fishmeth effort pass abund number minl maxl</span>
+<span class="co">#&gt; 1 2840995 6182554       16     4      fys     NA   NA  &lt;NA&gt;      5   NA   NA</span>
+<span class="co">#&gt; 2 2847218 6174038       16     0      sen     NA   NA  &lt;NA&gt;     27   NA   NA</span>
+<span class="co">#&gt; 3 2846262 6174474        2     2      fyn     NA   NA  &lt;NA&gt;      6   42  105</span>
+<span class="co">#&gt; 4 2847598 6173371        0     0      spo     NA   NA  &lt;NA&gt;     NA   NA   NA</span>
+<span class="co">#&gt; 5 2661200 6475000        5     1      nfc     50    1  &lt;NA&gt;      2  250  270</span>
+<span class="co">#&gt; 6 2840995 6182554       16     4      fys     NA   NA  &lt;NA&gt;      4   NA   NA</span>
+<span class="co">#&gt;   nzreach    form      common_name             sci_name    family       genus</span>
+<span class="co">#&gt; 1 8023537  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta</span>
+<span class="co">#&gt; 2 8024600 Estuary Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta</span>
+<span class="co">#&gt; 3 8024599   River Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta</span>
+<span class="co">#&gt; 4 8024588   Creek Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta</span>
+<span class="co">#&gt; 5 2006167  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta</span>
+<span class="co">#&gt; 6 8023537  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta</span>
+<span class="co">#&gt;    species   threat_class native</span>
+<span class="co">#&gt; 1 forsteri not threatened native</span>
+<span class="co">#&gt; 2 forsteri not threatened native</span>
+<span class="co">#&gt; 3 forsteri not threatened native</span>
+<span class="co">#&gt; 4 forsteri not threatened native</span>
+<span class="co">#&gt; 5 forsteri not threatened native</span>
+<span class="co">#&gt; 6 forsteri not threatened native</span></code></pre></div>
 </div>
 <div id="adding-river-environment-classification-data" class="section level3">
 <h3 class="hasAnchor">
@@ -227,14 +227,14 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check number of columns before REC data has been added</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">dat3</span><span class="op">)</span>
-<span class="co">#&gt; [1] 58768    30</span>
+<span class="co">#&gt; [1] 26121    30</span>
 
 <span class="co"># add REC data</span>
 <span class="va">dat4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffd_add.html">nzffd_add</a></span><span class="op">(</span><span class="va">dat3</span><span class="op">)</span>
 
 <span class="co"># check number of columns after REC data has been added</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">dat4</span><span class="op">)</span>
-<span class="co">#&gt; [1] 58768    54</span></code></pre></div>
+<span class="co">#&gt; [1] 26121    54</span></code></pre></div>
 <p>You should now have a cleaned up dataframe of NZFFD records available to you, optionally along with some missing data and associated REC data.</p>
 </div>
 <div id="mapping-observations" class="section level3">
@@ -244,7 +244,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ggplot2 for nice figures</span>
 <span class="co"># sf library for setting map crs</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span> 
 
 <span class="co"># get map of NZ and remove Chatham Islands</span>
