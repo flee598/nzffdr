@@ -6,3 +6,4 @@ cran-comments.md
 ^docs$
 index.md
 index.Rmd
+^\.github$
