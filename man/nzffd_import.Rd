@@ -24,7 +24,7 @@ want all catchments in NZ.}
 \item{river}{river name. e.g. to get all records for the Clutha, \code{river
 = "Clutha"}.}
 
-\item{location}{sampling location. e.g. \code{location = "Nelson"}. This
+\item{location}{sampling locality. e.g. \code{location = "Awakino"}. This
 only works when the location is included in the name of the waterway.}
 
 \item{fish_method}{fishing method used. There are 59 different possible

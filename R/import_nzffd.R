@@ -22,7 +22,7 @@
 #' @param river river name. e.g. to get all records for the Clutha, \code{river
 #' = "Clutha"}.
 #'
-#' @param location sampling location. e.g. \code{location = "Nelson"}. This
+#' @param location sampling locality. e.g. \code{location = "Awakino"}. This
 #' only works when the location is included in the name of the waterway.
 #'
 #' @param fish_method fishing method used. There are 59 different possible
@@ -101,6 +101,11 @@ nzffd_import <- function(catchment = "", river = "", location = "",
   } else {
     stop("Unknown fish_method arg - see nzffd_method for list of
     acceptable inputs", call. = FALSE)
+  }
+
+  # convert fishing method to code - required by NZFFD
+  if (fish_method != "") {
+    fish_method <- fishing_method_ls$VALUE[which(fishing_method_ls == fish_method)]
   }
 
   # gather species
