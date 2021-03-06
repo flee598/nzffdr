@@ -21,7 +21,7 @@
 #'   \item{altitude}{sample site altitude, in meters above sea level}
 #'   \item{penet}{ distance to sea along the network, in meters}
 #' }
-#' @source \url{www.niwa.co.nz}
+#' @source \href{www.niwa.co.nz}{NIWA}
 "nzffd_data"
 
 #' Dataframe listing all fishing methods used in the NZFFD

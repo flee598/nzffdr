@@ -73,7 +73,7 @@ River Environment Classification (REC) database and attach corresponding REC dat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nzffdr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@ with 24 additional columns from the REC database added.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Note that any row that has an <code>nzreach</code> value of <code>0</code>, <code>9</code>
-or <code>NA</code> will not return any REC data.</p>
+or <code>NA</code> will not return any REC data. Also, this is the 2010 depreciated REC data (much of it is still relevant) not the latest (<a href='https://niwa.maps.arcgis.com/home/item.html?id=b551ac0b06be4281bdb93357f850504d'>REC2</a>) version. As it stands the NZFFD uses the <code>nzreach</code> variable to identify stream reaches, this variable has been superseded in REC2 with <code>Nzsegment</code> which makes cross referencing between NZFFD and REC2 difficult. In the future access to REC2 will be added.</p>
 <p>This function requires an internet connection to query the REC database.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -155,7 +155,7 @@ or <code>NA</code> will not return any REC data.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Finnbar Lee, Nick xx.</p>
+  <p>Developed by Finnbar Lee, Nick Young.</p>
 </div>
 
 <div class="pkgdown">

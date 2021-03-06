@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Import, clean and update data from the New Zealand Freshwater Fish Database">
-<meta property="og:description" content="Access the New Zealand Freshwater Fish Database (url) from r and a few functions to clean the data once in R.">
+<meta property="og:description" content="Access the New Zealand Freshwater Fish Database from R and a few functions to clean the data once in R.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">nzffdr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
 <div id="getting-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-data" class="anchor"></a>Getting data</h3>
-<p>Start by importing some data. We have tried to make the search terms match those you would use directly on the Niwa site. For example leaving a search field blank will return all records. There are seven search arguments:</p>
+<p>Start by importing some data. We have tried to make the search terms match those you would use directly on the NIWA site. For example leaving a search field blank will return all records. There are seven search arguments:</p>
 <ul>
 <li><p><code>catchment</code> this refers to the Catchment No. a 6 digit number unique to the reach of interest. You can search using the inidviual number (e.g. <code>catchment = "702.500"</code>), or for all rivers in a catchment you can use the wildcard search term (e.g. <code>catchment = "702%"</code>), or don’t set the arg if you want all catchments in NZ.</p></li>
 <li><p><code>river</code> search for a river by name, to get all records for the Clutha (e.g. <code>river = "Clutha"</code>).</p></li>
@@ -100,7 +100,7 @@
 <li><p><code>starts</code> starting search date, 1850 at the earliest.</p></li>
 <li><p><code>ends</code> ending search date.</p></li>
 </ul>
-<p>This function requires an internet connection to query Niwa’s database.</p>
+<p>This function requires an internet connection to query NIWA’s database.</p>
 <p>Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version 1.2. The National Institute of Water and Atmospheric Research (NIWA). Occurrence Dataset <a href="https://doi.org/10.15468/ms5iqu" class="uri">https://doi.org/10.15468/ms5iqu</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># import all records between 2010 and 2015</span>
@@ -223,6 +223,7 @@
 <h3 class="hasAnchor">
 <a href="#adding-river-environment-classification-data" class="anchor"></a>Adding River Environment Classification data</h3>
 <p>We can also add associated network topology and environmental information from the River Environment Classification database (<a href="https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/">REC</a>) using <code><a href="reference/nzffd_add.html">nzffd_add()</a></code>. This function takes the <code>nzreach</code> variable and matches it again the corresponding <code>NZREACH</code> variable in the REC database and imports all the REC data. Note this will add 24 new columns to your dataframe, with the original REC column names, we suggest renaming the REC columns as they are a bit fiendish as is.</p>
+<p>Note this is the 2010 depreciated REC data (much of it is still relevant) not the latest (<a href="https://niwa.maps.arcgis.com/home/item.html?id=b551ac0b06be4281bdb93357f850504d">REC2</a>) version. As it stands the NZFFD uses the <code>nzreach</code> variable to identify stream reaches, this variable has been superseded in REC2 with <code>Nzsegment</code> which makes cross referencing between NZFFD and REC2 difficult. In the future access to REC2 will be added.</p>
 <p>This function requires an internet connection to query the REC database.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check number of columns before REC data has been added</span>
@@ -286,7 +287,7 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Finnbar Lee <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Nick xx <br><small class="roles"> Author </small>  </li>
+<li>Nick Young <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
@@ -295,7 +296,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Finnbar Lee, Nick xx.</p>
+  <p>Developed by Finnbar Lee, Nick Young.</p>
 </div>
 
 <div class="pkgdown">

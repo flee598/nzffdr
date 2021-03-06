@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
-The purpose of this package is allow for direct access to the NZ Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search)) from R and additional functions for cleaning imported data and adding missing data. 
+The purpose of this package is to allow for direct access to the NZ Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search)) from R and additional functions for cleaning imported data and adding missing data. 
 
 For a detailed guide to using the package see the [help page](https://flee598.github.io/nzffdr/).
 
@@ -36,9 +36,9 @@ library(nzffdr)
 This function requires an internet connection to query the NZFFD database. 
 
 ```{r}
-# import all records between 2000 and 2010
+# import all records between 2010 and 2015
 dat <- nzffd_import(catchment = "", river = "", location = "", 
-  fish_method = "", species = "", starts = 2000, ends = 2010)
+  fish_method = "", species = "", starts = 2010, ends = 2015)
 head(dat)
 
 # To import the entire NZFF database:
@@ -52,7 +52,7 @@ dat2 <- nzffd_clean(dat)
 head(dat2)
 ```
 
-### Filling gaps
+### Filling gaps and adding species information
 
 ```{r}
 dat3 <- nzffd_fill(dat2, alt = TRUE, maps = TRUE)
@@ -66,7 +66,9 @@ This function requires an internet connection to query the REC database.
 
 ```{r}
 dat4 <- nzffd_add(dat3)
-head(dat4)
+
+# sort by date
+head(dat4[order(dat4$y, dat4$m),])
 ```
 
-You should now have a cleaned up dataframe of NZFFD records available to you, optionally along with some missing data and associated REC data.
+Using the four functions should result in a cleaned up dataframe of NZFFD records, along with some missing data and associated REC data.

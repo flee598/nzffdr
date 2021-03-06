@@ -19,7 +19,7 @@ Use the \code{nzreach} variable in the NZFFD to match NZFFD sample locations aga
 }
 \details{
 Note that any row that has an \code{nzreach} value of \code{0}, \code{9}
-or \code{NA} will not return any REC data.
+or \code{NA} will not return any REC data. Also, this is the 2010 depreciated REC data (much of it is still relevant) not the latest (\href{https://niwa.maps.arcgis.com/home/item.html?id=b551ac0b06be4281bdb93357f850504d}{REC2}) version. As it stands the NZFFD uses the \code{nzreach} variable to identify stream reaches, this variable has been superseded in REC2 with \code{Nzsegment} which makes cross referencing between NZFFD and REC2 difficult. In the future access to REC2 will be added.
 
 This function requires an internet connection to query the REC database.
 }

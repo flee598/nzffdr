@@ -1,10 +1,10 @@
 Package: nzffdr
 Title: Import, clean and update data from the New Zealand Freshwater Fish Database
-Version: 0.0.1.9000
+Version: 0.0.0.9000
 Authors@R: c(
 	person("Finnbar", "Lee", email = "lee.finnbar@gmail.com", role = c("aut", "cre")),
-	person("Nick", "xx", email = "xx@xx.com", role = "aut"))
-Description: Access the New Zealand Freshwater Fish Database (url) from r and a few functions to clean the data once in R.
+	person("Nick", "Young", role = "aut"))
+Description: Access the New Zealand Freshwater Fish Database from R and a few functions to clean the data once in R.
 License: MIT + file LICENSE
 Depends: R (>= 3.5.0)
 Imports:

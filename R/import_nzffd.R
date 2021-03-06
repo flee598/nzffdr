@@ -7,7 +7,7 @@
 #' \href{https://niwa.co.nz/freshwater-and-estuaries/nzffd/user-guide/tips}{help page} 
 #' for details. To import the entire database leave all arguments blank.  
 #'
-#' This function requires an internet connection to query Niwa's database.
+#' This function requires an internet connection to query NIWA's database.
 #'
 #' Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version
 #' 1.2. The National Institute of Water and Atmospheric Research (NIWA).

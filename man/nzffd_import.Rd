@@ -59,7 +59,7 @@ used for the \href{https://nzffdms.niwa.co.nz/search}{NZFFFD}, see their
 for details. To import the entire database leave all arguments blank.
 }
 \details{
-This function requires an internet connection to query Niwa's database.
+This function requires an internet connection to query NIWA's database.
 
 Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version
 1.2. The National Institute of Water and Atmospheric Research (NIWA).

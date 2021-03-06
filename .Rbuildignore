@@ -4,6 +4,7 @@
 cran-comments.md
 ^_pkgdown\.yml$
 ^docs$
+index.html
 index.md
 index.Rmd
 ^\.github$
