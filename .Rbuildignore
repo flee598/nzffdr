@@ -8,3 +8,4 @@ index.html
 index.md
 index.Rmd
 ^\.github$
+^LICENSE\.md$
