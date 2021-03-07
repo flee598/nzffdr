@@ -9,3 +9,4 @@ index.md
 index.Rmd
 ^\.github$
 ^LICENSE\.md$
+^cran-comments\.md$
