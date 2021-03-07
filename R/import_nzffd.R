@@ -49,6 +49,7 @@
 #'
 #' @import httr xml2
 #' @importFrom utils read.csv
+#' @importFrom curl curl
 #'
 #' @examples
 #' \dontrun{
@@ -60,6 +61,8 @@
 nzffd_import <- function(catchment = "", river = "", location = "",
                          fish_method = "", species = "", starts = 1850, ends = 2100) {
 
+  if(!curl::has_internet()) print("Internet connection is required, no connection detected")
+  
   # check args are legit
   stopifnot(
     is.character(catchment),

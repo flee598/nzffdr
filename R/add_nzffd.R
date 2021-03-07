@@ -15,7 +15,8 @@
 #' with 24 additional columns from the REC database added.
 #'
 #' @import httr xml2 jsonlite
-#'
+#' @importFrom curl curl
+#' 
 #' @examples
 #' \dontrun{
 #'
@@ -24,6 +25,8 @@
 #' }
 #' @export
 nzffd_add <- function(fishd) {
+  
+  if(!curl::has_internet()) print("Internet connection is required, no connection detected")
   
   if (!is.data.frame(fishd)) {
     stop("arg fishd must be a data.frame")

@@ -8,17 +8,18 @@ Description: Access the New Zealand Freshwater Fish Database from R and a few fu
 License: MIT + file LICENSE
 Depends: R (>= 3.5.0)
 Imports:
-	stringr,
 	chron,
+	curl,
 	httr,
-	jsonlite,
+    jsonlite,
+	stringr,
 	utils,
 	xml2
 Suggests:
-    knitr,
     devtools,
-    roxygen2,
+    knitr,
     rmarkdown,
+    roxygen2,
     testthat (>= 2.1.0)
 Encoding: UTF-8
 LazyData: true

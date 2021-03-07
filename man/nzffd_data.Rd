@@ -24,7 +24,7 @@ A dataframe of 141708 rows and 22 variables:
 }
 }
 \source{
-\href{www.niwa.co.nz}{NIWA}
+\href{https://niwa.co.nz}{NIWA}
 }
 \usage{
 data(nzffd_data)

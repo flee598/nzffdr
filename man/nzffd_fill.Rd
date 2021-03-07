@@ -26,6 +26,7 @@ Also add missing values for the \code{map} and \code{alt} variables.
 Altitude data is added by taking the site coordinates and pulling the relevant
 data from an 8m \href{https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/}{DEM}. Note data taken from the DEM is suitable for cartographic visualisation only.
 
+
 If \code{alt = TRUE} this function requires an internet connection to query
 the 8m DEM.
 }

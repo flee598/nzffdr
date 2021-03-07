@@ -6,6 +6,7 @@
 #'
 #' Altitude data is added by taking the site coordinates and pulling the relevant
 #' data from an 8m \href{https://data.linz.govt.nz/layer/51768-nz-8m-digital-elevation-model-2012/}{DEM}. Note data taken from the DEM is suitable for cartographic visualisation only.
+#' 
 #'
 #' If \code{alt = TRUE} this function requires an internet connection to query
 #' the 8m DEM.
@@ -20,6 +21,8 @@
 #' seven additional columns added (\code{common_name, sci_name, family, genus, species, threat_class, native}).
 #'
 #' @import httr jsonlite
+#' @importFrom curl curl
+#' 
 #' @examples
 #' \dontrun{
 #'
@@ -29,6 +32,10 @@
 #' @export
 nzffd_fill <- function(fishd, alt = TRUE, maps = TRUE) {
 
+  if (alt == TRUE & !curl::has_internet()) {
+    print("If alt == TRUE Internet connection is required, no connection detected")
+  }
+  
   if (is.data.frame(fishd) == FALSE) {
     stop("arg fishd must be a data.frame")
   }
