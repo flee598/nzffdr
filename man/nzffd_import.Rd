@@ -67,7 +67,6 @@ Occurrence Dataset https://doi.org/10.15468/ms5iqu
 }
 \examples{
 \dontrun{
-
-df <- nzffd_import(nzffdr::nzffd_data)
+df <- nzffd_import(starts = 2000, ends = 2001)
 }
 }

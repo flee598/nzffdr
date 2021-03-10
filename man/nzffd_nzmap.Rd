@@ -5,10 +5,9 @@
 \alias{nzffd_nzmap}
 \title{Simple features map of New Zealand}
 \format{
-A simple features dataframe with 4 rows and 3 columns:
+A simple features dataframe with 4 rows and 2 columns:
 \describe{
-  \item{name}{Island name}
-  \item{name_ascii}{Island name ascii characters}
+  \item{island}{Island name}
   \item{geometry}{Line geometry}
 }
 }

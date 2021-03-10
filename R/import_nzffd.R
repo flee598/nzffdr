@@ -53,15 +53,13 @@
 #'
 #' @examples
 #' \dontrun{
-#'
-#' df <- nzffd_import(nzffdr::nzffd_data)
-
+#' df <- nzffd_import(starts = 2000, ends = 2001)
 #' }
 #' @export
 nzffd_import <- function(catchment = "", river = "", location = "",
                          fish_method = "", species = "", starts = 1850, ends = 2100) {
 
-  if(!curl::has_internet()) print("Internet connection is required, no connection detected")
+  if (!curl::has_internet()){message("There appears to be no internet connection"); return(NULL)}
   
   # check args are legit
   stopifnot(
@@ -211,4 +209,3 @@ caps <- function(x) {
   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
   return(x)
 }
-

@@ -25,7 +25,6 @@ This function requires an internet connection to query the REC database.
 }
 \examples{
 \dontrun{
-
 df <- nzffd_add(nzffdr::nzffd_data)
 }
 }

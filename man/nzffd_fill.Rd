@@ -31,9 +31,5 @@ If \code{alt = TRUE} this function requires an internet connection to query
 the 8m DEM.
 }
 \examples{
-\dontrun{
-
-df <- nzffd_fill(nzffdr::nzffd_data)
-head(df)
-}
+df <- nzffd_fill(nzffdr::nzffd_data, alt = FALSE, maps = FALSE)
 }

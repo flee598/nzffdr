@@ -19,14 +19,12 @@
 #' 
 #' @examples
 #' \dontrun{
-#'
 #' df <- nzffd_add(nzffdr::nzffd_data)
-
 #' }
 #' @export
 nzffd_add <- function(fishd) {
   
-  if(!curl::has_internet()) print("Internet connection is required, no connection detected")
+  if (!curl::has_internet()){message("There appears to be no internet connection"); return(NULL)}
   
   if (!is.data.frame(fishd)) {
     stop("arg fishd must be a data.frame")

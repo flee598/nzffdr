@@ -24,17 +24,11 @@
 #' @importFrom curl curl
 #' 
 #' @examples
-#' \dontrun{
-#'
-#' df <- nzffd_fill(nzffdr::nzffd_data)
-#' head(df)
-#' }
+#' df <- nzffd_fill(nzffdr::nzffd_data, alt = FALSE, maps = FALSE)
 #' @export
 nzffd_fill <- function(fishd, alt = TRUE, maps = TRUE) {
 
-  if (alt == TRUE & !curl::has_internet()) {
-    print("If alt == TRUE Internet connection is required, no connection detected")
-  }
+  if (alt == TRUE & !curl::has_internet()){message("There appears to be no internet connection"); return(NULL)}
   
   if (is.data.frame(fishd) == FALSE) {
     stop("arg fishd must be a data.frame")
