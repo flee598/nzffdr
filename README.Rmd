@@ -26,10 +26,18 @@ The purpose of this package is to allow for direct access to the NZ Freshwater F
 For a detailed guide to using the package see the [help page](https://flee598.github.io/nzffdr/).
 
 ### Installation
-```{r, warning = FALSE}
-# devtools::install_github("flee598/nzffdr")
-library(nzffdr)
+```{r, eval = FALSE, warning=FALSE}
+install.packages("nzffdr")
 ```
+
+
+### Development version
+To install the latest development version install from GitHub, warning there may be bugs!
+```{r, warning = FALSE, eval = FALSE}
+devtools::install_github("flee598/nzffdr")
+```
+
+
 
 ### Import data from the NZFFD 
 
@@ -37,6 +45,8 @@ This function requires an internet connection to query the NZFFD database.
 
 ```{r}
 # import all records between 2010 and 2015
+library(nzffdr)
+
 dat <- nzffd_import(catchment = "", river = "", location = "", 
   fish_method = "", species = "", starts = 2010, ends = 2015)
 head(dat)

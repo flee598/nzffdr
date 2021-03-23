@@ -17,8 +17,16 @@ page](https://flee598.github.io/nzffdr/).
 ### Installation
 
 ``` r
-# devtools::install_github("flee598/nzffdr")
-library(nzffdr)
+install.packages("nzffdr")
+```
+
+### Development version
+
+To install the latest development version install from GitHub, warning
+there may be bugs!
+
+``` r
+devtools::install_github("flee598/nzffdr")
 ```
 
 ### Import data from the NZFFD
@@ -28,6 +36,8 @@ database.
 
 ``` r
 # import all records between 2010 and 2015
+library(nzffdr)
+
 dat <- nzffd_import(catchment = "", river = "", location = "", 
   fish_method = "", species = "", starts = 2010, ends = 2015)
 head(dat)
@@ -130,57 +140,57 @@ dat4 <- nzffd_add(dat3)
 # sort by date
 head(dat4[order(dat4$y, dat4$m),])
 #>      nzreach spcode  card m    y         catchname   catch
-#> 28         0 galfas 27877 1 2010 Hen And Chicken I  53.000
-#> 29         0 galfas 27876 1 2010 Hen And Chicken I  53.000
-#> 1855 1026192 parcur 30880 1 2010       Oruawharo R 459.111
-#> 1856 1026192 parane 30880 1 2010       Oruawharo R 459.111
-#> 1857 1026192 angaus 30880 1 2010       Oruawharo R 459.111
+#> 4          0 galfas 27876 1 2010 Hen And Chicken I  53.000
+#> 42         0 galfas 27877 1 2010 Hen And Chicken I  53.000
+#> 1855 1026192 angaus 30880 1 2010       Oruawharo R 459.111
+#> 1856 1026192 hyrmen 30880 1 2010       Oruawharo R 459.111
+#> 1857 1026192 gobhut 30880 1 2010       Oruawharo R 459.111
 #> 1858 1026192 gobcot 30880 1 2010       Oruawharo R 459.111
 #>                             locality     time  org map    east   north altitude
-#> 28   Unnamed Stream Koputotara Point 13:00:00 docy r07 2666100 6588400       28
-#> 29         Unnamed Stream South Cove 13:00:00 docy r07 2666600 6588300       20
+#> 4          Unnamed Stream South Cove 13:00:00 docy r07 2666600 6588300       20
+#> 42   Unnamed Stream Koputotara Point 13:00:00 docy r07 2666100 6588400       28
 #> 1855          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
 #> 1856          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
 #> 1857          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
 #> 1858          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
 #>      penet fishmeth effort pass abund number minl maxl      form
-#> 28      10      gmt     10   NA  <NA>      4   95  140    Stream
-#> 29      10      gmt      9   NA  <NA>      1  115   NA    Stream
-#> 1855    20      gmt      6   NA     c     NA   NA   NA Tributary
-#> 1856    20      gmt      6   NA     o     NA   NA   NA Tributary
-#> 1857    20      gmt      6   NA     c     NA   30   45 Tributary
+#> 4       10      gmt      9   NA  <NA>      1  115   NA    Stream
+#> 42      10      gmt     10   NA  <NA>      4   95  140    Stream
+#> 1855    20      gmt      6   NA     c     NA   30   45 Tributary
+#> 1856    20      gmt      6   NA     p     NA   NA   NA Tributary
+#> 1857    20      gmt      6   NA  <NA>      7   40   50 Tributary
 #> 1858    20      gmt      6   NA  <NA>      2   40   70 Tributary
-#>            common_name                sci_name       family        genus
-#> 28       Banded kokopu      Galaxias fasciatus   Galaxiidae     Galaxias
-#> 29       Banded kokopu      Galaxias fasciatus   Galaxiidae     Galaxias
-#> 1855 Freshwater shrimp    Paratya curvirostris      Atyidae      Paratya
-#> 1856             Koura       Paranephrops spp. Parastacidae Paranephrops
-#> 1857      Shortfin eel      Anguilla australis  Anguillidae     Anguilla
-#> 1858      Common bully Gobiomorphus cotidianus   Eleotridae Gobiomorphus
-#>           species   threat_class native OBJECTID FNODE TNODE   LENGTH REACH_ID
-#> 28      fasciatus not threatened native       NA    NA    NA       NA       NA
-#> 29      fasciatus not threatened native       NA    NA    NA       NA       NA
-#> 1855 curvirostris not threatened native    26085 27471 27344 1745.513    26192
-#> 1856         spp. not threatened native    26085 27471 27344 1745.513    26192
-#> 1857    australis not threatened native    26085 27471 27344 1745.513    26192
-#> 1858   cotidianus not threatened native    26085 27471 27344 1745.513    26192
+#>            common_name                sci_name      family        genus
+#> 4        Banded kokopu      Galaxias fasciatus  Galaxiidae     Galaxias
+#> 42       Banded kokopu      Galaxias fasciatus  Galaxiidae     Galaxias
+#> 1855      Shortfin eel      Anguilla australis Anguillidae     Anguilla
+#> 1856 Freshwater mussel      Hyridella menziesi   Unionidae    Hyridella
+#> 1857      Redfin bully    Gobiomorphus huttoni  Eleotridae Gobiomorphus
+#> 1858      Common bully Gobiomorphus cotidianus  Eleotridae Gobiomorphus
+#>         species   threat_class native OBJECTID FNODE TNODE   LENGTH REACH_ID
+#> 4     fasciatus not threatened native       NA    NA    NA       NA       NA
+#> 42    fasciatus not threatened native       NA    NA    NA       NA       NA
+#> 1855  australis not threatened native    26085 27471 27344 1745.513    26192
+#> 1856   menziesi        at risk native    26085 27471 27344 1745.513    26192
+#> 1857    huttoni not threatened native    26085 27471 27344 1745.513    26192
+#> 1858 cotidianus not threatened native    26085 27471 27344 1745.513    26192
 #>      FNODE_1 TNODE_1 ORDER CLIMATE SRC_OF_FLW GEOLOGY LANDCOVER NET_POSN
-#> 28        NA      NA    NA    <NA>       <NA>    <NA>      <NA>     <NA>
-#> 29        NA      NA    NA    <NA>       <NA>    <NA>      <NA>     <NA>
+#> 4         NA      NA    NA    <NA>       <NA>    <NA>      <NA>     <NA>
+#> 42        NA      NA    NA    <NA>       <NA>    <NA>      <NA>     <NA>
 #> 1855   27483   27356     2      WW          L      SS         P       LO
 #> 1856   27483   27356     2      WW          L      SS         P       LO
 #> 1857   27483   27356     2      WW          L      SS         P       LO
 #> 1858   27483   27356     2      WW          L      SS         P       LO
 #>      VLY_LNDFRM CSOF   CSOFG    CSOFGL     CSOFGLNP      CSOFGLNPVL SPRING
-#> 28         <NA> <NA>    <NA>      <NA>         <NA>            <NA>   <NA>
-#> 29         <NA> <NA>    <NA>      <NA>         <NA>            <NA>   <NA>
+#> 4          <NA> <NA>    <NA>      <NA>         <NA>            <NA>   <NA>
+#> 42         <NA> <NA>    <NA>      <NA>         <NA>            <NA>   <NA>
 #> 1855         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
 #> 1856         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
 #> 1857         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
 #> 1858         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
 #>      NZFNODE NZTNODE  DISTSEA CATCHAREA
-#> 28        NA      NA       NA        NA
-#> 29        NA      NA       NA        NA
+#> 4         NA      NA       NA        NA
+#> 42        NA      NA       NA        NA
 #> 1855 1027471 1027344 20835.72   1748249
 #> 1856 1027471 1027344 20835.72   1748249
 #> 1857 1027471 1027344 20835.72   1748249
