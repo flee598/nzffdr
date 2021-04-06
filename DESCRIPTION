@@ -1,6 +1,6 @@
 Package: nzffdr
 Title: Import, Clean and Update Data from the New Zealand Freshwater Fish Database
-Version: 1.0.1
+Version: 1.0.0
 Authors@R: c(
 	person("Finnbar", "Lee", email = "lee.finnbar@gmail.com", role = c("aut", "cre")),
 	person("Nick", "Young", role = "aut"))
