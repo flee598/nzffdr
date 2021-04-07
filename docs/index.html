@@ -69,12 +69,19 @@
 <!-- badges: start -->
 <!-- badges: end -->
 <p>The purpose of this package is to allow for direct access to the NZ Freshwater Fish Database (<a href="https://nzffdms.niwa.co.nz/search">NZFFD</a>) from R and additional functions for cleaning imported data and adding missing data.</p>
+<p>Specifically, the four core functions are:</p>
+<ul>
+<li><p><code>nzffdr_import()</code> - Import NZFFD data from in R.</p></li>
+<li><p><code>nzffdr_clean()</code> - Clean up a bunch of small spelling inconsistencies and add a new variable “form” which describes the sampling habitat e.g. (river, stream, wetland etc.)</p></li>
+<li><p><code>nzffdr_fill()</code> - adds missing information such as, family, genus and species names, common names, threat classification status and whether the species is native or introduced.</p></li>
+<li><p><code>nzffdr_add()</code> - Imports and attaches associated REC data.</p></li>
+</ul>
+<p>See below for a detailed overview.</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># devtools::install_github("flee598/nzffdr")</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nzffdr</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"nzffdr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="built-in-datasets" class="section level3">
 <h3 class="hasAnchor">
@@ -92,7 +99,7 @@
 <a href="#getting-data" class="anchor"></a>Getting data</h3>
 <p>Start by importing some data. We have tried to make the search terms match those you would use directly on the NIWA site. For example leaving a search field blank will return all records. There are seven search arguments:</p>
 <ul>
-<li><p><code>catchment</code> this refers to the Catchment No. a 6 digit number unique to the reach of interest. You can search using the inidviual number (e.g. <code>catchment = "702.500"</code>), or for all rivers in a catchment you can use the wildcard search term (e.g. <code>catchment = "702%"</code>), or don’t set the arg if you want all catchments in NZ.</p></li>
+<li><p><code>catchment</code> this refers to the Catchment No. a 6 digit number unique to the reach of interest. You can search using the individual number (e.g. <code>catchment = "702.500"</code>), or for all rivers in a catchment you can use the wildcard search term (e.g. <code>catchment = "702%"</code>), or don’t set the arg if you want all catchments in NZ.</p></li>
 <li><p><code>river</code> search for a river by name, to get all records for the Clutha (e.g. <code>river = "Clutha"</code>).</p></li>
 <li><p><code>location</code> search for river by sampling locality e.g. (<code>location = "Awakino"</code>). This only works when the location is included in the name of the waterway.</p></li>
 <li><p><code>fish_method</code> search by fishing method used. There are 59 different possible options for <code>fish_method</code>, if you want to search for a specific fishing method use <code><a href="reference/nzffd_method.html">nzffd_method()</a></code> to see a list of all possible options, you can then copy/paste from there (e.g. if we only wanted fish caught by lures use <code>fish_meth = "Angling - Lure"</code>) don’t set the arg if you want all fishing methods.</p></li>
@@ -103,7 +110,9 @@
 <p>This function requires an internet connection to query NIWA’s database.</p>
 <p>Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version 1.2. The National Institute of Water and Atmospheric Research (NIWA). Occurrence Dataset <a href="https://doi.org/10.15468/ms5iqu" class="uri">https://doi.org/10.15468/ms5iqu</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># import all records between 2010 and 2015</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nzffdr</span><span class="op">)</span>
+
+<span class="co"># import all records between 2010 and 2015</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffd_import.html">nzffd_import</a></span><span class="op">(</span>catchment <span class="op">=</span> <span class="st">""</span>, river <span class="op">=</span> <span class="st">""</span>, location <span class="op">=</span> <span class="st">""</span>, 
   fish_method <span class="op">=</span> <span class="st">""</span>, species <span class="op">=</span> <span class="st">""</span>, starts <span class="op">=</span> <span class="fl">2010</span>, ends <span class="op">=</span> <span class="fl">2015</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
@@ -135,7 +144,7 @@
 <div id="cleaning-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cleaning-data" class="anchor"></a>Cleaning data</h3>
-<p>While the data imported from NZFFD is in pretty good shape there are some small inconsistencies. The <code><a href="reference/nzffd_clean.html">nzffd_clean()</a></code> function aims to deal with some of these inconsistencies. In particular text strings have been standardised. The first letter of all words in <code>catchname</code> and <code>locality</code> are capitalised and any non-alphanumeric characters are removed. <code>time</code> is converted to a standardised 24 hour format and nonsesical values converted to <code>NA</code>. <code>org</code> is converted to all lowercase and has non-alphanumeric characters removed. <code>map</code> is converted to lower case and has any non-three digit codes converted to <code>NA</code>. <code>catchname</code> codes are tidied following the suggested abbreviations, e.g. “Clutha River”, “Clutha r” and “Clutha river” all become Clutha R. Finally a new variable <code>form</code> is added which defines each observation as from one of the following systems: <code>Creek, River, Tributary, Stream, Lake, Lagoon, Pond, Burn, Race, Dam, Estuary, Swamp, Drain, Canal, Tarn, Wetland, Reservoir, Brook, Spring, Gully</code> or <code>NA</code>.</p>
+<p>While the data imported from NZFFD is in pretty good shape there are some small inconsistencies. The <code><a href="reference/nzffd_clean.html">nzffd_clean()</a></code> function aims to deal with some of these inconsistencies. In particular text strings have been standardised. The first letter of all words in <code>catchname</code> and <code>locality</code> are capitalised and any non-alphanumeric characters are removed. <code>time</code> is converted to a standardised 24 hour format and nonsensical values converted to <code>NA</code>. <code>org</code> is converted to all lowercase and has non-alphanumeric characters removed. <code>map</code> is converted to lower case and has any non-three digit codes converted to <code>NA</code>. <code>catchname</code> codes are tidied following the suggested abbreviations, e.g. “Clutha River”, “Clutha r” and “Clutha river” all become Clutha R. Finally a new variable <code>form</code> is added which defines each observation as from one of the following systems: <code>Creek, River, Tributary, Stream, Lake, Lagoon, Pond, Burn, Race, Dam, Estuary, Swamp, Drain, Canal, Tarn, Wetland, Reservoir, Brook, Spring, Gully</code> or <code>NA</code>. Note the <code>form</code> variable is created by pulling the last word from each row in the <code>locality</code> column in the database, therefore it is only as accurate as the <code>locality</code> variable.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffd_clean.html">nzffd_clean</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span>
@@ -223,7 +232,7 @@
 <h3 class="hasAnchor">
 <a href="#adding-river-environment-classification-data" class="anchor"></a>Adding River Environment Classification data</h3>
 <p>We can also add associated network topology and environmental information from the River Environment Classification database (<a href="https://data.mfe.govt.nz/layer/51845-river-environment-classification-new-zealand-2010-deprecated/">REC</a>) using <code><a href="reference/nzffd_add.html">nzffd_add()</a></code>. This function takes the <code>nzreach</code> variable and matches it again the corresponding <code>NZREACH</code> variable in the REC database and imports all the REC data. Note this will add 24 new columns to your dataframe, with the original REC column names, we suggest renaming the REC columns as they are a bit fiendish as is.</p>
-<p>Note this is the 2010 depreciated REC data (much of it is still relevant) not the latest (<a href="https://niwa.maps.arcgis.com/home/item.html?id=b551ac0b06be4281bdb93357f850504d">REC2</a>) version. As it stands the NZFFD uses the <code>nzreach</code> variable to identify stream reaches, this variable has been superseded in REC2 with <code>Nzsegment</code> which makes cross referencing between NZFFD and REC2 difficult. In the future access to REC2 will be added.</p>
+<p>Note this is the 2010 depreciated REC data (much of it is still relevant) not the latest (<a href="https://niwa.maps.arcgis.com/home/item.html?id=b551ac0b06be4281bdb93357f850504d">REC2</a>) version. In the future access to REC2 will hopefully be added.</p>
 <p>This function requires an internet connection to query the REC database.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check number of columns before REC data has been added</span>
@@ -245,7 +254,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ggplot2 for nice figures</span>
 <span class="co"># sf library for setting map crs</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span> 
 
 <span class="co"># get map of NZ and remove Chatham Islands</span>
@@ -275,7 +284,14 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=nzffdr">https://​cloud.r-project.org/​package=nzffdr</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
