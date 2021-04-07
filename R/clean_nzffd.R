@@ -1,4 +1,4 @@
-#' Clean NZ freshwater Fish fishdasets
+#' Clean NZ Freshwater Fish fishdasets
 #'
 #' Clean up data imported from the NZ Freshwater Fish Database.
 #'
