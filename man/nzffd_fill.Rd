@@ -4,7 +4,7 @@
 \alias{nzffd_fill}
 \title{Add additional data to the NZFFD}
 \usage{
-nzffd_fill(fishd, alt = TRUE, maps = TRUE)
+nzffd_fill(fishd, alt = FALSE, maps = FALSE)
 }
 \arguments{
 \item{fishd}{A dataframe imported from the NZFFD using \code{nzffd_import}.}

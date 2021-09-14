@@ -1,0 +1,14 @@
+citHeader("To cite nzffdr in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "nzffdr: an R package to import, clean and update data from the New Zealand Freshwater Fish Database",
+  author   = personList(as.person("Finnbar Lee"),
+                   as.person("Nick Young")),
+  journal  = "bioRxiv",
+  year     = "2021",
+  url      = "https://doi.org/10.1101/2021.06.22.449519",
+  textVersion = paste(
+"Lee, F., & Young, N. (2021). nzffdr: an R package to import, clean and update data from the New Zealand Freshwater Fish Database. bioRxiv. doi.org/10.1101/2021.06.22.449519"
+  )
+)

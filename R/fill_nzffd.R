@@ -26,7 +26,7 @@
 #' @examples
 #' df <- nzffd_fill(nzffdr::nzffd_data, alt = FALSE, maps = FALSE)
 #' @export
-nzffd_fill <- function(fishd, alt = TRUE, maps = TRUE) {
+nzffd_fill <- function(fishd, alt = FALSE, maps = FALSE) {
 
   if (alt == TRUE & !curl::has_internet()){message("There appears to be no internet connection"); return(NULL)}
   

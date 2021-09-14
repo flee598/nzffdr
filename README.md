@@ -14,6 +14,13 @@ missing data.
 For a detailed guide to using the package see the [help
 page](https://flee598.github.io/nzffdr/).
 
+A preprint describing the package is now available (if you wish to cite
+the package please use this):
+
+Lee, F., & Young, N. (2021). nzffdr: an R package to import, clean and
+update data from the New Zealand Freshwater Fish Database. bioRxiv.
+<https://doi.org/10.1101/2021.06.22.449519>
+
 ### Installation
 
 ``` r
@@ -53,15 +60,15 @@ head(dat)
 #> 2 2691748 6427557       15    49              NA   NA chefos            1   NA
 #> 3 2479366 5751283       10    11      ntc     17   NA angdie           18  400
 #> 4 2479366 5751283       10    11      ntc     17   NA angaus           50  250
-#> 5 2479366 5751283       10    11      ntc     17   NA gobgob            1  125
-#> 6 2479366 5751283       10    11      ntc     17   NA gobcot           20   40
+#> 5 2479366 5751283       10    11      ntc     17   NA gobcot           20   40
+#> 6 2479366 5751283       10    11      ntc     17   NA gobbre            1   56
 #>   maxl  nzreach
 #> 1   NA  3008300
 #> 2   NA  3008300
 #> 3 1100 13043121
 #> 4  900 13043121
-#> 5   NA 13043121
-#> 6  110 13043121
+#> 5  110 13043121
+#> 6   NA 13043121
 
 # To import the entire NZFF database:
 # dat <- nzffd_import()
@@ -84,15 +91,15 @@ head(dat2)
 #> 2 2691748 6427557       15    49     <NA>     NA   NA chefos  <NA>      1   NA
 #> 3 2479366 5751283       10    11      ntc     17   NA angdie  <NA>     18  400
 #> 4 2479366 5751283       10    11      ntc     17   NA angaus  <NA>     50  250
-#> 5 2479366 5751283       10    11      ntc     17   NA gobgob  <NA>      1  125
-#> 6 2479366 5751283       10    11      ntc     17   NA gobcot  <NA>     20   40
+#> 5 2479366 5751283       10    11      ntc     17   NA gobcot  <NA>     20   40
+#> 6 2479366 5751283       10    11      ntc     17   NA gobbre  <NA>      1   56
 #>   maxl  nzreach      form
 #> 1   NA  3008300     River
 #> 2   NA  3008300     River
 #> 3 1100 13043121 Tributary
 #> 4  900 13043121 Tributary
-#> 5   NA 13043121 Tributary
-#> 6  110 13043121 Tributary
+#> 5  110 13043121 Tributary
+#> 6   NA 13043121 Tributary
 ```
 
 ### Filling gaps and adding species information
@@ -100,27 +107,27 @@ head(dat2)
 ``` r
 dat3 <- nzffd_fill(dat2, alt = TRUE, maps = TRUE)
 head(dat3)
-#>   spcode   card  m    y   catchname   catch         locality     time  org map
-#> 1 aldfor 104726  5 2015     Taipo S 229.000     Taipo Stream 09:50:00 hbrc v21
-#> 2 aldfor 104396  4 2013 Ngaruroro R 231.000 Waitangi Estuary 13:30:00 hbrc v21
-#> 3 aldfor  33330  1 2011 Ngaruroro R 231.000  Ngaruroro River     <NA> hbrc v21
-#> 4 aldfor  33321 10 2012     Clive R 231.501      Muddy Creek 23:00:00 hbrc v21
-#> 5 aldfor  30982  4 2010      Whau R  80.060  Avondale Stream 10:15:00  bml r11
-#> 6 aldfor 104726  5 2015     Taipo S 229.000     Taipo Stream 09:50:00 hbrc v21
+#>   spcode   card  m    y  catchname   catch       locality     time  org map
+#> 1 aldfor 104726  5 2015    Taipo S 229.000   Taipo Stream 09:50:00 hbrc v21
+#> 2 aldfor  33325  4 2013 Tukituki R 232.000 Tukituki River     <NA> hbrc v21
+#> 3 aldfor 111397  8 2012  Waikato R 434.190     Lake Waahi     <NA>  uow S18
+#> 4 aldfor 104726  5 2015    Taipo S 229.000   Taipo Stream 09:50:00 hbrc v21
+#> 5 aldfor  33321 10 2012    Clive R 231.501    Muddy Creek 23:00:00 hbrc v21
+#> 6 aldfor 104726  5 2015    Taipo S 229.000   Taipo Stream 09:50:00 hbrc v21
 #>      east   north altitude penet fishmeth effort pass abund number minl maxl
-#> 1 2840995 6182554       16     4      fys     NA   NA  <NA>      5   NA   NA
-#> 2 2847218 6174038       16     0      sen     NA   NA  <NA>     27   NA   NA
-#> 3 2846262 6174474        2     2      fyn     NA   NA  <NA>      6   42  105
-#> 4 2847598 6173371        0     0      spo     NA   NA  <NA>     NA   NA   NA
-#> 5 2661200 6475000        5     1      nfc     50    1  <NA>      2  250  270
-#> 6 2840995 6182554       16     4      fys     NA   NA  <NA>      4   NA   NA
-#>   nzreach    form      common_name             sci_name    family       genus
-#> 1 8023537  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
-#> 2 8024600 Estuary Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
-#> 3 8024599   River Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
-#> 4 8024588   Creek Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
-#> 5 2006167  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
-#> 6 8023537  Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
+#> 1 2840995 6182554       16     4      fys     NA   NA  <NA>      3   NA   NA
+#> 2 2848760 6170923        0     0      unk     NA   NA  <NA>    128   40  100
+#> 3 2698224 6402735       20    81      efb     NA    4  <NA>      3   NA   NA
+#> 4 2840995 6182554       16     4      fys     NA   NA  <NA>      5   NA   NA
+#> 5 2847598 6173371        0     0      spo     NA   NA  <NA>     NA   NA   NA
+#> 6 2840995 6182554       16     4      fys     NA   NA  <NA>      1   NA   NA
+#>   nzreach   form      common_name             sci_name    family       genus
+#> 1 8023537 Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
+#> 2 8025043  River Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
+#> 3 3012906   Lake Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
+#> 4 8023537 Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
+#> 5 8024588  Creek Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
+#> 6 8023537 Stream Yelloweye mullet Aldrichetta forsteri Mugilidae Aldrichetta
 #>    species   threat_class native
 #> 1 forsteri not threatened native
 #> 2 forsteri not threatened native
@@ -140,61 +147,61 @@ dat4 <- nzffd_add(dat3)
 # sort by date
 head(dat4[order(dat4$y, dat4$m),])
 #>      nzreach spcode  card m    y         catchname   catch
-#> 4          0 galfas 27876 1 2010 Hen And Chicken I  53.000
-#> 42         0 galfas 27877 1 2010 Hen And Chicken I  53.000
-#> 1855 1026192 angaus 30880 1 2010       Oruawharo R 459.111
-#> 1856 1026192 hyrmen 30880 1 2010       Oruawharo R 459.111
-#> 1857 1026192 gobhut 30880 1 2010       Oruawharo R 459.111
-#> 1858 1026192 gobcot 30880 1 2010       Oruawharo R 459.111
+#> 24         0 galfas 27876 1 2010 Hen And Chicken I  53.000
+#> 26         0 galfas 27877 1 2010 Hen And Chicken I  53.000
+#> 1865 1026192 parane 30880 1 2010       Oruawharo R 459.111
+#> 1866 1026192 parcur 30880 1 2010       Oruawharo R 459.111
+#> 1867 1026192 angaus 30880 1 2010       Oruawharo R 459.111
+#> 1868 1026192 hyrmen 30880 1 2010       Oruawharo R 459.111
 #>                             locality     time  org map    east   north altitude
-#> 4          Unnamed Stream South Cove 13:00:00 docy r07 2666600 6588300       20
-#> 42   Unnamed Stream Koputotara Point 13:00:00 docy r07 2666100 6588400       28
-#> 1855          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
-#> 1856          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
-#> 1857          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
-#> 1858          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
+#> 24         Unnamed Stream South Cove 13:00:00 docx r07 2666600 6588300       20
+#> 26   Unnamed Stream Koputotara Point 13:00:00 docx r07 2666100 6588400       28
+#> 1865          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
+#> 1866          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
+#> 1867          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
+#> 1868          Hakaru River Tributary 10:00:00 doca q08 2649760 6557736       75
 #>      penet fishmeth effort pass abund number minl maxl      form
-#> 4       10      gmt      9   NA  <NA>      1  115   NA    Stream
-#> 42      10      gmt     10   NA  <NA>      4   95  140    Stream
-#> 1855    20      gmt      6   NA     c     NA   30   45 Tributary
-#> 1856    20      gmt      6   NA     p     NA   NA   NA Tributary
-#> 1857    20      gmt      6   NA  <NA>      7   40   50 Tributary
-#> 1858    20      gmt      6   NA  <NA>      2   40   70 Tributary
-#>            common_name                sci_name      family        genus
-#> 4        Banded kokopu      Galaxias fasciatus  Galaxiidae     Galaxias
-#> 42       Banded kokopu      Galaxias fasciatus  Galaxiidae     Galaxias
-#> 1855      Shortfin eel      Anguilla australis Anguillidae     Anguilla
-#> 1856 Freshwater mussel      Hyridella menziesi   Unionidae    Hyridella
-#> 1857      Redfin bully    Gobiomorphus huttoni  Eleotridae Gobiomorphus
-#> 1858      Common bully Gobiomorphus cotidianus  Eleotridae Gobiomorphus
-#>         species   threat_class native OBJECTID FNODE TNODE   LENGTH REACH_ID
-#> 4     fasciatus not threatened native       NA    NA    NA       NA       NA
-#> 42    fasciatus not threatened native       NA    NA    NA       NA       NA
-#> 1855  australis not threatened native    26085 27471 27344 1745.513    26192
-#> 1856   menziesi        at risk native    26085 27471 27344 1745.513    26192
-#> 1857    huttoni not threatened native    26085 27471 27344 1745.513    26192
-#> 1858 cotidianus not threatened native    26085 27471 27344 1745.513    26192
+#> 24      10      gmt      9   NA  <NA>      1  115   NA    Stream
+#> 26      10      gmt     10   NA  <NA>      4   95  140    Stream
+#> 1865    20      gmt      6   NA     o     NA   NA   NA Tributary
+#> 1866    20      gmt      6   NA     c     NA   NA   NA Tributary
+#> 1867    20      gmt      6   NA     c     NA   30   45 Tributary
+#> 1868    20      gmt      6   NA     p     NA   NA   NA Tributary
+#>            common_name             sci_name       family        genus
+#> 24       Banded kokopu   Galaxias fasciatus   Galaxiidae     Galaxias
+#> 26       Banded kokopu   Galaxias fasciatus   Galaxiidae     Galaxias
+#> 1865             Koura    Paranephrops spp. Parastacidae Paranephrops
+#> 1866 Freshwater shrimp Paratya curvirostris      Atyidae      Paratya
+#> 1867      Shortfin eel   Anguilla australis  Anguillidae     Anguilla
+#> 1868 Freshwater mussel   Hyridella menziesi    Unionidae    Hyridella
+#>           species   threat_class native OBJECTID FNODE TNODE   LENGTH REACH_ID
+#> 24      fasciatus not threatened native       NA    NA    NA       NA       NA
+#> 26      fasciatus not threatened native       NA    NA    NA       NA       NA
+#> 1865         spp. not threatened native    26085 27471 27344 1745.513    26192
+#> 1866 curvirostris not threatened native    26085 27471 27344 1745.513    26192
+#> 1867    australis not threatened native    26085 27471 27344 1745.513    26192
+#> 1868     menziesi        at risk native    26085 27471 27344 1745.513    26192
 #>      FNODE_1 TNODE_1 ORDER CLIMATE SRC_OF_FLW GEOLOGY LANDCOVER NET_POSN
-#> 4         NA      NA    NA    <NA>       <NA>    <NA>      <NA>     <NA>
-#> 42        NA      NA    NA    <NA>       <NA>    <NA>      <NA>     <NA>
-#> 1855   27483   27356     2      WW          L      SS         P       LO
-#> 1856   27483   27356     2      WW          L      SS         P       LO
-#> 1857   27483   27356     2      WW          L      SS         P       LO
-#> 1858   27483   27356     2      WW          L      SS         P       LO
+#> 24        NA      NA    NA    <NA>       <NA>    <NA>      <NA>     <NA>
+#> 26        NA      NA    NA    <NA>       <NA>    <NA>      <NA>     <NA>
+#> 1865   27483   27356     2      WW          L      SS         P       LO
+#> 1866   27483   27356     2      WW          L      SS         P       LO
+#> 1867   27483   27356     2      WW          L      SS         P       LO
+#> 1868   27483   27356     2      WW          L      SS         P       LO
 #>      VLY_LNDFRM CSOF   CSOFG    CSOFGL     CSOFGLNP      CSOFGLNPVL SPRING
-#> 4          <NA> <NA>    <NA>      <NA>         <NA>            <NA>   <NA>
-#> 42         <NA> <NA>    <NA>      <NA>         <NA>            <NA>   <NA>
-#> 1855         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
-#> 1856         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
-#> 1857         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
-#> 1858         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
+#> 24         <NA> <NA>    <NA>      <NA>         <NA>            <NA>   <NA>
+#> 26         <NA> <NA>    <NA>      <NA>         <NA>            <NA>   <NA>
+#> 1865         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
+#> 1866         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
+#> 1867         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
+#> 1868         LG WW/L WW/L/SS WW/L/SS/P WW/L/SS/P/LO WW/L/SS/P/LO/LG      -
 #>      NZFNODE NZTNODE  DISTSEA CATCHAREA
-#> 4         NA      NA       NA        NA
-#> 42        NA      NA       NA        NA
-#> 1855 1027471 1027344 20835.72   1748249
-#> 1856 1027471 1027344 20835.72   1748249
-#> 1857 1027471 1027344 20835.72   1748249
-#> 1858 1027471 1027344 20835.72   1748249
+#> 24        NA      NA       NA        NA
+#> 26        NA      NA       NA        NA
+#> 1865 1027471 1027344 20835.72   1748249
+#> 1866 1027471 1027344 20835.72   1748249
+#> 1867 1027471 1027344 20835.72   1748249
+#> 1868 1027471 1027344 20835.72   1748249
 ```
 
 Using the four functions should result in a cleaned up dataframe of

@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_nzffd.R
 \name{nzffd_clean}
 \alias{nzffd_clean}
-\title{Clean NZ freshwater Fish fishdasets}
+\title{Clean NZ Freshwater Fish fishdasets}
 \usage{
 nzffd_clean(fishd)
 }
