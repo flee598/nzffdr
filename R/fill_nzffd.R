@@ -38,7 +38,7 @@ nzffd_fill <- function(fishd, alt = FALSE, maps = FALSE) {
   }
 
   # add common, sci, fam names and threat status
-  fishd <- merge(fishd, sp_codes, by = "spcode")
+  fishd <- merge(fishd, sp_codes, by = "spcode", all.x = TRUE)
 
   
   
