@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# nzffdr <img src='man/figures/nzffdr_hex.png' align="right" height="150" /></a>
+# nzffdr <img src='man/figures/nzffdr_hex.svg' align="right" height="150" /></a>
 
 
 <!-- badges: start -->
@@ -24,6 +24,10 @@ knitr::opts_chunk$set(
 The purpose of this package is to allow for direct access to the NZ Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search)) from R and additional functions for cleaning imported data and adding missing data. 
 
 For a detailed guide to using the package see the [help page](https://flee598.github.io/nzffdr/).
+
+A preprint describing the package is now available (if you wish to cite the package please use this):
+
+Lee, F., & Young, N. (2021). nzffdr: an R package to import, clean and update data from the New Zealand Freshwater Fish Database. bioRxiv. https://doi.org/10.1101/2021.06.22.449519
 
 ### Installation
 ```{r, eval = FALSE, warning=FALSE}

@@ -1,5 +1,5 @@
 
-# nzffdr <img src='man/figures/nzffdr_hex.png' align="right" height="150" /></a>
+# nzffdr <img src='man/figures/nzffdr_hex.svg' align="right" height="150" /></a>
 
 <!-- badges: start -->
 
