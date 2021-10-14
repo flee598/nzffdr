@@ -7,9 +7,8 @@
 <!-- badges: end -->
 
 
-# THE NZFFD IS CURRENTLY UNDERGOING MAINANTENCE AND NOT AVAIALABLE AT THE MOMENT
-
-Therefore the nzffdr R package function nzffd_import() is not working. I will look to get it back up and runnin as soon as NIWA has the NZFFD up and running again. 
+# warning 
+The NZFFD is currently undergoing maintenance and not available at the moment. Therefore the nzffdr R package function nzffd_import() is not working. I will look to get it back up and runnin as soon as NIWA has the NZFFD up and running again. 
 
 The purpose of this package is to allow for direct access to the NZ
 Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search))
