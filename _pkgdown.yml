@@ -3,16 +3,17 @@ reference:
    desc: >
     Functions for importing and tidying NZFFD data
    contents: 
-    - nzffd_import
-    - nzffd_clean
-    - nzffd_fill
-    - nzffd_add
+    - nzffdr_import
+    - nzffdr_clean
+    - nzffdr_add_dates
+    - nzffdr_taxon_threat
+    - nzffdr_widen_habitat
+    - nzffdr_razzle_dazzle
+    - nzffdr_get_table
  - title: "Datasets"
    desc: >
     Useful datasets
    contents:
-    - nzffd_data
-    - nzffd_species
-    - nzffd_method
-    - nzffd_nzmap
+    - nzffdr_data
+    - nzffdr_nzmap
 
