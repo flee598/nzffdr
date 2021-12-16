@@ -10,6 +10,7 @@ reference:
     - nzffdr_widen_habitat
     - nzffdr_razzle_dazzle
     - nzffdr_get_table
+    - nzffdr_ind_lengths
  - title: "Datasets"
    desc: >
     Useful datasets

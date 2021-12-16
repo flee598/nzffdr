@@ -12,7 +12,7 @@
 #' @return An NZFFD dataframe with added wide format columns for each of the 
 #' selected habitat columns.
 #'
-#' @importFrom stats reshape setNames
+#' @importFrom stats reshape setNames na.omit
 #'
 #' @examples
 #' nzffdr_widen_habitat(nzffdr::nzffdr_data)
@@ -24,6 +24,10 @@ nzffdr_widen_habitat <- function(fishd,
                                    "habitatRiparianVegPercent",
                                    "habitatSubstratePercent")) {
   
+  if (!all(cols_to_expand %in% colnames(fishd))) {
+    stop("all of cols_to_expand must be present in fishd", call. = FALSE)
+  }
+  
   xx <- fishd[c("nzffdRecordNumber", cols_to_expand)]
   res <- vector(mode = "list", length = length(xx) - 1)
   
@@ -34,14 +38,14 @@ nzffdr_widen_habitat <- function(fishd,
     xx2[xx2 == ""] <- NA
     xx2 <- stats::na.omit(xx2)
     
-    xx2 <- stack(setNames(strsplit(xx2[[cl]], ','), xx2[["nzffdRecordNumber"]]))
-    xx2 <- stack(setNames(strsplit(xx2[["values"]], ':'), xx2[["ind"]]))
+    xx2 <- stack(stats::setNames(strsplit(xx2[[cl]], ','), xx2[["nzffdRecordNumber"]]))
+    xx2 <- stack(stats::setNames(strsplit(xx2[["values"]], ':'), xx2[["ind"]]))
     xx2[["values"]] <- trimws(xx2[["values"]])
     
     xx3 <- fun_df(xx2, cl)
     xx3 <- xx3[!duplicated(xx3), ]
     
-    out <- reshape(xx3, v.names = "percent", idvar = "nzffdRecordNumber",
+    out <- stats::reshape(xx3, v.names = "percent", idvar = "nzffdRecordNumber",
             timevar = "stuff", direction = "wide", sep = "_")
     
     if (cl != "habitatSubstratePercent") out[is.na(out)] <- 0

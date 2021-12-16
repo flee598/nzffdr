@@ -8,7 +8,7 @@
 
 ## Major update December 2021
 
-Following a significant update to the NZFFD, the nzffdr package as been
+Following a significant update to the NZFFD, the nzffdr package has been
 completely overhauled. The NZFFD update resulted in nzffdr v 1.0.0
 functions either i) not working or, ii) being redundant. Therefore I
 have completely rewritten nzffdr. This does mean there is **NO**

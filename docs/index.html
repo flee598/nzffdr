@@ -63,28 +63,36 @@
 </h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
+<div class="section level3">
+<h3 id="major-update-december-2021---v-200">Major update December 2021 - v 2.0.0<a class="anchor" aria-label="anchor" href="#major-update-december-2021---v-200"></a>
+</h3>
+<p>Following a significant update to the NZFFD, the nzffdr package has been completely overhauled. The NZFFD update resulted in nzffdr v 1.0.0 functions either i) not working or, ii) being redundant. Therefore I have completely rewritten nzffdr. This does mean there is <strong>NO</strong> backwards compatibility, and any previous code that used nzffdr functions will no longer work. I am sorry for this, but it was unavoidable.</p>
+<p>On the up side, the NZFFD now contains lots of useful additional information by default, and the new and improved nzffdr has added functionality.</p>
+<hr>
 <p>The purpose of this package is to allow for direct access to the NZ Freshwater Fish Database (<a href="https://nzffdms.niwa.co.nz/search" class="external-link">NZFFD</a>) from R and additional functions for cleaning imported data and adding missing data.</p>
-<p>Specifically, the six core functions are:</p>
+<p>Specifically, the seven core functions are:</p>
 <ul>
 <li><p><code><a href="reference/nzffdr_import.html">nzffdr_import()</a></code> - import NZFFD data into R.</p></li>
 <li><p><code><a href="reference/nzffdr_clean.html">nzffdr_clean()</a></code> - clean up a bunch of small inconsistencies in the imported NZFFD data.</p></li>
 <li><p><code><a href="reference/nzffdr_add_dates.html">nzffdr_add_dates()</a></code> - add separate year, month and day columns to NZFFD data.</p></li>
-<li><p><code><a href="reference/nzffdr_taxon_threat.html">nzffdr_taxon_threat()</a></code> - add extra taxonomic (genus, species, family etc.) and NZ Threat Classification System (<a href="https://nztcs.org.nz" class="external-link">NZTCS</a>) data to NZFFD data.</p></li>
-<li><p><code><a href="reference/nzffdr_widen_habitat.html">nzffdr_widen_habitat()</a></code> - transforms non-tidy format habitat columns to tidy wide format.</p></li>
+<li><p><code><a href="reference/nzffdr_taxon_threat.html">nzffdr_taxon_threat()</a></code> - add extra taxonomic and NZ Threat Classification System (<a href="https://nztcs.org.nz" class="external-link">NZTCS</a>) data to NZFFD data (12 new columns). Lots more detail added compared to <code>nzffdr</code> v 1.0.0.</p></li>
+<li><p><code><a href="reference/nzffdr_widen_habitat.html">nzffdr_widen_habitat()</a></code> - transform non-tidy format habitat columns to tidy wide format.</p></li>
 <li><p><code><a href="reference/nzffdr_razzle_dazzle.html">nzffdr_razzle_dazzle()</a></code> - wrapper for all of the above functions to quickly download and tidy NZFFD data in one go.</p></li>
+<li><p><code><a href="reference/nzffdr_ind_lengths.html">nzffdr_ind_lengths()</a></code> - transform non-tidy format individual fish length measures into tidy long format.</p></li>
 </ul>
 <p>See below for a detailed overview.</p>
+</div>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
-<p>Currently only the GitHub version of <code>nzffdr</code> is functioning, after NZFFD was updated. I aim to submit <code>nzffdr</code> v 2.0.0 to CRAN by early 2022.</p>
+<p>Currently only the GitHub version of <code>nzffdr</code> is functioning. I aim to submit <code>nzffdr</code> v 2.0.0 to CRAN by early 2022.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"flee598/nzffdr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="built-in-datasets">Built-in datasets<a class="anchor" aria-label="anchor" href="#built-in-datasets"></a>
 </h3>
-<p>There are two built-in datasets to assist, these are:</p>
+<p>There are two built-in datasets, these are:</p>
 <ul>
 <li><p><code>nzffdr_data</code> a subset of 200 rows from the NZFFD, used for examples, tutorials etc.</p></li>
 <li><p><code>nzffdr_nzmap</code> a simple features map of New Zealand. A simplified version of the 1:150k NZ map outline available from <a href="https://www.linz.govt.nz" class="external-link">Land Information New Zealand</a>.</p></li>
@@ -93,13 +101,13 @@
 <div class="section level3">
 <h3 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
 </h3>
-<p>Start by importing some data. We have tried to make the search terms match those you would use directly on the NIWA site. For example leaving a search field blank will return all records. <code><a href="reference/nzffdr_import.html">nzffdr_import()</a></code> has nine search arguments:</p>
+<p>We have tried to make the search terms match those you would use directly on the NIWA site. For example leaving a search field blank will return all records. <code><a href="reference/nzffdr_import.html">nzffdr_import()</a></code> has nine search arguments:</p>
 <ul>
 <li><p><code>institution</code> the organisation that submitted the records.</p></li>
-<li><p><code>catchment_num</code> this refers to the Catchment No. a 6 digit number unique to the reach of interest. You can search using the individual number (e.g. <code>catchment = "702.500"</code>), or for all rivers in a catchment you can use the wildcard search term (e.g. <code>catchment = "702%"</code>), or don’t set the arg if you want all catchments in NZ.</p></li>
+<li><p><code>catchment_num</code> this refers to the Catchment No., a 6 digit number unique to the reach of interest. You can search using the individual number (e.g. <code>catchment = "702.500"</code>), or for all rivers in a catchment you can use the wildcard search term (e.g. <code>catchment = "702%"</code>), or don’t set the arg if you want all catchments in NZ.</p></li>
 <li><p><code>catchment_name</code> search for a catchment by name e.g. (<code>catchment_name = "Waimakariri R"</code>).</p></li>
 <li><p><code>waterBody</code> search for a water body by name. (e.g. <code>waterBody = "Otukaikino Stream tributary"</code>).</p></li>
-<li><p><code>fish_method</code> search by fishing method used. If you want to search for a specific fishing method use the function <code>nzffdr_get_table("fish_method")</code> to see a list of all possible search terms, you can then copy/paste from there (e.g. if we only wanted fish caught by lures use <code>fish_meth = "Angling - Lure"</code>).</p></li>
+<li><p><code>fish_method</code> search by fishing method used. If you want to search for a specific fishing method use the function <code>nzffdr_get_table("fish_method")</code> to see a list of all possible search terms, (e.g. if you only wanted fish caught by lures use <code>fish_meth = "Angling - Lure"</code>).</p></li>
 <li><p><code>taxon</code> search for a particular species. If you want to search for a specific species use the function <code>nzffdr_get_table("taxon")</code> to see a list of all possible search terms. You can search using either common or scientific names and can search for multiple species at once. e.g. to search for Black mudfish use <code>species = "Black mudfish"</code> or <code>species = "Neochanna diversus"</code> and to search for Black mudfish and Bluegill bully use <code>species = c("Black mudfish", "Bluegill bully")</code> etc.</p></li>
 <li><p><code>starts</code> starting search date, 1850 at the earliest.</p></li>
 <li><p><code>ends</code> ending search date.</p></li>
@@ -127,7 +135,7 @@
 <div class="section level3">
 <h3 id="add-separate-date-columns">Add separate date columns<a class="anchor" aria-label="anchor" href="#add-separate-date-columns"></a>
 </h3>
-<p>A small function that adds separate year, month and day columns based on values in the column <code>eventDate</code> column.</p>
+<p>A small function that adds separate year, month and day columns based on values in the column <code>eventDate</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_add_dates.html">nzffdr_add_dates</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span>
 
@@ -226,7 +234,7 @@
 <div class="section level3">
 <h3 id="quick-all-in-one">Quick all in one<a class="anchor" aria-label="anchor" href="#quick-all-in-one"></a>
 </h3>
-<p>There is a wrapper of all of the above functions, to quickly download, tidy and add information all in one easy step.</p>
+<p>There is a wrapper for all of the above functions, to quickly download the entire NZFFD, tidy and add information all in one easy step.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_razzle_dazzle.html">nzffdr_razzle_dazzle</a></span><span class="op">(</span><span class="op">)</span>
 
@@ -260,7 +268,7 @@
 </h3>
 <p>There is a simple features map of New Zealand included in the package, this can be used to quickly check species distributions and the like.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># load ggplot2 for nice figures</span>
+<code class="sourceCode R"><span class="co"># load ggplot2 and sf for nice figures</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
 
