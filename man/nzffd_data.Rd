@@ -5,23 +5,7 @@
 \alias{nzffd_data}
 \title{Sample dataframe of 200 rows of the NZFFD.}
 \format{
-A dataframe of 141708 rows and 22 variables:
-\describe{
-  \item{card}{NZFFD card id}
-  \item{m}{month sampling occured}
-  \item{y}{year sampling occured}
-  \item{catchname}{catchment name}
-  \item{catch}{catchment number}
-  \item{locality}{sampling locality}
-  \item{time}{time sampling occured}
-  \item{org}{3 letter code identifying the organisation that carried out
-             the sampling see vignette for code descriptions}
-  \item{map}{NZMS260 map tile code}
-  \item{east}{easting, in NZMG}
-  \item{north}{northing, in NZMG}
-  \item{altitude}{sample site altitude, in meters above sea level}
-  \item{penet}{ distance to sea along the network, in meters}
-}
+A dataframe of 200 rows and 67 variables:
 }
 \source{
 \href{https://niwa.co.nz}{NIWA}

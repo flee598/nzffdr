@@ -21,6 +21,13 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
+## Major update December 2021
+Following a significant update to the NZFFD, the nzffdr package as been completely overhauled. The NZFFD update resulted in nzffdr v 1.0.0 functions either i) not working or, ii) being redundant. Therefore I have completely rewritten nzffdr. This does mean there is *NO* backwards compatibility, and any previous code that used nzffdr functions will no longer work. I am sorry for this, but it was unavoidable. 
+
+On the up side, the NZFFD now contains lots of useful additional information by default, and the new and improved nzffdr has added functionality.
+
+## Package overview
+
 The purpose of this package is to allow for direct access to the NZ Freshwater Fish Database ([NZFFD](https://nzffdms.niwa.co.nz/search)) from R and additional functions for cleaning imported data and adding missing data. 
 
 For a detailed guide to using the package see the [help page](https://flee598.github.io/nzffdr/).
@@ -30,18 +37,13 @@ A preprint describing the package is now available (if you wish to cite the pack
 Lee, F., & Young, N. (2021). nzffdr: an R package to import, clean and update data from the New Zealand Freshwater Fish Database. bioRxiv. https://doi.org/10.1101/2021.06.22.449519
 
 ### Installation
-```{r, eval = FALSE, warning=FALSE}
-install.packages("nzffdr")
-```
-
+For now, the only functioning version of nzffdr is here on GitHub, I aim to get nzffdr v 2.0.0 on CRAN in early 2022.
 
 ### Development version
-To install the latest development version install from GitHub, warning there may be bugs!
+To install the latest development version install from GitHub.
 ```{r, warning = FALSE, eval = FALSE}
 devtools::install_github("flee598/nzffdr")
 ```
-
-
 
 ### Import data from the NZFFD 
 
@@ -51,38 +53,11 @@ This function requires an internet connection to query the NZFFD database.
 # import all records between 2010 and 2015
 library(nzffdr)
 
-dat <- nzffd_import(catchment = "", river = "", location = "", 
-  fish_method = "", species = "", starts = 2010, ends = 2015)
+dat <- nzffdr_import(institution = "", catchment_num = "", catchment_name = "",
+                    water_body = "", fish_method = "", taxon = "", 
+                    starts = 2010, ends = 2015, download_format = "all")
 head(dat)
 
-# To import the entire NZFF database:
+# To import the entire NZFF Database:
 # dat <- nzffd_import()
 ```
-
-### Cleaning data
-
-```{r}
-dat2 <- nzffd_clean(dat)
-head(dat2)
-```
-
-### Filling gaps and adding species information
-
-```{r}
-dat3 <- nzffd_fill(dat2, alt = TRUE, maps = TRUE)
-head(dat3)
-```
-
-  
-### Adding River Environment Classification data
-
-This function requires an internet connection to query the REC database. 
-
-```{r}
-dat4 <- nzffd_add(dat3)
-
-# sort by date
-head(dat4[order(dat4$y, dat4$m),])
-```
-
-Using the four functions should result in a cleaned up dataframe of NZFFD records, along with some missing data and associated REC data.

@@ -1,26 +1,23 @@
 Package: nzffdr
 Title: Import, Clean and Update Data from the New Zealand Freshwater Fish Database
-Version: 1.0.0
+Version: 2.0.0
 Authors@R: c(
 	person("Finnbar", "Lee", email = "lee.finnbar@gmail.com", role = c("aut", "cre")),
 	person("Nick", "Young", role = "aut"))
 Description: Access the New Zealand Freshwater Fish Database from R and a few functions to clean the data once in R.
 License: MIT + file LICENSE
-Depends: R (>= 3.5.0)
+Depends: R (>= 4.0.0)
 Imports:
-	chron,
-	curl,
-	httr,
-    jsonlite,
-	stringr,
-	utils,
-	xml2
+    curl,
+    httr,
+    stringi,
+    utils,
+    xml2
 Suggests:
     devtools,
     knitr,
     rmarkdown,
     roxygen2,
-    testthat (>= 2.1.0)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
