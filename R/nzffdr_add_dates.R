@@ -10,7 +10,7 @@
 #' @return A NZFFD dataframe, with year, month and day columns added.
 #'
 #' @examples
-#' nzffdr_add_dates(nzffdr::nzffd_data)
+#' nzffdr_add_dates(nzffdr::nzffdr_data)
 #' 
 #' @export
 nzffdr_add_dates <- function(fishd){

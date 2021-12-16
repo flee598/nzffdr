@@ -26,5 +26,5 @@ Converts habitat variables to tidy wide format columns and appends to
 original dataframe.
 }
 \examples{
-nzffdr_widen_habitat(nzffdr::nzffd_data)
+nzffdr_widen_habitat(nzffdr::nzffdr_data)
 }

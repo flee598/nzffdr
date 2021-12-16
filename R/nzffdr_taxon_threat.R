@@ -14,7 +14,7 @@
 #' @return An NZFFD dataframe, with 12 additional columns.
 #'
 #' @examples
-#' nzffdr_taxon_threat(nzffdr::nzffd_data)
+#' nzffdr_taxon_threat(nzffdr::nzffdr_data)
 #' @export
 nzffdr_taxon_threat <- function(fishd){
   

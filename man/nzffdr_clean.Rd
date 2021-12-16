@@ -23,6 +23,6 @@ Cleans up a few inconsistencies in the NZFFD data returned from
  become Clutha R) and, any empty columns are removed.
 }
 \examples{
-nzffdr_clean(nzffdr::nzffd_data)
+nzffdr_clean(nzffdr::nzffdr_data)
 
 }

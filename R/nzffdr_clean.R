@@ -17,7 +17,7 @@
 #' @importFrom utils stack
 #' 
 #' @examples
-#' nzffdr_clean(nzffdr::nzffd_data)
+#' nzffdr_clean(nzffdr::nzffdr_data)
 #' 
 #' @export
 nzffdr_clean <- function(fishd) {

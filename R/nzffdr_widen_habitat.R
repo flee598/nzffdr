@@ -15,7 +15,7 @@
 #' @importFrom stats reshape setNames
 #'
 #' @examples
-#' nzffdr_widen_habitat(nzffdr::nzffd_data)
+#' nzffdr_widen_habitat(nzffdr::nzffdr_data)
 #' @export
 nzffdr_widen_habitat <- function(fishd,
                                  cols_to_expand = c(

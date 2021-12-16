@@ -11,9 +11,10 @@
 Following a significant update to the NZFFD, the nzffdr package as been
 completely overhauled. The NZFFD update resulted in nzffdr v 1.0.0
 functions either i) not working or, ii) being redundant. Therefore I
-have completely rewritten nzffdr. This does mean there is *NO* backwards
-compatibility, and any previous code that used nzffdr functions will no
-longer work. I am sorry for this, but it was unavoidable.
+have completely rewritten nzffdr. This does mean there is **NO**
+backwards compatibility, and any previous code that used nzffdr
+functions will no longer work. I am sorry for this, but it was
+unavoidable.
 
 On the up side, the NZFFD now contains lots of useful additional
 information by default, and the new and improved nzffdr has added

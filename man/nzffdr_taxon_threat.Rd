@@ -10,10 +10,10 @@ nzffdr_taxon_threat(fishd)
 \item{fishd}{A dataframe imported from the NZFFD using \code{nzffd_import}}
 }
 \value{
-An NZFFD dataframe, with 13 additional columns.
+An NZFFD dataframe, with 12 additional columns.
 }
 \description{
-Adds additional common ans scientific names, and threat classification status
+Adds additional common and scientific names, and threat classification status
 information.
 }
 \details{
@@ -24,5 +24,5 @@ Classification Status information ("category", "status", "taxonomicStatus",
 regarding the NZTCS variables.
 }
 \examples{
-nzffdr_taxon_threat(nzffdr::nzffd_data)
+nzffdr_taxon_threat(nzffdr::nzffdr_data)
 }
