@@ -3,9 +3,9 @@
 \docType{data}
 \name{nzffdr_data}
 \alias{nzffdr_data}
-\title{Sample dataframe of 200 rows of the NZFFD.}
+\title{Sample NZFFD data.}
 \format{
-A dataframe of 200 rows and 67 variables:
+A dataframe of 200 rows and 67 variables.
 }
 \source{
 \href{https://niwa.co.nz}{NIWA}
@@ -14,6 +14,6 @@ A dataframe of 200 rows and 67 variables:
 data(nzffdr_data)
 }
 \description{
-Sample dataframe of 200 rows of the NZFFD.
+Sample NZFFD data.
 }
 \keyword{datasets}

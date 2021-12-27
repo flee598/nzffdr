@@ -2,12 +2,12 @@
 % Please edit documentation in R/nzffdr_ind_lengths.R
 \name{nzffdr_ind_lengths}
 \alias{nzffdr_ind_lengths}
-\title{Converts fish length to tidy long format}
+\title{Fish length to tidy long format}
 \usage{
 nzffdr_ind_lengths(fishd)
 }
 \arguments{
-\item{fishd}{an NZFFD dataframe returned from nzffdr_import. Must contain
+\item{fishd}{an NZFFD dataframe returned from [nzffdr_import()]. Must contain
 the columns "nzffdRecordNumber", "taxonName" and "indLengths".}
 }
 \value{
@@ -15,7 +15,7 @@ A dataframe with three columns,"nzffdRecordNumber", "taxonName" and
  "indLengths".
 }
 \description{
-Converts individual fish length length measures from multiple entries in
+Converts individual fish length measures from multiple entries in
 a single cell to tidy long format.
 }
 \examples{

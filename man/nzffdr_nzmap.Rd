@@ -20,7 +20,6 @@ nzffdr_nzmap
 \description{
 A simple features map of New Zealand. A simplified version of the 1:150k
 NZ map outline available from Land Information New Zealand.
-CRS: NZ Transverse Mercator (NZTM: EPSG 2193) 
-The map contains polygons for the three main island plus the Chatham Islands.
+CRS: NZ Transverse Mercator (NZTM: EPSG 2193).
 }
 \keyword{datasets}

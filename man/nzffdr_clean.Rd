@@ -7,7 +7,7 @@
 nzffdr_clean(fishd)
 }
 \arguments{
-\item{fishd}{A dataframe imported from the NZFFD using \code{nzffdr_import}}
+\item{fishd}{a dataframe imported from the NZFFD using \code{nzffdr_import}}
 }
 \value{
 A cleaned NZFFD dataframe.
@@ -17,8 +17,8 @@ Clean up data imported from the NZ Freshwater Fish Database.
 }
 \details{
 Cleans up a few inconsistencies in the NZFFD data returned from
- \code{nzffd_import}. Column types are checked and converted to, integer,
- numeric or character. Empty cells are filled with NA, variable catchmentName
+ [nzffd_import()]. Column types are checked and converted to, integer,
+ numeric or character. Empty cells are filled with NA, variable `catchmentName`
  entries are standardised (e.g. Clutha r, Clutha River and Clutha R all
  become Clutha R) and, any empty columns are removed.
 }

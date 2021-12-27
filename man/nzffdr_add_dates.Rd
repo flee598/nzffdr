@@ -2,22 +2,22 @@
 % Please edit documentation in R/nzffdr_add_dates.R
 \name{nzffdr_add_dates}
 \alias{nzffdr_add_dates}
-\title{Add date data to a NZFFD dataset}
+\title{Add dates to a NZFFD dataset}
 \usage{
 nzffdr_add_dates(fishd)
 }
 \arguments{
-\item{fishd}{A dataframe imported from the NZFFD using \code{nzffdr_import}, which contains the column "eventDate"}
+\item{fishd}{a dataframe imported from the NZFFD using [nzffdr_import()], which contains the column "eventDate"}
 }
 \value{
-A NZFFD dataframe, with year, month and day columns added.
+a NZFFD dataframe, with year, month and day columns added.
 }
 \description{
 Add year, month and day columns to a NZFFD dataset.
 }
 \details{
 Adds year, month and day columns to a NZFFD dataset, based on values in 
-the column "eventDate" column.
+the "eventDate" column.
 }
 \examples{
 nzffdr_add_dates(nzffdr::nzffdr_data)

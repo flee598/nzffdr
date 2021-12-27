@@ -1,13 +1,13 @@
-#' Add date data to a NZFFD dataset
+#' Add dates to a NZFFD dataset
 #'
 #' Add year, month and day columns to a NZFFD dataset.
 #'
 #' Adds year, month and day columns to a NZFFD dataset, based on values in 
-#' the column "eventDate" column.
+#' the "eventDate" column.
 #' 
-#' @param fishd A dataframe imported from the NZFFD using \code{nzffdr_import}, which contains the column "eventDate"
+#' @param fishd a dataframe imported from the NZFFD using [nzffdr_import()], which contains the column "eventDate"
 #'
-#' @return A NZFFD dataframe, with year, month and day columns added.
+#' @return a NZFFD dataframe, with year, month and day columns added.
 #'
 #' @examples
 #' nzffdr_add_dates(nzffdr::nzffdr_data)

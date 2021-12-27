@@ -1,6 +1,6 @@
 
 # nzffdr 2.0.0
-Major rework of the package following an overhall of the the NZFFD website. Some previous functions are now depreciated.
+Major rework of the nzffdr package following an overhall of the the NZFFD website. Some previous functions are now depreciated.
 
 ## Depreciated functions
  - nzffdr_add - no longer relevant following NZFFD updates
@@ -18,7 +18,6 @@ Major rework of the package following an overhall of the the NZFFD website. Some
 
 # nzffdr 1.0.0
 Initial CRAN release
-
 
 # nzffdr 0.0.0.9000
 Initial development version of the nzffdr package on GitHub

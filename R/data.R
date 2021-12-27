@@ -1,10 +1,10 @@
-#' Sample dataframe of 200 rows of the NZFFD.
+#' Sample NZFFD data.
 #'
 #' @docType data
 #'
 #' @usage data(nzffdr_data)
 #'
-#' @format A dataframe of 200 rows and 67 variables:
+#' @format A dataframe of 200 rows and 67 variables.
 #' 
 #' @source \href{https://niwa.co.nz}{NIWA}
 "nzffdr_data"
@@ -14,8 +14,7 @@
 #'
 #' A simple features map of New Zealand. A simplified version of the 1:150k
 #' NZ map outline available from Land Information New Zealand.
-#' CRS: NZ Transverse Mercator (NZTM: EPSG 2193) 
-#' The map contains polygons for the three main island plus the Chatham Islands.  
+#' CRS: NZ Transverse Mercator (NZTM: EPSG 2193). 
 #' 
 #' @source \url{https://data.linz.govt.nz}
 #'

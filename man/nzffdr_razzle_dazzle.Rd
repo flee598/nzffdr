@@ -15,8 +15,8 @@ Wraps multiple nzffdr functions allowing, importing, cleaning and adding
 of new information all in one step.
 }
 \details{
-Wraps: \code{nzffdr_import}, \code{nzffdr_clean}, \code{nzffdr_add_date},
-\code{nzffdr_taxon_threat}, \code{nzffdr_widen_habitat} and runs the lot
+Wraps: [nzffdr_import()], [nzffdr_clean()], [nzffdr_add_date()],
+[nzffdr_taxon_threat()], [nzffdr_widen_habitat()] and runs the lot
 in one go, returning a downloaded and cleaned NZFFD dataset.
 
 This function requires an internet connection to query the NZFFD

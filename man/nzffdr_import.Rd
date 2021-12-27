@@ -51,9 +51,9 @@ etc.}
 
 \item{ends}{end year.}
 
-\item{download_format}{use "all" or "essential" to download all 
+\item{download_format}{use "all" or "essential" to download either, all 
 variables (67 columns), which now includes some River Environment
-Classification data, or just the essential data (23 columns).}
+Classification data, or just essential data (23 columns).}
 }
 \value{
 A dataframe where each row is a NZFFD record.

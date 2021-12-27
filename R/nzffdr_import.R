@@ -43,9 +43,9 @@
 #' and Bluegill bully use \code{taxon = c("Black mudfish", "Bluegill bully")} 
 #' etc.
 #' 
-#' @param download_format use "all" or "essential" to download all 
+#' @param download_format use "all" or "essential" to download either, all 
 #' variables (67 columns), which now includes some River Environment
-#' Classification data, or just the essential data (23 columns).
+#' Classification data, or just essential data (23 columns).
 #'
 #' @param starts start year, 1850 at the earliest.
 #'
@@ -103,7 +103,7 @@ nzffdr_import <- function(institution = "", catchment_num = "", catchment_name =
     if (fish_method %in% fishing_method_ls$NAME) {
       fish_method <- fishing_method_ls$VALUE[which(fishing_method_ls == fish_method)]
     } else {
-      stop("Unknown fish_method arg - see nzffd_method for list of
+      stop("Unknown fish_method arg - see ?nzffdr_get_table for list of
     acceptable inputs", call. = FALSE)
     }}
     
@@ -114,7 +114,7 @@ nzffdr_import <- function(institution = "", catchment_num = "", catchment_name =
     if (institution %in% institute_ls$NAME) {
       institution <- institute_ls$VALUE[which(institute_ls == institution)]
   } else {
-    stop("Unknown institution arg - see org_options for list of
+    stop("Unknown institution arg - see ?nzffdr_get_table for list of
     acceptable inputs", call. = FALSE)
   }}
 
@@ -125,7 +125,7 @@ nzffdr_import <- function(institution = "", catchment_num = "", catchment_name =
 
   if (any(taxon != "")) {
     if (!all(taxon %in% taxon_tbl$name)) {
-      stop("Unknown taxon arg - see ?nzffdr_taxon for list of
+      stop("Unknown taxon arg - see ?nzffdr_get_table for list of
     acceptable inputs", call. = FALSE)
     }
     taxon <- sapply(taxon, function(x){
