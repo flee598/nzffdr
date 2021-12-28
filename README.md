@@ -16,8 +16,7 @@ Following a significant update to the NZFFD, the nzffdr package has been
 completely overhauled. The NZFFD update resulted in nzffdr v 1.0.0
 functions either i) not working or, ii) being redundant. Therefore I
 have completely rewritten nzffdr. This does mean there is **NO**
-backwards compatibility, and any previous code that used nzffdr
-functions will no longer work. I am sorry for this, but it was out of my
+backwards compatibility. I am sorry for this, but it was out of my
 control given the changes to NZFFD.
 
 On the up side, the NZFFD now contains lots of useful additional
