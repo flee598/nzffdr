@@ -3,7 +3,11 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/nzffdr)](https://CRAN.R-project.org/package=nzffdr)
 [![R-CMD-check](https://github.com/flee598/nzffdr/workflows/R-CMD-check/badge.svg)](https://github.com/flee598/nzffdr/actions)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/nzffdr)](https://r-pkg.org/pkg/nzffdr)
 <!-- badges: end -->
 
 ## Major update December 2021
@@ -127,26 +131,26 @@ head(dat)
 #> 5                          NA                      NA      NA            NA
 #> 6                          NA                      NA      NA            NA
 #>                                                                  habitatFlowPercent
-#> 1 Coarse gravel:10, Mud:50, Sand (1-2 mm):25, Cobbles (64-257 mm):5, Fine gravel:10
-#> 2 Coarse gravel:10, Mud:50, Sand (1-2 mm):25, Cobbles (64-257 mm):5, Fine gravel:10
-#> 3 Coarse gravel:10, Mud:50, Sand (1-2 mm):25, Cobbles (64-257 mm):5, Fine gravel:10
-#> 4 Coarse gravel:10, Mud:50, Sand (1-2 mm):25, Cobbles (64-257 mm):5, Fine gravel:10
-#> 5 Coarse gravel:10, Mud:50, Sand (1-2 mm):25, Cobbles (64-257 mm):5, Fine gravel:10
-#> 6 Coarse gravel:10, Mud:50, Sand (1-2 mm):25, Cobbles (64-257 mm):5, Fine gravel:10
+#> 1 Mud:50, Cobbles (64-257 mm):5, Fine gravel:10, Sand (1-2 mm):25, Coarse gravel:10
+#> 2 Mud:50, Cobbles (64-257 mm):5, Fine gravel:10, Sand (1-2 mm):25, Coarse gravel:10
+#> 3 Mud:50, Cobbles (64-257 mm):5, Fine gravel:10, Sand (1-2 mm):25, Coarse gravel:10
+#> 4 Mud:50, Cobbles (64-257 mm):5, Fine gravel:10, Sand (1-2 mm):25, Coarse gravel:10
+#> 5 Mud:50, Cobbles (64-257 mm):5, Fine gravel:10, Sand (1-2 mm):25, Coarse gravel:10
+#> 6 Mud:50, Cobbles (64-257 mm):5, Fine gravel:10, Sand (1-2 mm):25, Coarse gravel:10
 #>                                                            habitatSubstratePercent
-#> 1 Undercut banks:y, Macrophytes-algae:y, Wood/instream debris:y, Bank vegetation:y
-#> 2 Undercut banks:y, Macrophytes-algae:y, Wood/instream debris:y, Bank vegetation:y
-#> 3 Undercut banks:y, Macrophytes-algae:y, Wood/instream debris:y, Bank vegetation:y
-#> 4 Undercut banks:y, Macrophytes-algae:y, Wood/instream debris:y, Bank vegetation:y
-#> 5 Undercut banks:y, Macrophytes-algae:y, Wood/instream debris:y, Bank vegetation:y
-#> 6 Undercut banks:y, Macrophytes-algae:y, Wood/instream debris:y, Bank vegetation:y
+#> 1 Wood/instream debris:y, Macrophytes-algae:y, Undercut banks:y, Bank vegetation:y
+#> 2 Wood/instream debris:y, Macrophytes-algae:y, Undercut banks:y, Bank vegetation:y
+#> 3 Wood/instream debris:y, Macrophytes-algae:y, Undercut banks:y, Bank vegetation:y
+#> 4 Wood/instream debris:y, Macrophytes-algae:y, Undercut banks:y, Bank vegetation:y
+#> 5 Wood/instream debris:y, Macrophytes-algae:y, Undercut banks:y, Bank vegetation:y
+#> 6 Wood/instream debris:y, Macrophytes-algae:y, Undercut banks:y, Bank vegetation:y
 #>   habitatInstreamCoverPresent                 habitatRiparianVegPercent
-#> 1              Run:95, Pool:5 Scrub:10, Grass/tussock:60, Raupo/flax:30
-#> 2              Run:95, Pool:5 Scrub:10, Grass/tussock:60, Raupo/flax:30
-#> 3              Run:95, Pool:5 Scrub:10, Grass/tussock:60, Raupo/flax:30
-#> 4              Run:95, Pool:5 Scrub:10, Grass/tussock:60, Raupo/flax:30
-#> 5              Run:95, Pool:5 Scrub:10, Grass/tussock:60, Raupo/flax:30
-#> 6              Run:95, Pool:5 Scrub:10, Grass/tussock:60, Raupo/flax:30
+#> 1              Pool:5, Run:95 Scrub:10, Grass/tussock:60, Raupo/flax:30
+#> 2              Pool:5, Run:95 Scrub:10, Grass/tussock:60, Raupo/flax:30
+#> 3              Pool:5, Run:95 Scrub:10, Grass/tussock:60, Raupo/flax:30
+#> 4              Pool:5, Run:95 Scrub:10, Grass/tussock:60, Raupo/flax:30
+#> 5              Pool:5, Run:95 Scrub:10, Grass/tussock:60, Raupo/flax:30
+#> 6              Pool:5, Run:95 Scrub:10, Grass/tussock:60, Raupo/flax:30
 #>                              samplingMethod samplingProtocol EfmNumberOfPasses
 #> 1 Other net - combination of nets and traps          Unknown                NA
 #> 2 Other net - combination of nets and traps          Unknown                NA
