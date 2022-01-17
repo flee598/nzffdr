@@ -11,6 +11,12 @@ reference:
     - nzffdr_razzle_dazzle
     - nzffdr_get_table
     - nzffdr_ind_lengths
+ - title: "Depreciated functions"
+   desc: >
+    The majority of functions from nzffdr v 1.0.0 are now depreciated e.g.
+   contents:
+    - nzffd_add
+    - nzffd_fill
  - title: "Datasets"
    desc: >
     Useful datasets

@@ -19,22 +19,7 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/add_nzffd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clean_nzffd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fill_nzffd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/import_nzffd.html</loc>
-  </url>
-  <url>
     <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/method_nzffd.html</loc>
   </url>
   <url>
     <loc>/reference/nzffdr_add_dates.html</loc>
@@ -70,30 +55,6 @@
     <loc>/reference/nzffd_add.html</loc>
   </url>
   <url>
-    <loc>/reference/nzffd_clean.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffd_data.html</loc>
-  </url>
-  <url>
     <loc>/reference/nzffd_fill.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffd_import.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffd_method.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffd_nzmap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffd_species.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzmap_nzffd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/species_nzffd.html</loc>
   </url>
 </urlset>

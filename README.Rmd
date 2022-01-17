@@ -38,7 +38,11 @@ A preprint describing the package is now available (if you wish to cite the pack
 Lee, F., & Young, N. (2021). nzffdr: an R package to import, clean and update data from the New Zealand Freshwater Fish Database. bioRxiv. https://doi.org/10.1101/2021.06.22.449519
 
 ### Installation
-For now, the only functioning version of nzffdr is here on GitHub, I aim to get nzffdr v 2.0.0 on CRAN in early 2022.
+nzffdr v 2.0.0 is now available on CRAN.
+```{r, warning = FALSE, eval = FALSE}
+install.packages("nzffdr")
+```
+
 
 ### Development version
 To install the latest development version install from GitHub.
