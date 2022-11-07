@@ -11,6 +11,7 @@ Imports:
     curl,
     httr,
     stringi,
+    tidyr,
     utils,
     xml2
 Suggests:
@@ -20,4 +21,4 @@ Suggests:
     roxygen2,
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1

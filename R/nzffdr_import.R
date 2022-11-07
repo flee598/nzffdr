@@ -9,9 +9,9 @@
 #'
 #' This function requires an internet connection to query NIWA's database.
 #'
-#' Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version
-#' 1.2. The National Institute of Water and Atmospheric Research (NIWA).
-#' Occurrence Dataset https://doi.institution/10.15468/ms5iqu
+#' Data citation: Stoffels R (2022). New Zealand Freshwater Fish Database (extended).
+#' The National Institute of Water and Atmospheric Research (NIWA).
+#' Sampling event dataset https://doi.org/10.15468/jbpw92
 #'
 #' @param institution institution that collected the data. Use the
 #' \code{nzffdr_get_table("institution")} function to see a list of all possible options,
@@ -47,9 +47,11 @@
 #' variables (67 columns), which now includes some River Environment
 #' Classification data, or just essential data (23 columns).
 #'
-#' @param starts start year, 1850 at the earliest.
+#' @param starts start year. Don't set the arg if
+#' you want all records in the database.
 #'
-#' @param ends end year.
+#' @param ends end year. Don't set the arg if
+#' you want all records in the database.
 #'
 #' @return A dataframe where each row is a NZFFD record.
 #'
@@ -59,13 +61,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' dat <- nzffdr_import(starts = 2000, ends = 2001)
+#' # import entire NZFFD
+#' dat <- nzffdr_import()
 #' }
 #' @export
 nzffdr_import <- function(institution = "", catchment_num = "", catchment_name = "",
                          water_body = "", fish_method = "", taxon = "", 
-                         starts = 1850, ends = 2100, download_format = "all") {
-
+                         starts = "", ends = "", download_format = "all") {
+  
+  message("WARNING: since the 2021 update to the NZFFD, according to the NZFFD help manual (p. 4) users have had difficulty obtaining subsets of records using search terms. It is highly recommended to download the entire database, i.e. leave all search terms blank ( download_format can be set to either ‘all’ or ‘essential’), the database can then be filtered as required.")  
+  
   if (!curl::has_internet()){message("There appears to be no internet connection"); return(NULL)}
   
   # check args are legit
@@ -75,20 +80,9 @@ nzffdr_import <- function(institution = "", catchment_num = "", catchment_name =
     is.character(water_body),
     is.character(fish_method),
     is.character(taxon),
-    is.numeric(starts),
-    is.numeric(ends),
     is.character(download_format)
   )
-  
-  if (starts < 1850 | starts > as.integer(format(Sys.Date(), "%Y"))) {
-    stop(paste0("arg starts must be a year between 1850 and ",
-                format(Sys.Date(), "%Y")), call. = FALSE)
-  }
-  
-  if (ends < 1850) {
-    stop("arg ends must be greater than 1850", call. = FALSE)
-  }
-  
+ 
   if (((catchment_num == "") || grepl("^\\d+\\%$", catchment_num) ||
        grepl("^\\d{3}\\.\\d{3}$", catchment_num)) == FALSE) {
     stop("arg: catchment_num must be 6-digit character string (e.g. \"752.638\")

@@ -1,3 +1,20 @@
+# nzffdr 2.1.0
+Fixes associated with NZFFD search issue and some small tidying.
+At the moment users should downlod the entire NZFFD (e.g. us nzffdr::nzffdr_import()), and then filter records from there. See note below.
+
+## NZFFD search issue
+ - Following reports of issues associated with using search fields in the NZFFD (see comments on page 4 of the help manual 
+   available here: https://niwa.co.nz/information-services/nz-freshwater-fish-database/help), nzffdr_import() now downloads the entire
+   NZFFD by default (previously even when no search terms were entered not all resultd were being downloaded).
+ - nzddr_import() & nzffdr_razzle_dazzle() now generate a warning regarding the NZFFD issue.
+
+## updated functions
+ - nzffdr_add_dates() now much faster
+ - nzffdr_widen_habitat() no longer produces the "In fun_df(xx2, cl) : NAs introduced by coercion" warning by default.
+
+## Depreciated functions
+ - depreciated functions from nzffdr 2.0.0 have been removed (nzffdr_add() & nzffdr_fill())
+
 
 # nzffdr 2.0.0
 Major rework of the nzffdr package following an overhall of the the NZFFD website. Some previous functions are now depreciated.

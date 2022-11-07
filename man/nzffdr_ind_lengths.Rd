@@ -7,7 +7,7 @@
 nzffdr_ind_lengths(fishd)
 }
 \arguments{
-\item{fishd}{an NZFFD dataframe returned from [nzffdr_import()]. Must contain
+\item{fishd}{an NZFFD dataframe returned from nzffdr_import(). Must contain
 the columns "nzffdRecordNumber", "taxonName" and "indLengths".}
 }
 \value{

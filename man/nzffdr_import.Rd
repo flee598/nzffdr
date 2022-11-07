@@ -11,8 +11,8 @@ nzffdr_import(
   water_body = "",
   fish_method = "",
   taxon = "",
-  starts = 1850,
-  ends = 2100,
+  starts = "",
+  ends = "",
   download_format = "all"
 )
 }
@@ -47,9 +47,11 @@ or \code{taxon = "Neochanna diversus"} and to search for Black mudfish
 and Bluegill bully use \code{taxon = c("Black mudfish", "Bluegill bully")} 
 etc.}
 
-\item{starts}{start year, 1850 at the earliest.}
+\item{starts}{start year. Don't set the arg if
+you want all records in the database.}
 
-\item{ends}{end year.}
+\item{ends}{end year. Don't set the arg if
+you want all records in the database.}
 
 \item{download_format}{use "all" or "essential" to download either, all 
 variables (67 columns), which now includes some River Environment
@@ -69,12 +71,13 @@ for details. To import the entire database leave all arguments as default.
 \details{
 This function requires an internet connection to query NIWA's database.
 
-Data citation: Crow S (2017). New Zealand Freshwater Fish Database. Version
-1.2. The National Institute of Water and Atmospheric Research (NIWA).
-Occurrence Dataset https://doi.institution/10.15468/ms5iqu
+Data citation: Stoffels R (2022). New Zealand Freshwater Fish Database (extended).
+The National Institute of Water and Atmospheric Research (NIWA).
+Sampling event dataset https://doi.org/10.15468/jbpw92
 }
 \examples{
 \dontrun{
-dat <- nzffdr_import(starts = 2000, ends = 2001)
+# import entire NZFFD
+dat <- nzffdr_import()
 }
 }

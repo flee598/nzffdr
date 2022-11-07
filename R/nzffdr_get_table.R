@@ -1,9 +1,9 @@
 #' Get NZFFD search terms
 #'
-#' Lists of possible argument options for function [nzffdr_import()].
+#' Lists of possible argument options for function \code{nzffdr_import()}.
 #'
 #' Returns the possible argument values for arguments: fish_method, 
-#' institution and taxon, used in the function [nzffdr_import()].
+#' institution and taxon, used in the function \code{nzffdr_import()}.
 #' 
 #' This function requires an internet connection to query NIWA's database.
 #' 

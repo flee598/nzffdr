@@ -7,7 +7,7 @@
 nzffdr_add_dates(fishd)
 }
 \arguments{
-\item{fishd}{a dataframe imported from the NZFFD using [nzffdr_import()], which contains the column "eventDate"}
+\item{fishd}{a dataframe imported from the NZFFD using \code{nzffdr_import()}, which contains the column \code{"eventDate"}}
 }
 \value{
 a NZFFD dataframe, with year, month and day columns added.

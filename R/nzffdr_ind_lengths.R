@@ -3,7 +3,7 @@
 #' Converts individual fish length measures from multiple entries in
 #' a single cell to tidy long format.
 #'
-#' @param fishd an NZFFD dataframe returned from [nzffdr_import()]. Must contain
+#' @param fishd an NZFFD dataframe returned from nzffdr_import(). Must contain
 #' the columns "nzffdRecordNumber", "taxonName" and "indLengths".
 #'
 #' @return A dataframe with three columns,"nzffdRecordNumber", "taxonName" and

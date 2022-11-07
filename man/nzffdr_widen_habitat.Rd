@@ -23,7 +23,8 @@ selected habitat columns.
 }
 \description{
 Converts habitat variables to tidy wide format columns and appends to 
-original dataframe.
+original dataframe. Warning, with large (>100k rows) datasets this function 
+slow (~30 seconds).
 }
 \examples{
 nzffdr_widen_habitat(nzffdr::nzffdr_data)

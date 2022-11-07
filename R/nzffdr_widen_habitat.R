@@ -1,7 +1,8 @@
 #' Converts habitat variables to tidy wide format
 #'
 #' Converts habitat variables to tidy wide format columns and appends to 
-#' original dataframe.
+#' original dataframe. Warning, with large (>100k rows) datasets this function 
+#' slow (~30 seconds).
 #'
 #' @param fishd an NZFFD dataframe returned from nzffdr_import.
 #' 
@@ -42,7 +43,7 @@ nzffdr_widen_habitat <- function(fishd,
     xx2 <- stack(stats::setNames(strsplit(xx2[["values"]], ':'), xx2[["ind"]]))
     xx2[["values"]] <- trimws(xx2[["values"]])
     
-    xx3 <- fun_df(xx2, cl)
+    xx3 <- suppressWarnings(fun_df(xx2, cl))
     xx3 <- xx3[!duplicated(xx3), ]
     
     out <- stats::reshape(xx3, v.names = "percent", idvar = "nzffdRecordNumber",
@@ -72,9 +73,9 @@ fun_df <- function(fishd, cl){
   
   colnames(fishd) <- c(cl, "nzffdRecordNumber")
   
-  fishd2 <- suppressWarnings(data.frame(
+  fishd2 <- data.frame(
     nzffdRecordNumber = fishd[["nzffdRecordNumber"]][c(TRUE, FALSE)],
-    stuff = fishd[[cl]][c(TRUE, FALSE)]))
+    stuff = fishd[[cl]][c(TRUE, FALSE)])
 
   if (cl == "habitatSubstratePercent") {
     fishd2$percent <- fishd[[cl]][c(FALSE, TRUE)]
