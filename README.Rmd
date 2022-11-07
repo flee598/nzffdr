@@ -22,10 +22,6 @@ knitr::opts_chunk$set(
   [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/nzffdr)](https://r-pkg.org/pkg/nzffdr)
 <!-- badges: end -->
 
-## Major update December 2021
-Following a significant update to the NZFFD, the nzffdr package has been completely overhauled. The NZFFD update resulted in nzffdr v 1.0.0 functions either i) not working or, ii) being redundant. Therefore I have completely rewritten nzffdr. This does mean there is **NO** backwards compatibility. I am sorry for this, but it was out of my control given the changes to NZFFD. 
-
-On the up side, the NZFFD now contains lots of useful additional information by default, and the new and improved nzffdr has added functionality.
 
 ## Package overview
 
@@ -38,7 +34,6 @@ A preprint describing the package is now available (if you wish to cite the pack
 Lee, F., & Young, N. (2021). nzffdr: an R package to import, clean and update data from the New Zealand Freshwater Fish Database. bioRxiv. https://doi.org/10.1101/2021.06.22.449519
 
 ### Installation
-nzffdr v 2.0.0 is now available on CRAN.
 ```{r, warning = FALSE, eval = FALSE}
 install.packages("nzffdr")
 ```
@@ -55,12 +50,10 @@ devtools::install_github("flee598/nzffdr")
 This function requires an internet connection to query the NZFFD database. 
 
 ```{r}
-# import all records between 2010 and 2015
+# import all records 
 library(nzffdr)
 
-dat <- nzffdr_import(institution = "", catchment_num = "", catchment_name = "",
-                    water_body = "", fish_method = "", taxon = "", 
-                    starts = 2010, ends = 2015, download_format = "all")
+dat <- nzffdr_import(download_format = "essential")
 head(dat)
 
 # To import the entire NZFF Database:

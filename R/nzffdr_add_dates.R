@@ -10,6 +10,7 @@
 #' @return a NZFFD dataframe, with year, month and day columns added.
 #'
 #' @importFrom tidyr separate
+#' @importFrom rlang .data
 #'
 #' @examples
 #' nzffdr_add_dates(nzffdr::nzffdr_data)
@@ -23,8 +24,8 @@ nzffdr_add_dates <- function(fishd){
   
   # add year, month, day columns
   fishd <-  tidyr::separate(data = fishd,
-                    col = eventDate,
-                    into = c("year", "month", "dday"),
+                    col = .data$eventDate,
+                    into = c("year", "month", "day"),
                     sep = "-",
                     remove = FALSE,
                     fill = "right",

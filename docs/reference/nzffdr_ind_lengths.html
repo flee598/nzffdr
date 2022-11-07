@@ -49,24 +49,27 @@ a single cell to tidy long format.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">nzffdr_ind_lengths</span><span class="op">(</span><span class="va">fishd</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nzffdr_ind_lengths</span><span class="op">(</span><span class="va">fishd</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>fishd</dt>
-<dd><p>an NZFFD dataframe returned from [nzffdr_import()]. Must contain
+<dd><p>an NZFFD dataframe returned from nzffdr_import(). Must contain
 the columns "nzffdRecordNumber", "taxonName" and "indLengths".</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A dataframe with three columns,"nzffdRecordNumber", "taxonName" and
+    
+
+<p>A dataframe with three columns,"nzffdRecordNumber", "taxonName" and
  "indLengths".</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">nzffdr_ind_lengths</span><span class="op">(</span><span class="fu">nzffdr</span><span class="fu">::</span><span class="va"><a href="nzffdr_data.html">nzffdr_data</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">nzffdr_ind_lengths</span><span class="op">(</span><span class="fu">nzffdr</span><span class="fu">::</span><span class="va"><a href="nzffdr_data.html">nzffdr_data</a></span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    nzffdRecordNumber               taxonName indLengths</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1             104929   Salvelinus fontinalis        145</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2             104929   Salvelinus fontinalis        147</span>
@@ -171,7 +174,7 @@ the columns "nzffdRecordNumber", "taxonName" and "indLengths".</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

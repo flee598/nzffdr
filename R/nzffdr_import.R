@@ -69,7 +69,8 @@ nzffdr_import <- function(institution = "", catchment_num = "", catchment_name =
                          water_body = "", fish_method = "", taxon = "", 
                          starts = "", ends = "", download_format = "all") {
   
-  message("WARNING: since the 2021 update to the NZFFD, according to the NZFFD help manual (p. 4) users have had difficulty obtaining subsets of records using search terms. It is highly recommended to download the entire database, i.e. leave all search terms blank ( download_format can be set to either ‘all’ or ‘essential’), the database can then be filtered as required.")  
+  message("WARNING: since the 2021 update to the NZFFD, according to the NZFFD help manual (p. 4) users have had difficulty obtaining subsets of records using search terms. It is highly recommended to download the entire database, i.e. leave all search terms blank (
+          download_format can be set to either all or essential), the database can then be filtered as required.")  
   
   if (!curl::has_internet()){message("There appears to be no internet connection"); return(NULL)}
   

@@ -1,3 +1,7 @@
+url: https://flee598.github.io/nzffdr/
+template:
+  bootstrap: 5
+
 reference:
  - title: "Core functions"
    desc: >
@@ -23,4 +27,3 @@ reference:
    contents:
     - nzffdr_data
     - nzffdr_nzmap
-
