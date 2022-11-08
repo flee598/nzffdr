@@ -63,75 +63,227 @@
 </h1></div>
 <!-- badges: start -->
 
-<div class="section level2">
-<h2 id="package-overview">Package overview<a class="anchor" aria-label="anchor" href="#package-overview"></a>
-</h2>
+<!-- badges: end -->
 <p>The purpose of this package is to allow for direct access to the NZ Freshwater Fish Database (<a href="https://nzffdms.niwa.co.nz/search" class="external-link">NZFFD</a>) from R and additional functions for cleaning imported data and adding missing data.</p>
-<p>For a detailed guide to using the package see the <a href="https://flee598.github.io/nzffdr/" class="external-link">help page</a>.</p>
-<p>A preprint describing the package is now available (if you wish to cite the package please use this):</p>
-<p>Lee, F., &amp; Young, N. (2021). nzffdr: an R package to import, clean and update data from the New Zealand Freshwater Fish Database. bioRxiv. <a href="https://doi.org/10.1101/2021.06.22.449519" class="external-link uri">https://doi.org/10.1101/2021.06.22.449519</a></p>
+<p>Specifically, the seven core functions are:</p>
+<ul>
+<li><p><code><a href="reference/nzffdr_import.html">nzffdr_import()</a></code> - import NZFFD data into R.</p></li>
+<li><p><code><a href="reference/nzffdr_clean.html">nzffdr_clean()</a></code> - clean up a bunch of small inconsistencies in the imported NZFFD data.</p></li>
+<li><p><code><a href="reference/nzffdr_add_dates.html">nzffdr_add_dates()</a></code> - add separate year, month and day columns to NZFFD data.</p></li>
+<li><p><code><a href="reference/nzffdr_taxon_threat.html">nzffdr_taxon_threat()</a></code> - add extra taxonomic and NZ Threat Classification System (<a href="https://nztcs.org.nz" class="external-link">NZTCS</a>) data to NZFFD data (12 new columns). Lots more detail added compared to <code>nzffdr</code> v 1.0.0.</p></li>
+<li><p><code><a href="reference/nzffdr_widen_habitat.html">nzffdr_widen_habitat()</a></code> - transform non-tidy format habitat columns to tidy wide format.</p></li>
+<li><p><code><a href="reference/nzffdr_razzle_dazzle.html">nzffdr_razzle_dazzle()</a></code> - wrapper for all of the above functions to quickly download and tidy NZFFD data in one go.</p></li>
+<li><p><code><a href="reference/nzffdr_ind_lengths.html">nzffdr_ind_lengths()</a></code> - transform non-tidy format individual fish length measures into tidy long format.</p></li>
+</ul>
+<p>See below for a detailed overview.</p>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
+<p>Install from CRAN</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"nzffdr"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="development-version">Development version<a class="anchor" aria-label="anchor" href="#development-version"></a>
-</h3>
-<p>To install the latest development version install from GitHub.</p>
+<p>Or to install the latest development version:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"flee598/nzffdr"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="import-data-from-the-nzffd">Import data from the NZFFD<a class="anchor" aria-label="anchor" href="#import-data-from-the-nzffd"></a>
+<h3 id="built-in-datasets">Built-in datasets<a class="anchor" aria-label="anchor" href="#built-in-datasets"></a>
 </h3>
-<p>This function requires an internet connection to query the NZFFD database.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># import all records</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flee598.github.io/nzffdr/" class="external-link">nzffdr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_import.html">nzffdr_import</a></span><span class="op">(</span>download_format <span class="op">=</span> <span class="st">"essential"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   nzffdRecordNumber  eventDate eventTime institution       waterBody</span></span>
-<span><span class="co">#&gt; 1                 1 1979-06-05     10:30        NIWA Limestone Creek</span></span>
-<span><span class="co">#&gt; 2                 1 1979-06-05     10:30        NIWA Limestone Creek</span></span>
-<span><span class="co">#&gt; 3                 1 1979-06-05     10:30        NIWA Limestone Creek</span></span>
-<span><span class="co">#&gt; 4                 1 1979-06-05     10:30        NIWA Limestone Creek</span></span>
-<span><span class="co">#&gt; 5                 1 1979-06-05     10:30        NIWA Limestone Creek</span></span>
-<span><span class="co">#&gt; 6                 1 1979-06-05     10:30        NIWA Limestone Creek</span></span>
-<span><span class="co">#&gt;   waterBodyType site catchmentNumber catchmentName eastingNZTM northingNZTM</span></span>
-<span><span class="co">#&gt; 1   Not Entered              691.021       Hinds R     1463229      5157184</span></span>
-<span><span class="co">#&gt; 2   Not Entered              691.021       Hinds R     1463229      5157184</span></span>
-<span><span class="co">#&gt; 3   Not Entered              691.021       Hinds R     1463229      5157184</span></span>
-<span><span class="co">#&gt; 4   Not Entered              691.021       Hinds R     1463229      5157184</span></span>
-<span><span class="co">#&gt; 5   Not Entered              691.021       Hinds R     1463229      5157184</span></span>
-<span><span class="co">#&gt; 6   Not Entered              691.021       Hinds R     1463229      5157184</span></span>
-<span><span class="co">#&gt;   minimumElevation distanceOcean                  samplingMethod</span></span>
-<span><span class="co">#&gt; 1              480            60 Electric fishing - Type unknown</span></span>
-<span><span class="co">#&gt; 2              480            60 Electric fishing - Type unknown</span></span>
-<span><span class="co">#&gt; 3              480            60 Electric fishing - Type unknown</span></span>
-<span><span class="co">#&gt; 4              480            60 Electric fishing - Type unknown</span></span>
-<span><span class="co">#&gt; 5              480            60 Electric fishing - Type unknown</span></span>
-<span><span class="co">#&gt; 6              480            60 Electric fishing - Type unknown</span></span>
-<span><span class="co">#&gt;   samplingProtocol                   taxonName     taxonCommonName totalCount</span></span>
-<span><span class="co">#&gt; 1          Unknown                    Anguilla    Unidentified eel         NA</span></span>
-<span><span class="co">#&gt; 2          Unknown           Galaxias vulgaris Canterbury galaxias         NA</span></span>
-<span><span class="co">#&gt; 3          Unknown      Gobiomorphus breviceps        Upland bully         NA</span></span>
-<span><span class="co">#&gt; 4          Unknown Scardinius erythrophthalmus                Rudd         NA</span></span>
-<span><span class="co">#&gt; 5          Unknown       Salvelinus fontinalis          Brook char         NA</span></span>
-<span><span class="co">#&gt; 6          Unknown           Carassius auratus            Goldfish         NA</span></span>
-<span><span class="co">#&gt;   present soughtNotDetected minLength maxLength dataVersion</span></span>
-<span><span class="co">#&gt; 1    true             false        NA        NA          V1</span></span>
-<span><span class="co">#&gt; 2    true             false        NA        NA          V1</span></span>
-<span><span class="co">#&gt; 3    true             false        NA        NA          V1</span></span>
-<span><span class="co">#&gt; 4    true             false        NA        NA          V1</span></span>
-<span><span class="co">#&gt; 5    true             false        NA        NA          V1</span></span>
-<span><span class="co">#&gt; 6    true             false        NA        NA          V1</span></span>
-<span></span>
-<span><span class="co"># To import the entire NZFF Database:</span></span>
-<span><span class="co"># dat &lt;- nzffd_import()</span></span></code></pre></div>
+<p>There are two built-in datasets, these are:</p>
+<ul>
+<li><p><code>nzffdr_data</code> a subset of 200 rows from the NZFFD, used for examples, tutorials etc.</p></li>
+<li><p><code>nzffdr_nzmap</code> a simple features map of New Zealand. A simplified version of the 1:150k NZ map outline available from <a href="https://www.linz.govt.nz" class="external-link">Land Information New Zealand</a>.</p></li>
+</ul>
 </div>
+<div class="section level3">
+<h3 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
+</h3>
+<p>As of Novemeber 2022 there are issues with the NIWA portal (see notes in changelog), it is best to download the entire NZFFD database (e.g. use <code>import()</code> with all args empty, although you can set <code>download_format</code>) and then filter as needed in R.</p>
+<p>We have tried to make the search terms match those you would use directly on the NIWA site. For example leaving a search field blank will return all records. <code><a href="reference/nzffdr_import.html">nzffdr_import()</a></code> has nine search arguments:</p>
+<ul>
+<li><p><code>institution</code> the organisation that submitted the records.</p></li>
+<li><p><code>catchment_num</code> this refers to the Catchment No., a 6 digit number unique to the reach of interest. You can search using the individual number (e.g. <code>catchment = "702.500"</code>), or for all rivers in a catchment you can use the wildcard search term (e.g. <code>catchment = "702%"</code>), or don’t set the arg if you want all catchments in NZ.</p></li>
+<li><p><code>catchment_name</code> search for a catchment by name e.g. (<code>catchment_name = "Waimakariri R"</code>).</p></li>
+<li><p><code>waterBody</code> search for a water body by name. (e.g. <code>waterBody = "Otukaikino Stream tributary"</code>).</p></li>
+<li><p><code>fish_method</code> search by fishing method used. If you want to search for a specific fishing method use the function <code>nzffdr_get_table("fish_method")</code> to see a list of all possible search terms, (e.g. if you only wanted fish caught by lures use <code>fish_meth = "Angling - Lure"</code>).</p></li>
+<li><p><code>taxon</code> search for a particular species. If you want to search for a specific species use the function <code>nzffdr_get_table("taxon")</code> to see a list of all possible search terms. You can search using either common or scientific names and can search for multiple species at once. e.g. to search for Black mudfish use <code>species = "Black mudfish"</code> or <code>species = "Neochanna diversus"</code> and to search for Black mudfish and Bluegill bully use <code>species = c("Black mudfish", "Bluegill bully")</code> etc.</p></li>
+<li><p><code>starts</code> start search date. Don’t set the arg if you want all records in the database.</p></li>
+<li><p><code>ends</code> end search date. Don’t set the arg if you want all records in the database.</p></li>
+<li><p><code>download_format</code> can be either <code>all</code> or <code>essential</code> depending on how many columns of data you want.</p></li>
+</ul>
+<p>This function requires an internet connection to query NIWA’s database.</p>
+<p>Data citation: Stoffels R (2022). New Zealand Freshwater Fish Database (extended). The National Institute of Water and Atmospheric Research (NIWA). Sampling event dataset <a href="https://doi.org/10.15468/jbpw92" class="external-link uri">https://doi.org/10.15468/jbpw92</a></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://flee598.github.io/nzffdr/" class="external-link">nzffdr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import all records - all fields</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_import.html">nzffdr_import</a></span><span class="op">(</span>download_format <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># To import the entire NZFF database:</span></span>
+<span><span class="co"># dat &lt;- nzffdr_import()</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="cleaning-data">Cleaning data<a class="anchor" aria-label="anchor" href="#cleaning-data"></a>
+</h3>
+<p>While the data imported from NZFFD is in pretty good shape there are some small inconsistencies. The <code>nzffd_clean()</code> function aims to deal with some of these inconsistencies.Column types are checked and converted to, integer, numeric or character. Empty cells are filled with <code>NA</code>, variable <code>catchmentName</code> entries are standardised (e.g. <code>Clutha r</code>, <code>Clutha River</code> and <code>Clutha R</code> all become <code>Clutha R</code>) and, any empty columns are removed.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_clean.html">nzffdr_clean</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
+<p>The above changes, while superficial make analysis that, for example relies on grouping, work as intended.</p>
+</div>
+<div class="section level3">
+<h3 id="add-separate-date-columns">Add separate date columns<a class="anchor" aria-label="anchor" href="#add-separate-date-columns"></a>
+</h3>
+<p>A small function that adds separate year, month and day columns based on values in the column <code>eventDate</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_add_dates.html">nzffdr_add_dates</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Have a look at the new columns</span></span>
+<span><span class="va">dat3</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"month"</span>, <span class="st">"day"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;   year month day</span></span>
+<span><span class="co">#&gt; 1 1979     6   5</span></span>
+<span><span class="co">#&gt; 2 1979     6   5</span></span>
+<span><span class="co">#&gt; 3 1979     6   5</span></span>
+<span><span class="co">#&gt; 4 1979     6   5</span></span>
+<span><span class="co">#&gt; 5 1979     6   5</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="add-taxonomic-and-threat-status-information">Add taxonomic and threat status information<a class="anchor" aria-label="anchor" href="#add-taxonomic-and-threat-status-information"></a>
+</h3>
+<p>Add NZ Threat Classification System (<a href="https://nztcs.org.nz" class="external-link">NZTCS</a>) information for each of the species. Includes taxonomic data, common and some Māori names. Also threat status (e.g. declining) and whether the species is endemic, invasive etc.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_taxon_threat.html">nzffdr_taxon_threat</a></span><span class="op">(</span><span class="va">dat3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Have a look at the new columns</span></span>
+<span><span class="va">dat4</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"commonMaoriName"</span>, <span class="st">"alternativeNames"</span>,</span>
+<span>            <span class="st">"genus"</span>, <span class="st">"family"</span>, <span class="st">"order"</span>, <span class="st">"class"</span>, <span class="st">"phylum"</span>,</span>
+<span>            <span class="st">"category"</span>, <span class="st">"status"</span>, <span class="st">"taxonomicStatus"</span>, <span class="st">"bioStatus"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;   commonMaoriName          alternativeNames       genus    family        order</span></span>
+<span><span class="co">#&gt; 1             aua kātaha, makawhiti, maraua Aldrichetta Mugilidae Mugiliformes</span></span>
+<span><span class="co">#&gt; 2             aua kātaha, makawhiti, maraua Aldrichetta Mugilidae Mugiliformes</span></span>
+<span><span class="co">#&gt; 3             aua kātaha, makawhiti, maraua Aldrichetta Mugilidae Mugiliformes</span></span>
+<span><span class="co">#&gt; 4             aua kātaha, makawhiti, maraua Aldrichetta Mugilidae Mugiliformes</span></span>
+<span><span class="co">#&gt; 5             aua kātaha, makawhiti, maraua Aldrichetta Mugilidae Mugiliformes</span></span>
+<span><span class="co">#&gt;            class   phylum       category         status</span></span>
+<span><span class="co">#&gt; 1 Actinopterygii Chordata Not Threatened Not Threatened</span></span>
+<span><span class="co">#&gt; 2 Actinopterygii Chordata Not Threatened Not Threatened</span></span>
+<span><span class="co">#&gt; 3 Actinopterygii Chordata Not Threatened Not Threatened</span></span>
+<span><span class="co">#&gt; 4 Actinopterygii Chordata Not Threatened Not Threatened</span></span>
+<span><span class="co">#&gt; 5 Actinopterygii Chordata Not Threatened Not Threatened</span></span>
+<span><span class="co">#&gt;             taxonomicStatus   bioStatus</span></span>
+<span><span class="co">#&gt; 1 Taxonomically Determinate Non-endemic</span></span>
+<span><span class="co">#&gt; 2 Taxonomically Determinate Non-endemic</span></span>
+<span><span class="co">#&gt; 3 Taxonomically Determinate Non-endemic</span></span>
+<span><span class="co">#&gt; 4 Taxonomically Determinate Non-endemic</span></span>
+<span><span class="co">#&gt; 5 Taxonomically Determinate Non-endemic</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="tidy-habitat-columns">Tidy habitat columns<a class="anchor" aria-label="anchor" href="#tidy-habitat-columns"></a>
+</h3>
+<p>The NZFFD now comes with additional habitat information in the columns (<code>habitatFlowPercent</code>, <code>habitatInstreamCoverPresent</code>, <code>habitatRiparianVegPercent</code>, <code>habitatSubstratePercent</code>), by default there are multiple entries in a single cell. <code><a href="reference/nzffdr_widen_habitat.html">nzffdr_widen_habitat()</a></code> transforms these non-tidy format habitat columns to tidy wide format columns.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_widen_habitat.html">nzffdr_widen_habitat</a></span><span class="op">(</span><span class="va">dat4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Have a look at the new columns</span></span>
+<span><span class="va">dat5</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Fine_gravel"</span>, <span class="st">"Coarse_gravel"</span>, <span class="st">"Sand_1_2_mm"</span>, <span class="st">"Mud"</span>, </span>
+<span>            <span class="st">"Cobbles_64_257_mm"</span>, <span class="st">"Boulders_257_mm"</span>, <span class="st">"Bedrock"</span>, <span class="st">"Gravel_3_64_mm"</span>,</span>
+<span>            <span class="st">"Mud_Silt_1mm"</span>, <span class="st">"Run"</span>, <span class="st">"Riffle"</span>, <span class="st">"Pool"</span>, <span class="st">"Still"</span>, <span class="st">"Backwater"</span>,</span>
+<span>            <span class="st">"Rapid"</span>, <span class="st">"Cascade"</span>, <span class="st">"Torrent"</span>, <span class="st">"Grass_tussock"</span>, <span class="st">"Scrub"</span>,</span>
+<span>            <span class="st">"Native_forest"</span>, <span class="st">"Raupo_flax"</span>, <span class="st">"Exotic_forest"</span>, <span class="st">"Exposed_bed"</span>,</span>
+<span>            <span class="st">"Other"</span>, <span class="st">"Tussock"</span>, <span class="st">"Scrub_willow"</span>, <span class="st">"Pasture"</span>, <span class="st">"Undercut_banks"</span>,</span>
+<span>            <span class="st">"Wood_instream_debris"</span>, <span class="st">"Bank_vegetation"</span>, <span class="st">"Macrophytes_algae"</span>,</span>
+<span>            <span class="st">"Macrophytes"</span>, <span class="st">"Cobbles"</span>, <span class="st">"Periphyton"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;   Fine_gravel Coarse_gravel Sand_1_2_mm  Mud Cobbles_64_257_mm Boulders_257_mm</span></span>
+<span><span class="co">#&gt; 1          40            40          10 &lt;NA&gt;              &lt;NA&gt;              10</span></span>
+<span><span class="co">#&gt; 2          40            40          10 &lt;NA&gt;              &lt;NA&gt;              10</span></span>
+<span><span class="co">#&gt; 3          40            40          10 &lt;NA&gt;              &lt;NA&gt;              10</span></span>
+<span><span class="co">#&gt; 4          40            40          10 &lt;NA&gt;              &lt;NA&gt;              10</span></span>
+<span><span class="co">#&gt; 5          40            40          10 &lt;NA&gt;              &lt;NA&gt;              10</span></span>
+<span><span class="co">#&gt;   Bedrock Gravel_3_64_mm Mud_Silt_1mm Run Riffle Pool Still Backwater Rapid</span></span>
+<span><span class="co">#&gt; 1    &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;  40     40   20     0         0     0</span></span>
+<span><span class="co">#&gt; 2    &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;  40     40   20     0         0     0</span></span>
+<span><span class="co">#&gt; 3    &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;  40     40   20     0         0     0</span></span>
+<span><span class="co">#&gt; 4    &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;  40     40   20     0         0     0</span></span>
+<span><span class="co">#&gt; 5    &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;  40     40   20     0         0     0</span></span>
+<span><span class="co">#&gt;   Cascade Torrent Grass_tussock Scrub Native_forest Raupo_flax Exotic_forest</span></span>
+<span><span class="co">#&gt; 1       0       0             0    50            50          0             0</span></span>
+<span><span class="co">#&gt; 2       0       0             0    50            50          0             0</span></span>
+<span><span class="co">#&gt; 3       0       0             0    50            50          0             0</span></span>
+<span><span class="co">#&gt; 4       0       0             0    50            50          0             0</span></span>
+<span><span class="co">#&gt; 5       0       0             0    50            50          0             0</span></span>
+<span><span class="co">#&gt;   Exposed_bed Other Tussock Scrub_willow Pasture Undercut_banks</span></span>
+<span><span class="co">#&gt; 1           0     0       0            0       0             NA</span></span>
+<span><span class="co">#&gt; 2           0     0       0            0       0             NA</span></span>
+<span><span class="co">#&gt; 3           0     0       0            0       0             NA</span></span>
+<span><span class="co">#&gt; 4           0     0       0            0       0             NA</span></span>
+<span><span class="co">#&gt; 5           0     0       0            0       0             NA</span></span>
+<span><span class="co">#&gt;   Wood_instream_debris Bank_vegetation Macrophytes_algae Macrophytes Cobbles</span></span>
+<span><span class="co">#&gt; 1                   NA              NA                NA          NA      NA</span></span>
+<span><span class="co">#&gt; 2                   NA              NA                NA          NA      NA</span></span>
+<span><span class="co">#&gt; 3                   NA              NA                NA          NA      NA</span></span>
+<span><span class="co">#&gt; 4                   NA              NA                NA          NA      NA</span></span>
+<span><span class="co">#&gt; 5                   NA              NA                NA          NA      NA</span></span>
+<span><span class="co">#&gt;   Periphyton</span></span>
+<span><span class="co">#&gt; 1         NA</span></span>
+<span><span class="co">#&gt; 2         NA</span></span>
+<span><span class="co">#&gt; 3         NA</span></span>
+<span><span class="co">#&gt; 4         NA</span></span>
+<span><span class="co">#&gt; 5         NA</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="quick-all-in-one">Quick all in one<a class="anchor" aria-label="anchor" href="#quick-all-in-one"></a>
+</h3>
+<p>There is a wrapper for all of the above functions, to quickly download the entire NZFFD, tidy and add information all in one easy step.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nzffdr_razzle_dazzle.html">nzffdr_razzle_dazzle</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># total number of rows and columns in the dataset</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat_all</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 154866    116</span></span>
+<span></span>
+<span><span class="co"># have a look at the first 5 rows and 10 columns</span></span>
+<span><span class="va">dat_all</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
+<span><span class="co">#&gt;   nzffdRecordNumber                   taxonName institutionRecordNumber</span></span>
+<span><span class="co">#&gt; 1                 1                    Anguilla                    &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2                 1 Scardinius erythrophthalmus                    &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3                 1      Gobiomorphus breviceps                    &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4                 1        Galaxias brevipinnis                    &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5                 1       Salvelinus fontinalis                    &lt;NA&gt;</span></span>
+<span><span class="co">#&gt;    eventDate year month day eventTime institution samplingPurpose</span></span>
+<span><span class="co">#&gt; 1 1979-06-05 1979     6   5     10:30        NIWA            &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2 1979-06-05 1979     6   5     10:30        NIWA            &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3 1979-06-05 1979     6   5     10:30        NIWA            &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4 1979-06-05 1979     6   5     10:30        NIWA            &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5 1979-06-05 1979     6   5     10:30        NIWA            &lt;NA&gt;</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="mapping-observations">Mapping observations<a class="anchor" aria-label="anchor" href="#mapping-observations"></a>
+</h3>
+<p>There is a simple features map of New Zealand included in the package, this can be used to quickly check species distributions and the like.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># load ggplot2 and sf for nice figures</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get map of NZ and remove Chatham Islands</span></span>
+<span><span class="va">nz</span> <span class="op">&lt;-</span> <span class="fu">nzffdr</span><span class="fu">::</span><span class="va"><a href="reference/nzffdr_nzmap.html">nzffdr_nzmap</a></span></span>
+<span><span class="va">nz</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">nz</span>, <span class="va">name</span> <span class="op">!=</span> <span class="st">"Chatham Island"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># filter just Oncorhynchus genus </span></span>
+<span><span class="va">df_fish</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">dat_all</span>, <span class="va">genus</span> <span class="op">==</span> <span class="st">"Oncorhynchus"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create a basic map, with points coloured by species common names</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_sf</span><span class="op">(</span>data <span class="op">=</span> <span class="va">nz</span>,</span>
+<span>          fill <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_fish</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">eastingNZTM</span>, y <span class="op">=</span> <span class="va">northingNZTM</span>, colour <span class="op">=</span> <span class="va">taxonCommonName</span><span class="op">)</span>,</span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_colour_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu">italic</span><span class="op">(</span><span class="st">"Oncorhynchus"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_void</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>plot.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">'lightgrey'</span>, colour <span class="op">=</span> <span class="st">'lightgrey'</span><span class="op">)</span>,</span>
+<span>        legend.position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.3</span>, <span class="fl">.8</span><span class="op">)</span>,</span>
+<span>        text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/unnamed-chunk-10-1.png"><!-- --></p>
 </div>
 </div>
   </div>
