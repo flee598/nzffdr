@@ -43,15 +43,16 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.1.0" id="nzffdr-210">nzffdr 2.1.0<a class="anchor" aria-label="anchor" href="#nzffdr-210"></a></h2>
-<p>Fixes associated with NZFFD search issue and some small tidying. At the moment users should downlod the entire NZFFD (e.g. us nzffdr::nzffdr_import()), and then filter records from there. See note below.</p>
+<p>Fixes associated with NZFFD search issue and some small tidying. At the moment users should download the entire NZFFD, and then filter records from there. See note below.</p>
 <div class="section level3">
 <h3 id="nzffd-search-issue-2-1-0">NZFFD search issue<a class="anchor" aria-label="anchor" href="#nzffd-search-issue-2-1-0"></a></h3>
-<ul><li>Following reports of issues associated with using search fields in the NZFFD (see comments on page 4 of the help manual available here: <a href="https://niwa.co.nz/information-services/nz-freshwater-fish-database/help" class="external-link uri">https://niwa.co.nz/information-services/nz-freshwater-fish-database/help</a>), nzffdr_import() now downloads the entire NZFFD by default (previously even when no search terms were entered not all resultd were being downloaded).</li>
-<li>nzddr_import() &amp; nzffdr_razzle_dazzle() now generate a warning regarding the NZFFD issue.</li>
+<ul><li><p>Following reports of issues associated with using search fields in the NZFFD (see comments on page 4 of the help manual available here: <a href="https://niwa.co.nz/information-services/nz-freshwater-fish-database/help" class="external-link uri">https://niwa.co.nz/information-services/nz-freshwater-fish-database/help</a>), nzffdr_import() now downloads the entire NZFFD by default (previously even when no search terms were entered not all results were being downloaded due to changes to the NZFFD portal).</p></li>
+<li><p>use any of the following to download the entire NZFFD (do not set additional arguments), and then filter in R as needed: nzffdr_import(download_format = “all”), nzffdr_import(download_format = “essential”) or nzffdr_razzle_dazzle().</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="updated-functions-2-1-0">updated functions<a class="anchor" aria-label="anchor" href="#updated-functions-2-1-0"></a></h3>
-<ul><li>nzffdr_add_dates() now much faster</li>
+<ul><li>nzddr_import() &amp; nzffdr_razzle_dazzle() now generate a warning regarding the NZFFD issue.</li>
+<li>nzffdr_add_dates() now much faster</li>
 <li>nzffdr_widen_habitat() no longer produces the “In fun_df(xx2, cl) : NAs introduced by coercion” warning by default.</li>
 </ul></div>
 <div class="section level3">
