@@ -47,7 +47,7 @@ This function requires an internet connection to query the NZFFD
 database.
 
 ``` r
-# import all records
+# import all records 
 library(nzffdr)
 
 dat <- nzffdr_import(download_format = "essential")
@@ -74,19 +74,26 @@ head(dat)
 #> 5              480            60 Electric fishing - Type unknown
 #> 6              480            60 Electric fishing - Type unknown
 #>   samplingProtocol                   taxonName     taxonCommonName totalCount
-#> 1          Unknown                    Anguilla    Unidentified eel         NA
-#> 2          Unknown           Galaxias vulgaris Canterbury galaxias         NA
-#> 3          Unknown      Gobiomorphus breviceps        Upland bully         NA
-#> 4          Unknown Scardinius erythrophthalmus                Rudd         NA
+#> 1          Unknown          Galaxias maculatus              Inanga         NA
+#> 2          Unknown           Carassius auratus            Goldfish         NA
+#> 3          Unknown           Galaxias vulgaris Canterbury galaxias         NA
+#> 4          Unknown      Gobiomorphus breviceps        Upland bully         NA
 #> 5          Unknown       Salvelinus fontinalis          Brook char         NA
-#> 6          Unknown           Carassius auratus            Goldfish         NA
-#>   present soughtNotDetected minLength maxLength dataVersion
-#> 1    true             false        NA        NA          V1
-#> 2    true             false        NA        NA          V1
-#> 3    true             false        NA        NA          V1
-#> 4    true             false        NA        NA          V1
-#> 5    true             false        NA        NA          V1
-#> 6    true             false        NA        NA          V1
+#> 6          Unknown Scardinius erythrophthalmus                Rudd         NA
+#>   notCountedButPresent notDetectedButSoughtAtSite minLength maxLength
+#> 1                 true                      false        NA        NA
+#> 2                 true                      false        NA        NA
+#> 3                 true                      false        NA        NA
+#> 4                 true                      false        NA        NA
+#> 5                 true                      false        NA        NA
+#> 6                 true                      false        NA        NA
+#>   dataVersion
+#> 1          V1
+#> 2          V1
+#> 3          V1
+#> 4          V1
+#> 5          V1
+#> 6          V1
 
 # To import the entire NZFF Database:
 # dat <- nzffd_import()

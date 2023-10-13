@@ -9,9 +9,6 @@
 #'
 #' @return a NZFFD dataframe, with year, month and day columns added.
 #'
-#' @importFrom tidyr separate
-#' @importFrom rlang .data
-#'
 #' @examples
 #' nzffdr_add_dates(nzffdr::nzffdr_data)
 #' 
@@ -22,14 +19,29 @@ nzffdr_add_dates <- function(fishd){
     stop("fishd must be a data.frame returned from a call to nzffd_import(), containing the \"eventDate\" column")
   }
   
-  # add year, month, day columns
-  fishd <-  tidyr::separate(data = fishd,
-                    col = .data$eventDate,
-                    into = c("year", "month", "day"),
-                    sep = "-",
-                    remove = FALSE,
-                    fill = "right",
-                    convert = TRUE)
+  # # add year, month, day columns
+  # fishd <-  tidyr::separate(data = fishd,
+  #                   col = .data$eventDate,
+  #                   into = c("year", "month", "day"),
+  #                   sep = "-",
+  #                   remove = FALSE,
+  #                   fill = "right",
+  #                   convert = TRUE)
+  
+  
+  datetxt <- as.Date(fishd$eventDate)
+  df <- data.frame(date = datetxt,
+                   year = as.integer(format(datetxt, format = "%Y")),
+                   month = as.integer(format(datetxt, format = "%m")),
+                   day = as.integer(format(datetxt, format = "%d")))
+  
+  # place new columns following the eventDate column
+  target <- which(names(fishd) == 'eventDate')[1]
+  
+  fishd <- cbind(fishd[ ,1:target, drop = F],
+                 df,
+                 fishd[ ,(target + 1):length(fishd),
+                        drop = F])
 
 return(fishd)
 }
