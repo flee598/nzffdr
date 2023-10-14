@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/nzffdr)](https://CRAN.R-project.org/package=nzffdr)
 [![R-CMD-check](https://github.com/flee598/nzffdr/workflows/R-CMD-check/badge.svg)](https://github.com/flee598/nzffdr/actions)
   [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/nzffdr)](https://r-pkg.org/pkg/nzffdr)
+[![R-CMD-check](https://github.com/flee598/nzffdr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/flee598/nzffdr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 
