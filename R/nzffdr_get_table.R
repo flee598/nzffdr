@@ -50,7 +50,6 @@ nzffdr_get_table <- function(x = c("fish_method", "institution", "taxon")) {
   }
   return(res)
 }
-# helper functions -------------------------------------------------------------
 
 # get web html info
 get_doc <- function() {

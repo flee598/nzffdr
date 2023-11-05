@@ -19,15 +19,6 @@ nzffdr_add_dates <- function(fishd){
     stop("fishd must be a data.frame returned from a call to nzffd_import(), containing the \"eventDate\" column")
   }
   
-  # # add year, month, day columns
-  # fishd <-  tidyr::separate(data = fishd,
-  #                   col = .data$eventDate,
-  #                   into = c("year", "month", "day"),
-  #                   sep = "-",
-  #                   remove = FALSE,
-  #                   fill = "right",
-  #                   convert = TRUE)
-  
   
   datetxt <- as.Date(fishd$eventDate)
   df <- data.frame(date = datetxt,

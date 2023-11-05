@@ -174,6 +174,7 @@ nzffdr_import <- function(institution = "", catchment_num = "", catchment_name =
 get_doc <- function() {
   gr <- httr::GET("https://nzffdms.niwa.co.nz/search")
   xml2::read_html(httr::content(gr, "text"))
+
 }
 
 # get csrf_token
