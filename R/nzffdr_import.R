@@ -66,7 +66,7 @@
 #' }
 #' @export
 nzffdr_import <- function(institution = "", catchment_num = "", catchment_name = "",
-                         water_body = "", fish_method = "", taxon = "", 
+                         water_body = "", fish_method = "", taxon = "",
                          starts = "", ends = "", download_format = "all") {
   
   message("WARNING: since the 2021 update to the NZFFD, according to the NZFFD help manual (p. 4) users have had difficulty obtaining subsets of records using search terms. It is highly recommended to download the entire database, i.e. leave all search terms blank (
@@ -149,13 +149,13 @@ nzffdr_import <- function(institution = "", catchment_num = "", catchment_name =
     "sample_search[start_year]" = as.character(starts),
     "sample_search[end_year]" = as.character(ends),
     "sample_search[download_format]" = as.character(download_format),
-    "sample_search[_token]" = get_tok()
+    "sample_search[_token]" = as.character(get_tok())
   ), taxon)
   
   message("\n...searching NZFFD, this may take up to 1 minute or so.")
   
   # run search
-  r <- httr::POST("https://nzffdms.niwa.co.nz/search",
+  r <- httr::POST("https://nzffdms.niwa.co.nz/download",
                   body = fd,
                   encode = "form"
   )
@@ -225,3 +225,4 @@ caps <- function(x) {
   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
   return(x)
 }
+
