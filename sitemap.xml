@@ -1,54 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_add_dates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_clean.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_get_table.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_import.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_ind_lengths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_nzmap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_razzle_dazzle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_taxon_threat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nzffdr_widen_habitat.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/nzffdr_add_dates.html</loc></url>
+<url><loc>/reference/nzffdr_clean.html</loc></url>
+<url><loc>/reference/nzffdr_data.html</loc></url>
+<url><loc>/reference/nzffdr_get_table.html</loc></url>
+<url><loc>/reference/nzffdr_import.html</loc></url>
+<url><loc>/reference/nzffdr_ind_lengths.html</loc></url>
+<url><loc>/reference/nzffdr_nzmap.html</loc></url>
+<url><loc>/reference/nzffdr_razzle_dazzle.html</loc></url>
+<url><loc>/reference/nzffdr_taxon_threat.html</loc></url>
+<url><loc>/reference/nzffdr_widen_habitat.html</loc></url>
 </urlset>
+
