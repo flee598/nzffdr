@@ -36,9 +36,8 @@ nzffdr_ind_lengths <- function (fishd) {
   # some data entries (missing commas) in the lengths gives a warning - don't need
   # to see it.
   dl2$indLengths <- suppressWarnings(as.integer(dl2$indLengths))
-  
   dl2 <- stats::na.omit(dl2)
+  dl2$nzffdRecordNumber <- as.integer(as.character(dl2$nzffdRecordNumber))
   
   return(dl2[cls])
 }
-

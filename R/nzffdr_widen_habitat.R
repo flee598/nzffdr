@@ -28,6 +28,9 @@ nzffdr_widen_habitat <- function(fishd,
   if (!all(cols_to_expand %in% colnames(fishd))) {
     stop("all of cols_to_expand must be present in fishd", call. = FALSE)
   }
+  if ("nzffdRecordNumber" %in% colnames(fishd) == FALSE) {
+    stop("dataframe must include the \"nzffdRecordNumber\" column")
+  }
   
   xx <- fishd[c("nzffdRecordNumber", cols_to_expand)]
   res <- vector(mode = "list", length = length(xx) - 1)
@@ -55,6 +58,7 @@ nzffdr_widen_habitat <- function(fishd,
     res[[i-1]] <- out
   }
   res <- Reduce(function(...) merge(..., all = T), res)
+  res <- as.data.frame(sapply(res, as.integer))
   res <- merge(fishd, res, by = "nzffdRecordNumber", all = T)
   return(res)
 }
